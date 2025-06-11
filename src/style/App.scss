@@ -1,0 +1,29 @@
+:root{
+    // Light
+    -light-bg: #FFFFFF;
+    -light-text-g: #096148;
+    -light-text-y: #C18A26;
+    -light-component-g:#5DAC81;
+    -light-component-y:#EBB471;
+    // Dark
+    -dark-bg: #1C1C1C;
+    -dark-text-g: #D0F0E0;
+    -dark-text-y: #FFCC66;
+    -dark-component-g: #72D6B4;
+    -dark-component-y: #F2B179;
+    // Font Family
+    // -font-title:Luckiest Guy;
+    // -font-text:;
+}   
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: #1C1C1C;
+}
+body{
+    background-color: var(-light-bg);
+    
+}
