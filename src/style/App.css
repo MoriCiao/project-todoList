@@ -1,14 +1,19 @@
 :root {
-  -light-bg: #FFFFFF;
-  -light-text-g: #096148;
-  -light-text-y: #C18A26;
-  -light-component-g: #5DAC81;
-  -light-component-y: #EBB471;
-  -dark-bg: #1C1C1C;
-  -dark-text-g: #D0F0E0;
-  -dark-text-y: #FFCC66;
-  -dark-component-g: #72D6B4;
-  -dark-component-y: #F2B179;
+  /* Light */
+  --light-bg: #FFFFFF;
+  --light-text-g: #096148;
+  --light-text-y: #C18A26;
+  --light-component-g: rgba(93, 172, 129,.5);
+  --light-component-y: rgba(235, 180, 113, 0.5);
+  /* Dark */
+  --dark-bg: #1C1C1C;
+  --dark-text-g: #D0F0E0;
+  --dark-text-y: #FFCC66;
+  --dark-component-g: #72D6B4;
+  --dark-component-y: #F2B179;
+  /* Font Family */
+  --font-title: "Luckiest_Guy";
+  --font-text: "Istok_Web";
 }
 
 * {
@@ -19,5 +24,27 @@
 }
 
 body {
-  background-color: var(-light-bg);
+  background-color: var(--light-bg);
+}
+body h1 {
+  font-family: var(--font-text);
+  font-style: italic;
+  font-size: 4rem;
+}
+body p {
+  font-family: var(--font-text);
+}
+
+.MainOutlet {
+  overflow-y: overlay;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+@media (max-width: 768px) {
+  .MainOutlet {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+  }
 }/*# sourceMappingURL=App.css.map */
