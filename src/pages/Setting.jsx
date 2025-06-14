@@ -1,5 +1,5 @@
 import React from "react";
-
+import GoToHomePage from "../components/GoBackBtn";
 const textSytle_theme =
   "font-['Luckiest_Guy'] text-[--light-text-g] text-[3rem]";
 const btnStyle_theme =
@@ -12,7 +12,8 @@ const btnStyle_FontSize =
 
 const Setting = () => {
   return (
-    <section className="setting col-span-1 col-start-1 flex flex-col items-center p-12">
+    <section className="setting col-start-1 col-span-3 items-center p-12 relative">
+      <GoToHomePage arrowImg="/icon/chevron-left-g.svg" />
       <img
         id="setting"
         src="title/Setting.svg"
@@ -20,7 +21,7 @@ const Setting = () => {
         className="mx-auto"
       />
 
-      <div className="flex flex-col items-center w-[80%] max-w-[30rem] mt-8">
+      <div className="flex flex-col items-center w-[80%] max-w-[30rem] mt-8 mx-auto">
         {/* theme setting */}
         <section className="Theme flex flex-col">
           <h2 className={textSytle_theme}>THEME</h2>

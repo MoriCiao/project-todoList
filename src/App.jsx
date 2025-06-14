@@ -7,29 +7,28 @@ import AllTasks from "./pages/AllTasks";
 import NewTodo from "./pages/NewTodo";
 import Setting from "./pages/Setting";
 import HomePage from "./pages/HomePage";
+import BtnTheme from "./components/BtnTheme";
 function App() {
+  const handleTheme = () => {};
   const [theme, setTheme] = useState(false);
   console.log(theme);
-  const handleTheme = () => {};
   const APP_RWD_setting = [
-    "lg:grid",
-    "lg:grid-cols-4",
-    "md:grid",
+    "lg:grid-cols-3",
     "md:grid-cols-2",
     "sm:grid-cols-1",
   ].join(" ");
 
-  useEffect(() => {}, [theme]);
-
   return (
     <div
-      className={`${theme ? "light" : "dark"} relative ${APP_RWD_setting}  p-4`}
+      className={`${
+        theme ? "light" : "dark"
+      } relative grid ${APP_RWD_setting}  p-4`}
     >
-      <header className="w-full lg:col-span-1 col-start-1 md:col-span-2">
+      <header className="w-full col-start-1 lg:col-span-1   md:col-span-1">
         <Header />
       </header>
 
-      <main className="lg:col-start-2 lg:col-span-3 md:col-start-3">
+      <main className="lg:col-start-2 lg:col-span-2 md:col-start-2 md:col-span-1">
         <Routes>
           <Route path="/" element={<MainOutlet />}>
             <Route index element={<HomePage />} />
@@ -40,12 +39,7 @@ function App() {
         </Routes>
       </main>
 
-      <button
-        className={`absolute bottom-0 left-4  border-2 p-2`}
-        onClick={() => setTheme(!theme)}
-      >
-        Theme
-      </button>
+      {/* <BtnTheme theme={theme} setTheme={setTheme} /> */}
     </div>
   );
 }

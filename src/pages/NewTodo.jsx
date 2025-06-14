@@ -1,4 +1,5 @@
 import React from "react";
+import GoToHomePage from "../components/GoBackBtn";
 
 const NewtodoLabel = ({ htmlFor, name, className }) => {
   return (
@@ -36,7 +37,9 @@ const lableStyle =
 
 const NewTodo = () => {
   return (
-    <section className="newtodo col-span-1 col-start-1 flex flex-col items-center p-12">
+    <section className="newtodo AllTasks col-start-1 col-span-3 items-center p-12 relative">
+      <GoToHomePage arrowImg="/icon/chevron-left-y.svg" />
+
       <img
         id="newtodo"
         src="/title/New Todo.svg"
@@ -44,7 +47,7 @@ const NewTodo = () => {
         className="mx-auto"
       />
 
-      <form className="flex flex-col items-center w-[80%] max-w-[30rem]">
+      <form className="flex flex-col items-center w-[80%] max-w-[30rem] mx-auto">
         {/* Task Name */}
         <NewtodoLabel
           htmlFor="task-name"
