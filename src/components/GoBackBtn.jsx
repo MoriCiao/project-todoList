@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const GoToHomePage = ({ arrowImg }) => {
@@ -7,7 +6,7 @@ const GoToHomePage = ({ arrowImg }) => {
     homepageBtn("/");
   };
   return (
-    <button onClick={handleGoback} className="absolute top-12">
+    <button onClick={handleGoback} className="absolute bottom-4 left-0">
       <img src={arrowImg} alt="Go Back Home" />
     </button>
   );

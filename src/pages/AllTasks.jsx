@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useReducer } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 
 const TaskCard = ({ title, time, description }) => {
@@ -20,12 +20,16 @@ const TaskCard = ({ title, time, description }) => {
 
   return (
     <div className="task relative p-4 rounded-md w-auto h-10rem bg-[--light-component-g]">
-      <div className="absolute w-full bottom-[-0.5rem] left-0 flex justify-center font-bold m-auto xl:hidden">
+      <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold m-auto xl:hidden">
         <span
-          className=" cursor-pointer text-center"
+          className="cursor-pointer text-center "
           onClick={() => dispatch({ type: "TOGGLE_VISIBLE" })}
         >
-          ﹀
+          {state.isVisible ? (
+            <img src="icon/chevron-up-g.svg" alt="" />
+          ) : (
+            <img src="icon/chevron-down-g.svg" alt="" />
+          )}
         </span>
       </div>
       <div className="grid grid-cols-6 items-center justify-center">
@@ -64,7 +68,9 @@ const AllTasks_RWD_setting = [
 
 const AllTasks = () => {
   return (
-    <section className="AllTasks col-start-1 col-span-3 items-center p-12 relative">
+    <section
+      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative`}
+    >
       <GoToHomePage arrowImg="/icon/chevron-left-g.svg" />
       <img id="alltasks" src="title/All Tasks.svg" className="mx-auto" alt="" />
       <div className={`grid ${AllTasks_RWD_setting} pt-4`}>

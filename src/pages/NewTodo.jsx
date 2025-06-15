@@ -24,7 +24,7 @@ const NewtodoInput = ({ type, name, id, placeholder, className }) => {
 const NewtodoTextArea = ({ maxlength, rows, placeholder, className }) => {
   return (
     <textarea
-      maxlength={maxlength}
+      maxLength={maxlength}
       rows={rows}
       placeholder={placeholder}
       className={className}
@@ -37,7 +37,9 @@ const lableStyle =
 
 const NewTodo = () => {
   return (
-    <section className="newtodo AllTasks col-start-1 col-span-3 items-center p-12 relative">
+    <section
+      className={`newtodo AllTasks col-start-1 col-span-3 items-center p-12 relative`}
+    >
       <GoToHomePage arrowImg="/icon/chevron-left-y.svg" />
 
       <img

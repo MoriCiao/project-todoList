@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
+import { todoContext } from "../components/todoCotext";
 const headerBtn = [
   {
     id: 1,
@@ -39,8 +40,12 @@ const headerBtn = [
 const RWD_Btn = ["md:grid", "md:grid-cols-5", "sm:flex"];
 
 const Header = () => {
+  const { textSize, sizeClass } = useContext(todoContext);
+
   return (
-    <section className="header-section h-auto flex flex-col items-center">
+    <section
+      className={`${sizeClass[textSize]} header-section flex flex-col items-center justify-start`}
+    >
       <Link to="/" className="py-4">
         <h1>My List</h1>
       </Link>
