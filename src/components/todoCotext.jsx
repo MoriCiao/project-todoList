@@ -13,8 +13,32 @@ export const TextSizeProvider = ({ children }) => {
   // 深淺色主題變更
   const [theme, setTheme] = useState(false);
 
+  // New TOdo 資料獲取，導入AllTasks裡，編列出各個Task
+  const [allTasks, setAllTasks] = useState([]);
+
+  const [taskName, setTaskName] = useState("");
+  const [startTime, setStartTime] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [taskDescript, setTaskDescript] = useState("");
+
   return (
-    <todoContext.Provider value={{ textSize, setTextSize, sizeClass }}>
+    <todoContext.Provider
+      value={{
+        textSize,
+        setTextSize,
+        sizeClass,
+        allTasks,
+        setAllTasks,
+        taskName,
+        setTaskName,
+        startTime,
+        setStartTime,
+        endTime,
+        setEndTime,
+        taskDescript,
+        setTaskDescript,
+      }}
+    >
       {children}
     </todoContext.Provider>
   );

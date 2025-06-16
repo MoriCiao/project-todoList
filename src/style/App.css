@@ -41,9 +41,6 @@ body p {
   scroll-behavior: smooth;
 }
 
-.AllTasks {
-  border: red 1px solid;
-}
 @media (max-width: 768px) {
   .MainOutlet {
     overflow-y: visible;
