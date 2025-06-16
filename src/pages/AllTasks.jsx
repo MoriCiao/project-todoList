@@ -19,24 +19,12 @@ const TaskCard = ({ title, time, description }) => {
   });
 
   return (
-    <div className="task relative p-4 rounded-md w-auto h-10rem bg-[--light-component-g]">
-      <div className="absolute w-full bottom-0 left-0 flex justify-center font-bold m-auto xl:hidden">
-        <span
-          className="cursor-pointer text-center "
-          onClick={() => dispatch({ type: "TOGGLE_VISIBLE" })}
-        >
-          {state.isVisible ? (
-            <img src="icon/chevron-up-g.svg" alt="" />
-          ) : (
-            <img src="icon/chevron-down-g.svg" alt="" />
-          )}
-        </span>
-      </div>
+    <div className="task relative p-4 rounded-md w-auto h-auto bg-[--light-component-g]">
       <div className="grid grid-cols-6 items-center justify-center">
         <h2 className="title col-start-1 col-span-2 text-[1.5rem]">{title}</h2>
         <div
           className={`col-start-3 col-span-5 text-end
-          }`}
+          `}
         >
           <span className="mx-2 my-auto">{time}</span>
 
@@ -45,13 +33,28 @@ const TaskCard = ({ title, time, description }) => {
           </button>
         </div>
       </div>
-      <p
-        className={`descript h-[10rem] p-4 rounded-md bg-[--light-component-g] ${
-          state.isVisible ? "" : "hidden"
-        }`}
-      >
-        {description}
-      </p>
+      <div className="descript-area bg-[--light-component-g] rounded-md h-auto">
+        {/* 需隱藏的文字 */}
+        {description && (
+          <p className={`descript  p-4 ${state.isVisible ? "" : "hidden"}`}>
+            {description}
+          </p>
+        )}
+
+        {/* 隱藏箭頭 */}
+        <div
+          className={`absolute w-full ${
+            state.isVisible ? "bottom-0" : "bottom-[-2]"
+          } left-0 flex justify-center items-center font-bold m-auto`}
+        >
+          <span
+            className="descript-visible cursor-pointer"
+            onClick={() => dispatch({ type: "TOGGLE_VISIBLE" })}
+          >
+            {state.isVisible ? "︽" : "︾"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 };

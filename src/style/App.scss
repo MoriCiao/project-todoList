@@ -43,7 +43,26 @@ body{
     scroll-behavior: smooth;
     
 }
+.AllTasks{
+    border: red 1px solid;
+    .task{
+        div.descript-area{
 
+            // height:1rem;
+            // &:active{
+            //     height: auto;
+            //     p{
+            //         display: block;
+            //     }
+            // }
+            // p{
+            //     display: none;
+                
+            // }
+        }
+    }
+    
+}
 
 
 @media (max-width: 768px) {
