@@ -1,6 +1,8 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useState } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
+import { useNavigate } from "react-router-dom";
+
 const NewtodoLabel = ({ htmlFor, name, className }) => {
   return (
     <label htmlFor={htmlFor} className={className}>
@@ -68,6 +70,8 @@ const NewTodo = () => {
     setTaskDescript,
   } = useContext(todoContext);
 
+  const GoToAllTasks = useNavigate();
+  const [isPass, setIsPass] = useState(false);
   // console.log(taskName);
   // console.log(startTime);
   // console.log(endTime);
@@ -79,6 +83,7 @@ const NewTodo = () => {
 
   const handleInputTask = () => {
     console.log("被點擊了!!");
+
     if (taskName === "" || startTime === "" || endTime === "") {
       alert("請輸入任務名稱及選擇開始與結束的日期!");
       return;
@@ -92,17 +97,20 @@ const NewTodo = () => {
       startTime: startTime,
       endTime: endTime,
       taskDescript: taskDescript,
+      // 開闔文字
+      isVisible: false,
     };
     const updateTasks = [...allTasks, newTask];
     setAllTasks(updateTasks);
     console.log(updateTasks);
 
     // 資料送出後，須把每個參數重新設定
-
     setTaskName("");
     setStartTime("");
     setEndTime("");
     setTaskDescript("");
+    // 資料輸入成功後，將頁面導向 Alltasks
+    GoToAllTasks("/alltasks");
   };
 
   return (
