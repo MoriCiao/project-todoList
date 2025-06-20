@@ -4,13 +4,17 @@ import { Outlet } from "react-router-dom";
 
 import { todoContext } from "../components/todoCotext";
 const MainOutlet = () => {
-  const { textSize, sizeClass } = useContext(todoContext);
+  const { textSize, sizeClass, theme } = useContext(todoContext);
 
   return (
     <main
-      className={`${sizeClass[textSize]} MainOutlet grid xxl:grid-cols-3 md:grid-cols-1 h-[95vh]`}
+      className={` MainOutlet grid xxl:grid-cols-3 md:grid-cols-1 h-[100vh] ${
+        theme ? "bg-[--dark-bg]" : ""
+      }`}
     >
-      <Outlet />
+      <div className={`${sizeClass[textSize]} h-[95vh]`}>
+        <Outlet />
+      </div>
     </main>
   );
 };

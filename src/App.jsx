@@ -20,9 +20,9 @@ function App() {
   return (
     <TextSizeProvider>
       <div
-        className={`relative grid p-4 w-auto ${APP_RWD_setting} items-start`}
+        className={`relative grid w-auto ${APP_RWD_setting} items-start h-[100vh]`}
       >
-        <header className="w-full col-start-1 lg:col-span-1 md:col-span-1 ">
+        <header className="w-full h-full col-start-1 lg:col-span-1 md:col-span-1 ">
           <Header />
         </header>
         <main className="lg:col-start-2 lg:col-span-2 md:col-start-2 md:col-span-1">

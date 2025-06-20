@@ -2,61 +2,30 @@ import React, { useContext, useEffect, useReducer } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
 import { useNavigate } from "react-router-dom";
-const TaskCard = ({ title, time, description }) => {
-  return (
-    <div className="task relative p-4 rounded-md w-auto h-auto bg-[--light-component-g]">
-      <div className="grid grid-cols-6 items-center justify-center">
-        <h2 className="title col-start-1 col-span-2 text-[1.5rem]">{title}</h2>
-        <div
-          className={`col-start-3 col-span-5 text-end
-          `}
-        >
-          <span className="mx-2 my-auto">{time}</span>
-
-          <button className="my-auto">
-            <img src="/icon/trash-g.svg" className="" alt="" />
-          </button>
-        </div>
-      </div>
-      <div className="descript-area bg-[--light-component-g] rounded-md h-auto">
-        {/* 需隱藏的文字 */}
-        {description && (
-          <p className={`descript  p-4 ${state.isVisible ? "" : "hidden"}`}>
-            {description}
-          </p>
-        )}
-
-        {/* 隱藏箭頭 */}
-        <div
-          className={`absolute w-full ${
-            state.isVisible ? "bottom-0" : "bottom-[-2]"
-          } left-0 flex justify-center items-center font-bold m-auto`}
-        >
-          <span
-            className="descript-visible cursor-pointer"
-            onClick={() => dispatch({ type: "TOGGLE_VISIBLE" })}
-          >
-            {state.isVisible ? "︽" : "︾"}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 const AllTasks_RWD_setting = [
-  "2xl:grid-cols-3",
-  "2xl:gap-8",
+  "2xl:grid-cols-2",
+  "2xl:gap-4",
   "xl:grid-cols-2",
   "md:grid-cols-1",
   "md:gap-4 ",
   "sm:grid-cols-1",
   "sm:gap-4",
 ].join(" ");
+// 任務時間的顯示參數
+const timeOptions = {
+  // year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+};
 
 const AllTasks = () => {
   // 獲取tasks 列表
-  const { allTasks, setAllTasks } = useContext(todoContext);
+  const { theme, allTasks, setAllTasks, raiseBtn, decreaseBtn } =
+    useContext(todoContext);
   const GoToNewTodo = useNavigate();
   // reducer的初始化
   const initailState = {
@@ -87,6 +56,13 @@ const AllTasks = () => {
 
   const [state, dispatch] = useReducer(TaskBtnReducer, initailState);
 
+  const themeOptions = {
+    themeFont: `${theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"}`,
+    themeBg: `${
+      theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
+    }`,
+  };
+
   //為了同步更新外部的allTasks
   useEffect(() => {
     setAllTasks(state.allTasks);
@@ -94,17 +70,42 @@ const AllTasks = () => {
   }, [state.allTasks]);
   return (
     <section
-      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative`}
+      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full`}
     >
-      <GoToHomePage arrowImg="/icon/chevron-left-g.svg" />
-      <img id="alltasks" src="title/All Tasks.svg" className="mx-auto" alt="" />
+      <div className="sortBtn absolute top-16 right-10">
+        <button
+          onClick={raiseBtn}
+          className={` px-2 py-1 border rounded-xl mx-2 ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+        >
+          A-Z
+        </button>
+        <button
+          onClick={decreaseBtn}
+          className={` px-2 py-1 border rounded-xl mx-2  ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+        >
+          Z-A
+        </button>
+      </div>
+      <GoToHomePage
+        arrowImg={
+          theme ? "/icon/chevron-left-dark-g.svg" : "/icon/chevron-left-g.svg"
+        }
+      />
+      <img
+        id="alltasks"
+        src={theme ? "title/All Tasks-dark.svg" : "title/All Tasks.svg"}
+        className="mx-auto"
+        alt=""
+      />
 
-      <div className={`grid ${AllTasks_RWD_setting} pt-4`}>
+      <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
         {state.allTasks.length === 0 ? (
-          <div className="text-center p-4 rounded-md bg-[--light-component-g]">
-            <p className="p-4">目前暫無任務</p>
+          <div
+            className={`text-center p-4 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+          >
+            <p className={`p-4 ${themeOptions.themeFont}`}>目前暫無任務</p>
             <button
-              className="px-4 py-2 rounded-md bg-[--light-component-g] font-bold"
+              className={`px-4 py-2 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} font-bold `}
               onClick={() => {
                 GoToNewTodo("/newtodo");
               }}
@@ -118,19 +119,25 @@ const AllTasks = () => {
             return (
               <div
                 key={index}
-                className="task relative p-4 rounded-md w-auto max-w-[40rem] h-auto bg-[--light-component-g]"
+                className={`task relative p-4 rounded-md w-auto max-w-[40rem] h-auto ${themeOptions.themeBg} ${themeOptions.themeFont}`}
               >
                 <div className="grid grid-cols-6 items-center justify-center">
-                  <h2 className="title col-start-1 col-span-2 text-[1.5rem]">
+                  <h2
+                    className={`title col-start-1 col-span-2 text-[1.5rem]  ${themeOptions.themeFont}`}
+                  >
                     {task.taskName}
                   </h2>
 
-                  <span className="mx-2 my-auto col-start-3 col-span-3 text-end text-[0.8rem]">
-                    {task.startTime} <br /> {task.endTime}
+                  <span
+                    className={`mx-2 my-auto col-start-3 col-span-3 text-end text-[0.8rem]  ${themeOptions.themeFont}`}
+                  >
+                    {task.startTime?.toLocaleDateString("zh-TW", timeOptions)}{" "}
+                    <br />{" "}
+                    {task.endTime?.toLocaleDateString("zh-TW", timeOptions)}
                   </span>
 
                   <button
-                    className="col-start-6 col-span-1  flex flex-col items-center"
+                    className={`col-start-6 col-span-1  flex flex-col items-center `}
                     onClick={() => {
                       dispatch({ type: "DELETE_TASK", payload: task.taskName });
                     }}
@@ -138,37 +145,13 @@ const AllTasks = () => {
                     <img src="/icon/trash-g.svg" className="w-" alt="" />
                   </button>
                 </div>
-                <div className="descript-area bg-[--light-component-g] rounded-md h-auto">
+                <div
+                  className={`descript-area rounded-md h-auto ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+                >
                   {/* 需隱藏的文字 */}
                   {task.taskDescript && (
-                    <p
-                      className={`descript  p-4 ${
-                        task.isVisible ? "" : "hidden"
-                      }`}
-                    >
-                      {task.taskDescript}
-                    </p>
+                    <p className={`descript  p-4`}>{task.taskDescript}</p>
                   )}
-
-                  {/* 隱藏箭頭 */}
-                  <div
-                    className={`absolute w-full 
-                      bottom-0 flex justify-center items-center  font-bold m-auto`}
-                  >
-                    <span
-                      className={`descript-visible cursor-pointer w-auto text-center ${
-                        task.isVisible ? "bottom-[-2]" : "bottom-0"
-                      }`}
-                      onClick={() =>
-                        dispatch({
-                          type: "TOGGLE_VISIBLE",
-                          payload: task.taskName,
-                        })
-                      }
-                    >
-                      {task.isVisible ? "︽" : "︾"}
-                    </span>
-                  </div>
                 </div>
               </div>
             );
