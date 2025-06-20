@@ -2,84 +2,51 @@ import React, { useContext, useEffect, useReducer } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
 import { useNavigate } from "react-router-dom";
-const TaskCard = ({ title, time, description }) => {
-  return (
-    <div className="task relative p-4 rounded-md w-auto h-auto bg-[--light-component-g]">
-      <div className="grid grid-cols-6 items-center justify-center">
-        <h2 className="title col-start-1 col-span-2 text-[1.5rem]">{title}</h2>
-        <div
-          className={`col-start-3 col-span-5 text-end
-          `}
-        >
-          <span className="mx-2 my-auto">{time}</span>
-
-          <button className="my-auto">
-            <img src="/icon/trash-g.svg" className="" alt="" />
-          </button>
-        </div>
-      </div>
-      <div className="descript-area bg-[--light-component-g] rounded-md h-auto">
-        {/* 需隱藏的文字 */}
-        {description && (
-          <p className={`descript  p-4 ${state.isVisible ? "" : "hidden"}`}>
-            {description}
-          </p>
-        )}
-
-        {/* 隱藏箭頭 */}
-        <div
-          className={`absolute w-full ${
-            state.isVisible ? "bottom-0" : "bottom-[-2]"
-          } left-0 flex justify-center items-center font-bold m-auto`}
-        >
-          <span
-            className="descript-visible cursor-pointer"
-            onClick={() => dispatch({ type: "TOGGLE_VISIBLE" })}
-          >
-            {state.isVisible ? "︽" : "︾"}
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-};
+import { motion } from "framer-motion";
 
 const AllTasks_RWD_setting = [
-  "2xl:grid-cols-3",
-  "2xl:gap-8",
+  "2xl:grid-cols-2",
+  "2xl:gap-4",
   "xl:grid-cols-2",
   "md:grid-cols-1",
   "md:gap-4 ",
   "sm:grid-cols-1",
   "sm:gap-4",
 ].join(" ");
+// 任務時間的顯示參數
+const timeOptions = {
+  // year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hour12: false,
+};
 
 const AllTasks = () => {
   // 獲取tasks 列表
-  const { allTasks, setAllTasks } = useContext(todoContext);
+  const { theme, allTasks, setAllTasks, raiseBtn, decreaseBtn, motion_fade } =
+    useContext(todoContext);
   const GoToNewTodo = useNavigate();
   // reducer的初始化
+
   const initailState = {
     allTasks: allTasks,
   };
   const TaskBtnReducer = (state, action) => {
     switch (action.type) {
-      case "TOGGLE_VISIBLE":
-        return {
-          ...state,
-          allTasks: state.allTasks.map((task) => {
-            if (task.taskName === action.payload) {
-              return { ...task, isVisible: !task.isVisible };
-            }
-            return task;
-          }),
-        };
       case "DELETE_TASK":
         const filteredTasks = state.allTasks.filter(
           (task) => task.taskName !== action.payload
         );
         return { ...state, allTasks: filteredTasks };
-
+      case "IS_CHECK":
+        const toggledTasks = state.allTasks.map((task) =>
+          task.taskName === action.payload
+            ? { ...task, isCheck: !task.isCheck }
+            : task
+        );
+        return { ...state, allTasks: toggledTasks };
       default:
         return state;
     }
@@ -87,24 +54,56 @@ const AllTasks = () => {
 
   const [state, dispatch] = useReducer(TaskBtnReducer, initailState);
 
+  const themeOptions = {
+    themeFont: `${theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"}`,
+    themeBg: `${
+      theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
+    }`,
+  };
+
   //為了同步更新外部的allTasks
   useEffect(() => {
     setAllTasks(state.allTasks);
-    console.log(state.allTasks);
   }, [state.allTasks]);
   return (
-    <section
-      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative`}
+    <motion.section
+      {...motion_fade}
+      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full`}
     >
-      <GoToHomePage arrowImg="/icon/chevron-left-g.svg" />
-      <img id="alltasks" src="title/All Tasks.svg" className="mx-auto" alt="" />
+      <div className="sortBtn absolute top-4 left-10 flex flex-col gap-4">
+        <button
+          onClick={raiseBtn}
+          className={`isClickBtn px-2 py-1 border-0 rounded-xl mx-2 ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+        >
+          A-Z
+        </button>
+        <button
+          onClick={decreaseBtn}
+          className={`isClickBtn px-2 py-1 border-0 rounded-xl mx-2  ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+        >
+          Z-A
+        </button>
+      </div>
+      <GoToHomePage
+        arrowImg={
+          theme ? "/icon/chevron-left-dark-g.svg" : "/icon/chevron-left-g.svg"
+        }
+      />
+      <img
+        id="alltasks"
+        src={theme ? "title/All Tasks-dark.svg" : "title/All Tasks.svg"}
+        className="mx-auto"
+        alt=""
+      />
 
-      <div className={`grid ${AllTasks_RWD_setting} pt-4`}>
+      <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
         {state.allTasks.length === 0 ? (
-          <div className="text-center p-4 rounded-md bg-[--light-component-g]">
-            <p className="p-4">目前暫無任務</p>
+          <div
+            className={`text-center p-4 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+          >
+            <p className={`p-4  ${themeOptions.themeFont}`}>目前暫無任務</p>
             <button
-              className="px-4 py-2 rounded-md bg-[--light-component-g] font-bold"
+              className={`px-4 py-2 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} font-bold `}
               onClick={() => {
                 GoToNewTodo("/newtodo");
               }}
@@ -118,56 +117,83 @@ const AllTasks = () => {
             return (
               <div
                 key={index}
-                className="task relative p-4 rounded-md w-auto max-w-[40rem] h-auto bg-[--light-component-g]"
+                className={`task relative rounded-md w-auto max-w-[40rem] h-auto grid grid-cols-12 ${themeOptions.themeBg} ${themeOptions.themeFont}`}
               >
-                <div className="grid grid-cols-6 items-center justify-center">
-                  <h2 className="title col-start-1 col-span-2 text-[1.5rem]">
-                    {task.taskName}
-                  </h2>
-
-                  <span className="mx-2 my-auto col-start-3 col-span-3 text-end text-[0.8rem]">
-                    {task.startTime} <br /> {task.endTime}
-                  </span>
-
+                <div className="check-Icon rounded-l-md col-span-2 col-start-1 py-4">
                   <button
-                    className="col-start-6 col-span-1  flex flex-col items-center"
-                    onClick={() => {
-                      dispatch({ type: "DELETE_TASK", payload: task.taskName });
-                    }}
+                    className="w-full h-full flex items-center justify-center"
+                    onClick={() =>
+                      dispatch({
+                        type: "IS_CHECK",
+                        payload: task.taskName,
+                      })
+                    }
                   >
-                    <img src="/icon/trash-g.svg" className="w-" alt="" />
+                    <motion.img
+                      initial={{ scale: 1 }}
+                      animate={
+                        task.isCheck
+                          ? { scale: [1, 1.5, 1] }
+                          : { scale: [1, 1.25, 1] }
+                      }
+                      transition={{ duration: 0.4 }}
+                      src={
+                        task.isCheck
+                          ? theme
+                            ? "/icon/check-dark-circked.svg"
+                            : "/icon/check-light-checked.svg"
+                          : theme
+                          ? "/icon/circle-dark-check.svg"
+                          : "/icon/circle-light-check.svg"
+                      }
+                      alt="checkIcon"
+                    />
                   </button>
                 </div>
-                <div className="descript-area bg-[--light-component-g] rounded-md h-auto">
-                  {/* 需隱藏的文字 */}
-                  {task.taskDescript && (
-                    <p
-                      className={`descript  p-4 ${
-                        task.isVisible ? "" : "hidden"
-                      }`}
+                <div className="task-container col-span-10 col-start-3 pt-4 pb-2 pr-2">
+                  <div className="grid grid-cols-6 items-center justify-center">
+                    <h2
+                      className={`title col-start-1 col-span-2 text-[1.5rem] transition-all duration-300  ${
+                        themeOptions.themeFont
+                      } ${task.isCheck ? "line-through" : ""}`}
                     >
-                      {task.taskDescript}
-                    </p>
-                  )}
+                      {task.taskName}
+                    </h2>
 
-                  {/* 隱藏箭頭 */}
-                  <div
-                    className={`absolute w-full 
-                      bottom-0 flex justify-center items-center  font-bold m-auto`}
-                  >
                     <span
-                      className={`descript-visible cursor-pointer w-auto text-center ${
-                        task.isVisible ? "bottom-[-2]" : "bottom-0"
-                      }`}
-                      onClick={() =>
-                        dispatch({
-                          type: "TOGGLE_VISIBLE",
-                          payload: task.taskName,
-                        })
-                      }
+                      className={`mx-2 my-auto col-start-3 col-span-3 text-end text-[0.8rem]  ${themeOptions.themeFont}`}
                     >
-                      {task.isVisible ? "︽" : "︾"}
+                      {task.startTime?.toLocaleDateString("zh-TW", timeOptions)}{" "}
+                      <br />{" "}
+                      {task.endTime?.toLocaleDateString("zh-TW", timeOptions)}
                     </span>
+
+                    <button
+                      className={`col-start-6 col-span-1  flex flex-col items-center `}
+                      onClick={() => {
+                        dispatch({
+                          type: "DELETE_TASK",
+                          payload: task.taskName,
+                        });
+                      }}
+                    >
+                      <img
+                        src={
+                          theme ? "/icon/trash-dark-g.svg" : "/icon/trash-g.svg"
+                        }
+                        className=""
+                        alt="trashBtn"
+                      />
+                    </button>
+                  </div>
+                  <div
+                    className={`descript-area rounded-md h-auto ${themeOptions.themeBg}`}
+                  >
+                    {task.taskDescript && (
+                      <p className={`descript  p-4 ${themeOptions.themeFont}`}>
+                        {task.taskDescript}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -175,7 +201,7 @@ const AllTasks = () => {
           })
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -1,8 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
 import { useNavigate } from "react-router-dom";
-
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/confetti.css";
+import { motion } from "framer-motion";
 const NewtodoLabel = ({ htmlFor, name, className }) => {
   return (
     <label htmlFor={htmlFor} className={className}>
@@ -19,6 +21,7 @@ const NewtodoInput = ({
   className,
   onChange,
   value,
+  ref,
 }) => {
   return (
     <input
@@ -29,6 +32,38 @@ const NewtodoInput = ({
       className={className}
       onChange={onChange}
       value={value}
+      ref={ref}
+    />
+  );
+};
+
+const NewtodoDate = ({ name, placeholder, className, onChange, value }) => {
+  const { theme } = useContext(todoContext);
+
+  return (
+    <Flatpickr
+      value={value}
+      // 需要釐清
+      onChange={([date]) =>
+        onChange({
+          target: { value: date },
+        })
+      }
+      //
+      options={{
+        enableTime: true,
+        dateFormat: "m-d H:i",
+        time_24hr: true,
+        allowInput: true,
+      }}
+      className={`${className} ${
+        theme
+          ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
+          : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
+      }`}
+      name={name}
+      id={name}
+      placeholder={placeholder}
     />
   );
 };
@@ -53,11 +88,9 @@ const NewtodoTextArea = ({
   );
 };
 
-const lableStyle =
-  "p-4 font-[Istok Web] text-center text-[1.5rem] text-[--light-text-y] mt-4";
-
 const NewTodo = () => {
   const {
+    theme,
     allTasks,
     setAllTasks,
     taskName,
@@ -68,22 +101,20 @@ const NewTodo = () => {
     setEndTime,
     taskDescript,
     setTaskDescript,
+    motion_fade,
   } = useContext(todoContext);
 
   const GoToAllTasks = useNavigate();
-  const [isPass, setIsPass] = useState(false);
-  // console.log(taskName);
-  // console.log(startTime);
-  // console.log(endTime);
-  // console.log(taskDescript);
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
+  const lableStyle = "p-4 font-[Istok Web] text-center text-[1.5rem] mt-4";
+
   const handleInputTask = () => {
     console.log("被點擊了!!");
-
+    console.log(allTasks);
     if (taskName === "" || startTime === "" || endTime === "") {
       alert("請輸入任務名稱及選擇開始與結束的日期!");
       return;
@@ -98,7 +129,7 @@ const NewTodo = () => {
       endTime: endTime,
       taskDescript: taskDescript,
       // 開闔文字
-      isVisible: false,
+      isCheck: false,
     };
     const updateTasks = [...allTasks, newTask];
     setAllTasks(updateTasks);
@@ -112,16 +143,26 @@ const NewTodo = () => {
     // 資料輸入成功後，將頁面導向 Alltasks
     GoToAllTasks("/alltasks");
   };
+  const taskRef = useRef(null);
+
+  useEffect(() => {
+    taskRef.current.focus();
+  }, []);
 
   return (
-    <section
-      className={`newtodo AllTasks col-start-1 col-span-3 items-center p-12 relative`}
+    <motion.section
+      {...motion_fade}
+      className={`newtodo AllTasks col-start-1 col-span-3 items-center p-12 relative h-full`}
     >
-      <GoToHomePage arrowImg="/icon/chevron-left-y.svg" />
+      <GoToHomePage
+        arrowImg={
+          theme ? "/icon/chevron-left-dark-y.svg" : "/icon/chevron-left-y.svg"
+        }
+      />
 
       <img
         id="newtodo"
-        src="/title/New Todo.svg"
+        src={theme ? "/title/New Todo-dark.svg" : "/title/New Todo.svg"}
         alt="New Todo.svg"
         className="mx-auto"
       />
@@ -133,7 +174,9 @@ const NewTodo = () => {
         {/* Task Name */}
         <NewtodoLabel
           htmlFor="task-name"
-          className={lableStyle}
+          className={`${lableStyle} ${
+            theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
+          } `}
           name="Task Name"
         />
         <NewtodoInput
@@ -141,60 +184,102 @@ const NewTodo = () => {
           name="mission"
           id="mission"
           placeholder="Input Task..."
-          className="border rounded indent-4 w-[20rem]"
+          className={`InputItem border-0 rounded indent-4 w-[20rem] ${
+            theme
+              ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
+              : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
+          }`}
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
+          ref={taskRef}
         />
 
         {/* Deadline */}
         <NewtodoLabel
           htmlFor="deadline"
-          className={lableStyle}
+          className={`${lableStyle} ${
+            theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
+          } `}
           name="Deadline"
         />
         <div className="flex flex-col gap-4 items-center w-[20rem]">
           <section className="grid grid-cols-4 items-center">
             <NewtodoLabel
               htmlFor="start"
-              className="text-start text-[1.2rem] text-[--light-text-y] col-span-1 col-start-1"
+              className={`text-start text-[1.2rem] col-span-1 col-start-1 ${
+                theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
+              }`}
               name="Start"
             />
-            <NewtodoInput
+            <NewtodoDate
+              name={"start"}
+              id={"start"}
+              placeholder={"請選擇日期..."}
+              value={startTime}
+              className={`InputItem w-[15rem] h-[2rem] border-0 rounded p-2 col-span-4 col-start-2 ${
+                theme
+                  ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
+                  : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
+              }`}
+              onChange={(e) => setStartTime(e.target.value)}
+            />
+            {/* <NewtodoInput
               type="date"
               name="start"
               id="start"
-              className="w-[15rem] h-[2rem] border rounded p-2 col-span-4 col-start-2"
+              className={`w-[15rem] h-[2rem] border rounded p-2 col-span-4 col-start-2 `}
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
-            />
+            /> */}
           </section>
           <section className="grid grid-cols-4 items-center">
             <NewtodoLabel
               htmlFor="end"
-              className="text-start text-[1.2rem] text-[--light-text-y] col-span-1 col-start-1"
+              className={`text-start text-[1.2rem] col-span-1 col-start-1 ${
+                theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
+              }`}
               name="End"
             />
-            <NewtodoInput
+            <NewtodoDate
+              name={"end"}
+              id={"end"}
+              placeholder={"請選擇日期..."}
+              value={endTime}
+              className={`InputItem w-[15rem] h-[2rem] border-0 rounded p-2 col-span-4 col-start-2 ${
+                theme
+                  ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
+                  : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
+              }`}
+              onChange={(e) => setEndTime(e.target.value)}
+            />
+
+            {/* <NewtodoInput
               type="date"
               name="End"
               id="End"
               className="w-[15rem] h-[2rem] border rounded p-2 col-span-4 col-start-2"
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
-            />
+            /> */}
           </section>
         </div>
         {/* Descript */}
         <NewtodoLabel
           htmlFor="descript"
-          className={lableStyle}
+          className={`${lableStyle} ${
+            theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
+          } `}
           name="Descript"
         />
         <NewtodoTextArea
           maxlength="200"
           rows="4"
           placeholder="Describe the task"
-          className="border rounded resize-none h-40 w-[20rem] booder indent-2"
+          className={`InputItem border-0 rounded resize-none h-40 w-[20rem] booder indent-2 ${
+            theme
+              ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
+              : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
+          }`}
           value={taskDescript}
           onChange={(e) => setTaskDescript(e.target.value)}
         />
@@ -203,14 +288,20 @@ const NewTodo = () => {
           onClick={() => {
             handleInputTask();
           }}
-          className="mt-2 w-[10rem] h-[2.5rem] rounded-full bg-[--light-component-y]  "
+          className={`mt-2 w-[10rem] h-[2.5rem] rounded-full ${
+            theme ? "bg-[--dark-component-y]" : "bg-[--light-component-y]"
+          } `}
         >
-          <p className="text-[2rem] font-['Luckiest_Guy'] text-[--light-text-y] w-full text-center leading-tight">
+          <p
+            className={`text-[2rem] font-['Luckiest_Guy'] w-full text-center leading-tight ${
+              theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
+            }`}
+          >
             ADD
           </p>
         </button>
       </form>
-    </section>
+    </motion.section>
   );
 };
 
