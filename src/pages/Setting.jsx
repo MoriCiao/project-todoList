@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
-
+import { motion } from "framer-motion";
 const Setting = () => {
-  const { textSize, setTextSize, sizeClass, theme, setTheme } =
+  const { textSize, setTextSize, sizeClass, theme, setTheme, motion_fade } =
     useContext(todoContext);
   console.log(textSize);
   const textSytle_theme = `font-['Luckiest_Guy'] ${
@@ -26,7 +26,8 @@ const Setting = () => {
   }, [theme]);
 
   return (
-    <section
+    <motion.section
+      {...motion_fade}
       className={`setting col-start-1 col-span-3 items-start pt-12 relative `}
     >
       <GoToHomePage
@@ -86,7 +87,7 @@ const Setting = () => {
           </button>
         </section>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

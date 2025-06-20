@@ -42,6 +42,25 @@ export const TextSizeProvider = ({ children }) => {
     console.log("大到小排序成功!!");
   };
 
+  // motion 參數設定
+  const motion_fade = {
+    initial: { opacity: 0, y: -20 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.5 },
+  };
+
+  const handleScroll = () => {
+    window.scrollTo({
+      // main最上方 Y 座標
+      top: 600,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const bgLightImg = "/main-bg-note-light.png";
+  const bgDarkImg = "/main-bg-note-dark.png";
+
   return (
     <todoContext.Provider
       value={{
@@ -62,6 +81,10 @@ export const TextSizeProvider = ({ children }) => {
         setTaskDescript,
         raiseBtn,
         decreaseBtn,
+        motion_fade,
+        handleScroll,
+        bgLightImg,
+        bgDarkImg,
       }}
     >
       {children}

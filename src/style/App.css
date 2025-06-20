@@ -41,6 +41,13 @@ body p {
   scroll-behavior: smooth;
 }
 
+.isClickBtn {
+  transition: all 0.3s ease-in-out;
+}
+.isClickBtn:hover {
+  transform: translate(-5px, -5px);
+}
+
 @media (max-width: 768px) {
   .MainOutlet {
     overflow-y: visible;

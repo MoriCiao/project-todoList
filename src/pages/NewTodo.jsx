@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
 import { useNavigate } from "react-router-dom";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/confetti.css";
-
+import { motion } from "framer-motion";
 const NewtodoLabel = ({ htmlFor, name, className }) => {
   return (
     <label htmlFor={htmlFor} className={className}>
@@ -21,6 +21,7 @@ const NewtodoInput = ({
   className,
   onChange,
   value,
+  ref,
 }) => {
   return (
     <input
@@ -31,6 +32,7 @@ const NewtodoInput = ({
       className={className}
       onChange={onChange}
       value={value}
+      ref={ref}
     />
   );
 };
@@ -99,6 +101,7 @@ const NewTodo = () => {
     setEndTime,
     taskDescript,
     setTaskDescript,
+    motion_fade,
   } = useContext(todoContext);
 
   const GoToAllTasks = useNavigate();
@@ -126,7 +129,7 @@ const NewTodo = () => {
       endTime: endTime,
       taskDescript: taskDescript,
       // 開闔文字
-      isVisible: false,
+      isCheck: false,
     };
     const updateTasks = [...allTasks, newTask];
     setAllTasks(updateTasks);
@@ -140,9 +143,15 @@ const NewTodo = () => {
     // 資料輸入成功後，將頁面導向 Alltasks
     GoToAllTasks("/alltasks");
   };
+  const taskRef = useRef(null);
+
+  useEffect(() => {
+    taskRef.current.focus();
+  }, []);
 
   return (
-    <section
+    <motion.section
+      {...motion_fade}
       className={`newtodo AllTasks col-start-1 col-span-3 items-center p-12 relative h-full`}
     >
       <GoToHomePage
@@ -182,6 +191,7 @@ const NewTodo = () => {
           }`}
           value={taskName}
           onChange={(e) => setTaskName(e.target.value)}
+          ref={taskRef}
         />
 
         {/* Deadline */}
@@ -291,7 +301,7 @@ const NewTodo = () => {
           </p>
         </button>
       </form>
-    </section>
+    </motion.section>
   );
 };
 

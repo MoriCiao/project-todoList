@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { TextSizeProvider } from "./components/todoCotext";
-import { todoContext } from "./components/todoCotext";
+
 import Header from "./pages/Header";
 import "./style/App.css";
 import MainOutlet from "./pages/MainOutlet";
@@ -9,12 +9,13 @@ import AllTasks from "./pages/AllTasks";
 import NewTodo from "./pages/NewTodo";
 import Setting from "./pages/Setting";
 import HomePage from "./pages/HomePage";
+import ToTopBtn from "./components/ToTopBtn";
 
 function App() {
   const APP_RWD_setting = [
     "lg:grid-cols-3",
     "md:grid-cols-2",
-    "sm:grid-rows-1",
+    "sm:grid-cols-1",
   ].join(" ");
 
   return (
@@ -35,7 +36,7 @@ function App() {
             </Route>
           </Routes>
         </main>
-        {/* <BtnTheme theme={theme} setTheme={setTheme} /> */}
+        <ToTopBtn />
       </div>
     </TextSizeProvider>
   );

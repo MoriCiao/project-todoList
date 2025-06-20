@@ -1,11 +1,11 @@
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { todoContext } from "../components/todoCotext";
-
+import { animate, motion } from "framer-motion";
 const RWD_Btn = ["md:grid", "md:grid-cols-5", "sm:flex"];
 
 const Header = () => {
-  const { textSize, sizeClass, theme } = useContext(todoContext);
+  const { textSize, sizeClass, theme, handleScroll } = useContext(todoContext);
 
   const headerBtn = [
     {
@@ -47,7 +47,7 @@ const Header = () => {
 
   return (
     <section
-      className={` ${
+      className={`relative ${
         theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
       } header-section  p-4 h-full`}
     >
@@ -62,7 +62,13 @@ const Header = () => {
         <nav className="flex flex-col ">
           {headerBtn.map((btn) => {
             return (
-              <Link to={btn.link} key={btn.id} className="mb-4 w-full">
+              <Link
+                to={btn.link}
+                key={btn.id}
+                className={`mb-4 w-full isClickBtn
+                `}
+                onClick={handleScroll}
+              >
                 <button
                   type={btn.type}
                   className={`${btn.bg_color} w-full grid grid-cols-5 rounded-xl p-4`}
