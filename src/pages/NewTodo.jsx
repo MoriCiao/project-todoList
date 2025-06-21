@@ -102,6 +102,8 @@ const NewTodo = () => {
     taskDescript,
     setTaskDescript,
     motion_fade,
+    state,
+    dispatch,
   } = useContext(todoContext);
 
   const GoToAllTasks = useNavigate();
@@ -124,6 +126,7 @@ const NewTodo = () => {
       return;
     }
     const newTask = {
+      id: Date.now().toString(),
       taskName: taskName,
       startTime: startTime,
       endTime: endTime,
@@ -131,9 +134,15 @@ const NewTodo = () => {
       // 開闔文字
       isCheck: false,
     };
+    /*
     const updateTasks = [...allTasks, newTask];
-    setAllTasks(updateTasks);
+    因reducer 控制 state 和 localStorage載入  setAllTasks是多餘的
+    setAllTasks(updateTasks)
+    localStorage.setItem("mylistTasks", JSON.stringify(updateTasks));
     console.log(updateTasks);
+    */
+    // 將新資料用 dispatch 導入 Reducer 裡的state.allTask
+    dispatch({ type: "ADD_TASK", payload: newTask });
 
     // 資料送出後，須把每個參數重新設定
     setTaskName("");

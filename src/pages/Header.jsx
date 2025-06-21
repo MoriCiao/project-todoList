@@ -1,11 +1,12 @@
 import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { todoContext } from "../components/todoCotext";
-import { animate, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 const RWD_Btn = ["md:grid", "md:grid-cols-5", "sm:flex"];
 
 const Header = () => {
-  const { textSize, sizeClass, theme, handleScroll } = useContext(todoContext);
+  const { textSize, sizeClass, theme, handleScroll, motion_theme } =
+    useContext(todoContext);
 
   const headerBtn = [
     {
@@ -46,52 +47,61 @@ const Header = () => {
   ];
 
   return (
-    <section
-      className={`relative ${
-        theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
-      } header-section  p-4 h-full`}
-    >
-      <div
-        className={`${sizeClass[textSize]} flex flex-col items-center justify-start`}
+    <AnimatePresence mode="wait">
+      <motion.section
+        {...motion_theme}
+        className={`relative ${
+          theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
+        } header-section  p-4 h-full`}
       >
-        <Link to="/" className="py-4">
-          <h1 className={`${theme ? "text-[--light-bg]" : "text-[--dark-bg]"}`}>
-            My List
-          </h1>
-        </Link>
-        <nav className="flex flex-col ">
-          {headerBtn.map((btn) => {
-            return (
-              <Link
-                to={btn.link}
-                key={btn.id}
-                className={`mb-4 w-full isClickBtn
+        <div
+          className={`${sizeClass[textSize]} flex flex-col items-center justify-start`}
+        >
+          <Link to="/" className="py-4">
+            <h1
+              className={`${theme ? "text-[--light-bg]" : "text-[--dark-bg]"}`}
+            >
+              My List
+            </h1>
+          </Link>
+          <nav className="flex flex-col ">
+            {headerBtn.map((btn) => {
+              return (
+                <Link
+                  to={btn.link}
+                  key={btn.id}
+                  className={`mb-4 w-full isClickBtn
                 `}
-                onClick={handleScroll}
-              >
-                <button
-                  type={btn.type}
-                  className={`${btn.bg_color} w-full grid grid-cols-5 rounded-xl p-4`}
+                  onClick={handleScroll}
                 >
-                  <div
-                    className={`${btn.bg_color} col-span-1 col-start-1 rounded-full  w-[4rem] h-[4rem] flex items-center justify-center`}
+                  <button
+                    type={btn.type}
+                    className={`${btn.bg_color} w-full grid grid-cols-5 rounded-xl p-4`}
                   >
-                    <img className="stroke-none" src={btn.img_content} alt="" />
-                  </div>
-                  <div className="col-span-4 col-start-2">
-                    <span
-                      className={`${btn.span_className} text-[2.5rem] font-['Luckiest_Guy']`}
+                    <div
+                      className={`${btn.bg_color} col-span-1 col-start-1 rounded-full  w-[4rem] h-[4rem] flex items-center justify-center`}
                     >
-                      {btn.text}
-                    </span>
-                  </div>
-                </button>
-              </Link>
-            );
-          })}
-        </nav>
-      </div>
-    </section>
+                      <img
+                        className="stroke-none"
+                        src={btn.img_content}
+                        alt=""
+                      />
+                    </div>
+                    <div className="col-span-4 col-start-2">
+                      <span
+                        className={`${btn.span_className} text-[2.5rem] font-['Luckiest_Guy']`}
+                      >
+                        {btn.text}
+                      </span>
+                    </div>
+                  </button>
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      </motion.section>
+    </AnimatePresence>
   );
 };
 

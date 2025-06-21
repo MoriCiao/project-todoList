@@ -25,34 +25,97 @@ const timeOptions = {
 
 const AllTasks = () => {
   // 獲取tasks 列表
-  const { theme, allTasks, setAllTasks, raiseBtn, decreaseBtn, motion_fade } =
-    useContext(todoContext);
+  const {
+    theme,
+    allTasks,
+    setAllTasks,
+    raiseBtn,
+    decreaseBtn,
+    motion_fade,
+    state,
+    dispatch,
+  } = useContext(todoContext);
+
   const GoToNewTodo = useNavigate();
-  // reducer的初始化
 
-  const initailState = {
-    allTasks: allTasks,
-  };
-  const TaskBtnReducer = (state, action) => {
-    switch (action.type) {
-      case "DELETE_TASK":
-        const filteredTasks = state.allTasks.filter(
-          (task) => task.taskName !== action.payload
-        );
-        return { ...state, allTasks: filteredTasks };
-      case "IS_CHECK":
-        const toggledTasks = state.allTasks.map((task) =>
-          task.taskName === action.payload
-            ? { ...task, isCheck: !task.isCheck }
-            : task
-        );
-        return { ...state, allTasks: toggledTasks };
-      default:
-        return state;
-    }
-  };
+  // const defaultTasks = [
+  //   {
+  //     taskName: "學習 React 基礎",
+  //     startTime: "2025-06-21T08:00:00.000Z",
+  //     endTime: "2025-06-21T10:00:00.000Z",
+  //     taskDescript: "觀看 React 官方教學並製作 TODO List",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     taskName: "閱讀 JavaScript 書籍",
+  //     startTime: "2025-06-22T07:30:00.000Z",
+  //     endTime: "2025-06-22T09:00:00.000Z",
+  //     taskDescript: "閱讀《你不知道的 JavaScript》第一章",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     taskName: "練習 Git 指令",
+  //     startTime: "2025-06-23T06:00:00.000Z",
+  //     endTime: "2025-06-23T07:30:00.000Z",
+  //     taskDescript: "練習 git init / clone / commit / push 流程",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     taskName: "設計個人網頁",
+  //     startTime: "2025-06-24T09:00:00.000Z",
+  //     endTime: "2025-06-24T11:00:00.000Z",
+  //     taskDescript: "使用 HTML/CSS 架設個人作品集首頁",
+  //     isCheck: false,
+  //   },
+  //   {
+  //     taskName: "撰寫學習筆記",
+  //     startTime: "2025-06-25T13:00:00.000Z",
+  //     endTime: "2025-06-25T14:00:00.000Z",
+  //     taskDescript: "整理本週 JavaScript 學習重點並發佈到 Notion",
+  //     isCheck: false,
+  //   },
+  // ];
 
-  const [state, dispatch] = useReducer(TaskBtnReducer, initailState);
+  // function getInitialStorage() {
+  //   console.log("第一次初始化 state");
+  //   const saved = localStorage.getItem("mylistTasks");
+
+  //   try {
+  //     if (!saved) {
+  //       // 裡面無任何資料
+  //       localStorage.setItem("mylistTasks", JSON.stringify(defaultTasks));
+  //       return { allTasks: defaultTasks };
+  //     }
+  //     return { allTasks: JSON.parse(saved) };
+  //   } catch (e) {
+  //     console.error("本機加載失敗...", e);
+  //     return { allTasks: defaultTasks };
+  //   }
+  // }
+  // // reducer的初始化
+  // // const initailState = {
+  // //   allTasks: allTasks,
+  // // };
+  // const TaskBtnReducer = (state, action) => {
+  //   switch (action.type) {
+  //     case "DELETE_TASK":
+  //       const filteredTasks = state.allTasks.filter(
+  //         (task) => task.taskName !== action.payload
+  //       );
+  //       return { ...state, allTasks: filteredTasks };
+  //     case "IS_CHECK":
+  //       const toggledTasks = state.allTasks.map((task) =>
+  //         task.taskName === action.payload
+  //           ? { ...task, isCheck: !task.isCheck }
+  //           : task
+  //       );
+  //       return { ...state, allTasks: toggledTasks };
+  //     default:
+  //       return state;
+  //   }
+  // };
+
+  // const [state, dispatch] = useReducer(TaskBtnReducer, {}, getInitialStorage);
 
   const themeOptions = {
     themeFont: `${theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"}`,
@@ -61,10 +124,16 @@ const AllTasks = () => {
     }`,
   };
 
-  //為了同步更新外部的allTasks
-  useEffect(() => {
-    setAllTasks(state.allTasks);
-  }, [state.allTasks]);
+  // useEffect(() => {
+  //   try {
+  //     localStorage.setItem("mylistTasks", JSON.stringify(state.allTasks));
+  //     console.log(state);
+  //     console.log("localStorage 已更新 ...");
+  //   } catch (e) {
+  //     console.error("儲存失敗 ：", e);
+  //   }
+  // }, [state.allTasks]);
+
   return (
     <motion.section
       {...motion_fade}
@@ -72,13 +141,13 @@ const AllTasks = () => {
     >
       <div className="sortBtn absolute top-4 left-10 flex flex-col gap-4">
         <button
-          onClick={raiseBtn}
+          onClick={() => dispatch({ type: "RAISE_BTN" })}
           className={`isClickBtn px-2 py-1 border-0 rounded-xl mx-2 ${themeOptions.themeBg} ${themeOptions.themeFont}`}
         >
           A-Z
         </button>
         <button
-          onClick={decreaseBtn}
+          onClick={() => dispatch({ type: "DECREASE_BTN" })}
           className={`isClickBtn px-2 py-1 border-0 rounded-xl mx-2  ${themeOptions.themeBg} ${themeOptions.themeFont}`}
         >
           Z-A
@@ -112,8 +181,8 @@ const AllTasks = () => {
             </button>
           </div>
         ) : (
-          allTasks &&
-          allTasks.map((task, index) => {
+          state.allTasks &&
+          state.allTasks.map((task, index) => {
             return (
               <div
                 key={index}
@@ -163,9 +232,15 @@ const AllTasks = () => {
                     <span
                       className={`mx-2 my-auto col-start-3 col-span-3 text-end text-[0.8rem]  ${themeOptions.themeFont}`}
                     >
-                      {task.startTime?.toLocaleDateString("zh-TW", timeOptions)}{" "}
+                      {new Date(task.startTime)?.toLocaleDateString(
+                        "zh-TW",
+                        timeOptions
+                      )}{" "}
                       <br />{" "}
-                      {task.endTime?.toLocaleDateString("zh-TW", timeOptions)}
+                      {new Date(task.endTime)?.toLocaleDateString(
+                        "zh-TW",
+                        timeOptions
+                      )}
                     </span>
 
                     <button

@@ -8,7 +8,7 @@ const GoToHomePage = ({ arrowImg }) => {
   return (
     <button
       onClick={handleGoback}
-      className="absolute md:bottom-4 md:left-8 bottom-0 left-8"
+      className="absolute md:bottom-2 md:left-4 bottom-0 left-"
     >
       <img src={arrowImg} alt="Go Back Home" />
     </button>

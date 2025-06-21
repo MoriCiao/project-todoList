@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { TextSizeProvider } from "./components/todoCotext";
+
+import { TextSizeProvider, todoContext } from "./components/todoCotext";
 
 import Header from "./pages/Header";
 import "./style/App.css";
@@ -10,6 +11,7 @@ import NewTodo from "./pages/NewTodo";
 import Setting from "./pages/Setting";
 import HomePage from "./pages/HomePage";
 import ToTopBtn from "./components/ToTopBtn";
+import GoToNewTodo from "./components/GoToNewTodo";
 
 function App() {
   const APP_RWD_setting = [
@@ -21,7 +23,7 @@ function App() {
   return (
     <TextSizeProvider>
       <div
-        className={`relative grid w-auto ${APP_RWD_setting} items-start h-[100vh]`}
+        className={`APP-div relative grid w-auto ${APP_RWD_setting} items-start h-[100vh]`}
       >
         <header className="w-full h-full col-start-1 lg:col-span-1 md:col-span-1 ">
           <Header />
@@ -36,7 +38,10 @@ function App() {
             </Route>
           </Routes>
         </main>
-        <ToTopBtn />
+        <div className="fixed bottom-8 right-4  flex flex-col gap-8">
+          <ToTopBtn />
+          <GoToNewTodo />
+        </div>
       </div>
     </TextSizeProvider>
   );
