@@ -14,45 +14,6 @@ export const TextSizeProvider = ({ children }) => {
   // 深淺色主題變更
   const [theme, setTheme] = useState(true);
 
-  // New TOdo 資料獲取，導入AllTasks裡，編列出各個Task
-  const [allTasks, setAllTasks] = useState([
-    // {
-    //   taskName: "學習 React 基礎",
-    //   startTime: "2025-06-21T08:00:00.000Z",
-    //   endTime: "2025-06-21T10:00:00.000Z",
-    //   taskDescript: "觀看 React 官方教學並製作 TODO List",
-    //   isCheck: false,
-    // },
-    // {
-    //   taskName: "閱讀 JavaScript 書籍",
-    //   startTime: "2025-06-22T07:30:00.000Z",
-    //   endTime: "2025-06-22T09:00:00.000Z",
-    //   taskDescript: "閱讀《你不知道的 JavaScript》第一章",
-    //   isCheck: false,
-    // },
-    // {
-    //   taskName: "練習 Git 指令",
-    //   startTime: "2025-06-23T06:00:00.000Z",
-    //   endTime: "2025-06-23T07:30:00.000Z",
-    //   taskDescript: "練習 git init / clone / commit / push 流程",
-    //   isCheck: false,
-    // },
-    // {
-    //   taskName: "設計個人網頁",
-    //   startTime: "2025-06-24T09:00:00.000Z",
-    //   endTime: "2025-06-24T11:00:00.000Z",
-    //   taskDescript: "使用 HTML/CSS 架設個人作品集首頁",
-    //   isCheck: false,
-    // },
-    // {
-    //   taskName: "撰寫學習筆記",
-    //   startTime: "2025-06-25T13:00:00.000Z",
-    //   endTime: "2025-06-25T14:00:00.000Z",
-    //   taskDescript: "整理本週 JavaScript 學習重點並發佈到 Notion",
-    //   isCheck: false,
-    // },
-  ]);
-
   const [taskName, setTaskName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -163,10 +124,7 @@ export const TextSizeProvider = ({ children }) => {
       return { allTasks: defaultTasks };
     }
   }
-  // reducer的初始化
-  // const initailState = {
-  //   allTasks: allTasks,
-  // };
+
   const TaskBtnReducer = (state, action) => {
     switch (action.type) {
       case "DELETE_TASK":
@@ -221,8 +179,6 @@ export const TextSizeProvider = ({ children }) => {
         textSize,
         setTextSize,
         sizeClass,
-        allTasks,
-        setAllTasks,
         taskName,
         setTaskName,
         startTime,
