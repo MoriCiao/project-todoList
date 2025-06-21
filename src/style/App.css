@@ -1,6 +1,6 @@
 :root {
   /* Light */
-  --light-bg: rgb(255, 255, 255);
+  --light-bg: rgb(253, 235, 200);
   --light-text-g: rgb(9, 97, 72);
   --light-text-y: rgb(193, 138, 38);
   --light-component-g: rgba(93, 172, 129,.5);
@@ -40,12 +40,17 @@ body p {
   scrollbar-width: none;
   scroll-behavior: smooth;
 }
+.MainOutlet .AllTasks {
+  overflow-y: overlay;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
 
 .isClickBtn {
   transition: all 0.3s ease-in-out;
 }
 .isClickBtn:hover {
-  transform: translate(-5px, -5px);
+  transform: translate(-2px, -2px);
 }
 
 @media (max-width: 768px) {

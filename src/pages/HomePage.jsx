@@ -1,14 +1,22 @@
 import React, { useContext, useEffect } from "react";
 import { todoContext } from "../components/todoCotext";
-import { scale } from "framer-motion";
+import { motion } from "framer-motion";
 const HomePage = () => {
-  const { textSize, setTextSize, sizeClass, theme, bgLightImg, bgDarkImg } =
-    useContext(todoContext);
+  const {
+    textSize,
 
-  useEffect(() => {}, []);
+    sizeClass,
+    theme,
+    bgLightImg,
+    bgDarkImg,
+    motion_fade,
+  } = useContext(todoContext);
 
   return (
-    <section className={`${sizeClass[textSize]} overflow-hidden`}>
+    <motion.section
+      {...motion_fade}
+      className={`${sizeClass[textSize]} overflow-hidden`}
+    >
       <div
         className={`py-10  m-auto max-w-[45rem] w-full ${
           theme ? "scale-[1.5] " : ""
@@ -16,7 +24,7 @@ const HomePage = () => {
       >
         <img className={``} src={theme ? bgDarkImg : bgLightImg} alt="" />
       </div>
-    </section>
+    </motion.section>
   );
 };
 

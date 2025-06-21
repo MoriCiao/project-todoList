@@ -16,11 +16,11 @@ const ToTopBtn = () => {
 
   return (
     <button
-      className="fixed bottom-4 right-4  rounded-full md:hidden sm:block"
+      className="rounded-full md:hidden sm:block w-[40px] h-[40px]"
       onClick={handleScrollTop}
     >
       <motion.img
-        className="rounded-full"
+        className="rounded-full w-[40px] h-[40px]"
         initial={{ scale: 1, boxShadow: "0px 0px 8px white" }}
         animate={{
           scale: [1, 1.1, 1],

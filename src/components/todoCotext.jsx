@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { easeInOut } from "framer-motion";
+import { createContext, useState, useReducer, useEffect } from "react";
 import React from "react";
 
 export const todoContext = createContext();
@@ -7,14 +8,50 @@ export const TextSizeProvider = ({ children }) => {
   const [textSize, setTextSize] = useState("medium");
   const sizeClass = {
     small: "scale-[80%]",
-    medium: "scale-100",
-    large: "scale-[115%]",
+    medium: "scale-[90%]",
+    large: "scale-[100%]",
   };
   // 深淺色主題變更
   const [theme, setTheme] = useState(true);
 
   // New TOdo 資料獲取，導入AllTasks裡，編列出各個Task
-  const [allTasks, setAllTasks] = useState([]);
+  const [allTasks, setAllTasks] = useState([
+    // {
+    //   taskName: "學習 React 基礎",
+    //   startTime: "2025-06-21T08:00:00.000Z",
+    //   endTime: "2025-06-21T10:00:00.000Z",
+    //   taskDescript: "觀看 React 官方教學並製作 TODO List",
+    //   isCheck: false,
+    // },
+    // {
+    //   taskName: "閱讀 JavaScript 書籍",
+    //   startTime: "2025-06-22T07:30:00.000Z",
+    //   endTime: "2025-06-22T09:00:00.000Z",
+    //   taskDescript: "閱讀《你不知道的 JavaScript》第一章",
+    //   isCheck: false,
+    // },
+    // {
+    //   taskName: "練習 Git 指令",
+    //   startTime: "2025-06-23T06:00:00.000Z",
+    //   endTime: "2025-06-23T07:30:00.000Z",
+    //   taskDescript: "練習 git init / clone / commit / push 流程",
+    //   isCheck: false,
+    // },
+    // {
+    //   taskName: "設計個人網頁",
+    //   startTime: "2025-06-24T09:00:00.000Z",
+    //   endTime: "2025-06-24T11:00:00.000Z",
+    //   taskDescript: "使用 HTML/CSS 架設個人作品集首頁",
+    //   isCheck: false,
+    // },
+    // {
+    //   taskName: "撰寫學習筆記",
+    //   startTime: "2025-06-25T13:00:00.000Z",
+    //   endTime: "2025-06-25T14:00:00.000Z",
+    //   taskDescript: "整理本週 JavaScript 學習重點並發佈到 Notion",
+    //   isCheck: false,
+    // },
+  ]);
 
   const [taskName, setTaskName] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -49,6 +86,15 @@ export const TextSizeProvider = ({ children }) => {
     transition: { duration: 0.5 },
   };
 
+  const motion_theme = {
+    // key值是為了分割
+    key: theme ? "dark" : "light",
+    initial: { opacity: 0.0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+    transition: { duration: 0.5 },
+  };
+
   const handleScroll = () => {
     window.scrollTo({
       // main最上方 Y 座標
@@ -61,6 +107,112 @@ export const TextSizeProvider = ({ children }) => {
   const bgLightImg = "/main-bg-note-light.png";
   const bgDarkImg = "/main-bg-note-dark.png";
 
+  // reducer 修正
+
+  const defaultTasks = [
+    {
+      taskName: "學習 React 基礎",
+      startTime: "2025-06-21T08:00:00.000Z",
+      endTime: "2025-06-21T10:00:00.000Z",
+      taskDescript: "觀看 React 官方教學並製作 TODO List",
+      isCheck: false,
+    },
+    {
+      taskName: "閱讀 JavaScript 書籍",
+      startTime: "2025-06-22T07:30:00.000Z",
+      endTime: "2025-06-22T09:00:00.000Z",
+      taskDescript: "閱讀《你不知道的 JavaScript》第一章",
+      isCheck: false,
+    },
+    {
+      taskName: "練習 Git 指令",
+      startTime: "2025-06-23T06:00:00.000Z",
+      endTime: "2025-06-23T07:30:00.000Z",
+      taskDescript: "練習 git init / clone / commit / push 流程",
+      isCheck: false,
+    },
+    {
+      taskName: "設計個人網頁",
+      startTime: "2025-06-24T09:00:00.000Z",
+      endTime: "2025-06-24T11:00:00.000Z",
+      taskDescript: "使用 HTML/CSS 架設個人作品集首頁",
+      isCheck: false,
+    },
+    {
+      taskName: "撰寫學習筆記",
+      startTime: "2025-06-25T13:00:00.000Z",
+      endTime: "2025-06-25T14:00:00.000Z",
+      taskDescript: "整理本週 JavaScript 學習重點並發佈到 Notion",
+      isCheck: false,
+    },
+  ];
+
+  function getInitialStorage() {
+    console.log("第一次初始化 state");
+    const saved = localStorage.getItem("mylistTasks");
+
+    try {
+      if (!saved) {
+        // 裡面無任何資料
+        localStorage.setItem("mylistTasks", JSON.stringify(defaultTasks));
+        return { allTasks: defaultTasks };
+      }
+      return { allTasks: JSON.parse(saved) };
+    } catch (e) {
+      console.error("本機加載失敗...", e);
+      return { allTasks: defaultTasks };
+    }
+  }
+  // reducer的初始化
+  // const initailState = {
+  //   allTasks: allTasks,
+  // };
+  const TaskBtnReducer = (state, action) => {
+    switch (action.type) {
+      case "DELETE_TASK":
+        const filteredTasks = state.allTasks.filter(
+          (task) => task.taskName !== action.payload
+        );
+        return { ...state, allTasks: filteredTasks };
+      case "IS_CHECK":
+        const toggledTasks = state.allTasks.map((task) =>
+          task.taskName === action.payload
+            ? { ...task, isCheck: !task.isCheck }
+            : task
+        );
+        return { ...state, allTasks: toggledTasks };
+      case "ADD_TASK": {
+        return { ...state, allTasks: [...state.allTasks, action.payload] };
+      }
+      case "RAISE_BTN": {
+        const newTasksList = [...state.allTasks].sort((a, b) => {
+          return new Date(a.startTime) - new Date(b.startTime);
+        });
+        return { ...state, allTasks: newTasksList };
+      }
+      case "DECREASE_BTN": {
+        const newTasksList = [...state.allTasks].sort((a, b) => {
+          return new Date(b.startTime) - new Date(a.startTime);
+        });
+        return { ...state, allTasks: newTasksList };
+      }
+
+      default:
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useReducer(TaskBtnReducer, {}, getInitialStorage);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("mylistTasks", JSON.stringify(state.allTasks));
+      console.log(state);
+      console.log("localStorage 已更新 ...");
+    } catch (e) {
+      console.error("儲存失敗 ：", e);
+    }
+  }, [state.allTasks]);
   return (
     <todoContext.Provider
       value={{
@@ -82,9 +234,12 @@ export const TextSizeProvider = ({ children }) => {
         raiseBtn,
         decreaseBtn,
         motion_fade,
+        motion_theme,
         handleScroll,
         bgLightImg,
         bgDarkImg,
+        state,
+        dispatch,
       }}
     >
       {children}
