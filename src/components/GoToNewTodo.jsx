@@ -21,7 +21,9 @@ const GoToNewTodo = () => {
         }}
         transition={{ duration: 2, repeat: Infinity }}
         src={
-          theme ? "/icon/plus-circle-dark.svg" : "/icon/plus-circle-light.svg"
+          theme
+            ? "/project-todoList/icon/plus-circle-dark.svg"
+            : "/project-todoList/icon/plus-circle-light.svg"
         }
         alt=""
       />

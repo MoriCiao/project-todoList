@@ -28,15 +28,6 @@ const Setting = () => {
   const btnStyle_FontSize =
     "w-[20rem] items-center bg-[--light-component-y] rounded-full mb-4";
 
-  // const motion_theme = {
-  //   // key值是為了分割
-  //   key: theme ? "dark" : "light",
-  //   initial: { opacity: 0.0 },
-  //   animate: { opacity: 1 },
-  //   exit: { opacity: 0 },
-  //   transition: { duration: 0.5 },
-  // };
-
   useEffect(() => {
     console.log("Theme變化了!");
   }, [theme]);
@@ -54,13 +45,17 @@ const Setting = () => {
           <GoToHomePage
             arrowImg={
               theme
-                ? "/icon/chevron-left-dark-g.svg"
-                : "/icon/chevron-left-g.svg"
+                ? "/project-todoList/icon/chevron-left-dark-g.svg"
+                : "/project-todoList/icon/chevron-left-g.svg"
             }
           />
           <img
             id="setting"
-            src={theme ? "title/Setting-dark.svg" : "title/Setting.svg"}
+            src={
+              theme
+                ? "/project-todoList/title/Setting-dark.svg"
+                : "/project-todoList/title/Setting.svg"
+            }
             alt="Setting.svg"
             className="mx-auto"
           />
@@ -74,7 +69,11 @@ const Setting = () => {
                 onClick={() => setTheme(false)}
               >
                 <img
-                  src={theme ? "icon/sun-dark-g.svg" : "icon/sun-light-g.svg"}
+                  src={
+                    theme
+                      ? "/project-todoList/icon/sun-dark-g.svg"
+                      : "/project-todoList/icon/sun-light-g.svg"
+                  }
                   className="col-start-1 m-auto"
                   alt=""
                 />
@@ -82,7 +81,11 @@ const Setting = () => {
               </button>
               <button className={btnStyle_theme} onClick={() => setTheme(true)}>
                 <img
-                  src={theme ? "icon/moon-dark-g.svg" : "icon/moon-light-g.svg"}
+                  src={
+                    theme
+                      ? "/project-todoList/icon/moon-dark-g.svg"
+                      : "/project-todoList/icon/moon-light-g.svg"
+                  }
                   className="col-start-1 m-auto"
                   alt=""
                 />

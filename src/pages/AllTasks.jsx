@@ -57,12 +57,18 @@ const AllTasks = () => {
       </div>
       <GoToHomePage
         arrowImg={
-          theme ? "/icon/chevron-left-dark-g.svg" : "/icon/chevron-left-g.svg"
+          theme
+            ? "/project-todoList/icon/chevron-left-dark-g.svg"
+            : "/project-todoList/icon/chevron-left-g.svg"
         }
       />
       <img
         id="alltasks"
-        src={theme ? "title/All Tasks-dark.svg" : "title/All Tasks.svg"}
+        src={
+          theme
+            ? "project-todoList/title/All Tasks-dark.svg"
+            : "project-todoList/title/All Tasks.svg"
+        }
         className="mx-auto"
         alt=""
       />
@@ -156,7 +162,9 @@ const AllTasks = () => {
                     >
                       <img
                         src={
-                          theme ? "/icon/trash-dark-g.svg" : "/icon/trash-g.svg"
+                          theme
+                            ? "/project-todoList/icon/trash-dark-g.svg"
+                            : "/project-todoList/icon/trash-g.svg"
                         }
                         className=""
                         alt="trashBtn"

@@ -165,13 +165,19 @@ const NewTodo = () => {
     >
       <GoToHomePage
         arrowImg={
-          theme ? "/icon/chevron-left-dark-y.svg" : "/icon/chevron-left-y.svg"
+          theme
+            ? "/project-todoList/icon/chevron-left-dark-y.svg"
+            : "/project-todoList/icon/chevron-left-y.svg"
         }
       />
 
       <img
         id="newtodo"
-        src={theme ? "/title/New Todo-dark.svg" : "/title/New Todo.svg"}
+        src={
+          theme
+            ? "/project-todoList/title/New Todo-dark.svg"
+            : "/project-todoList/title/New Todo.svg"
+        }
         alt="New Todo.svg"
         className="mx-auto"
       />

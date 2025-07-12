@@ -15,8 +15,10 @@ const Header = () => {
       link: "alltasks",
       href: "#alltasks",
       text: "ALL TASKS",
-      img_bg: "/icon/Ellipse-light-g.svg",
-      img_content: theme ? "/icon/list-dark-g.svg" : "/icon/list-light-g.svg",
+      img_bg: "/project-todoList/icon/Ellipse-light-g.svg",
+      img_content: theme
+        ? "/project-todoList/icon/list-dark-g.svg"
+        : "/project-todoList/icon/list-light-g.svg",
       bg_color: theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]",
       span_className: theme ? "text-[--dark-text-g] " : "text-[--light-text-g]",
     },
@@ -26,8 +28,12 @@ const Header = () => {
       link: "newtodo",
       href: "#newtodo",
       text: "NEW TODO",
-      img_bg: theme ? "/icon/Ellipse-dark-y.svg" : "/icon/Ellipse-light-y.svg",
-      img_content: theme ? "/icon/plus-dark-y.svg" : "/icon/plus-light-y.svg",
+      img_bg: theme
+        ? "/project-todoList/icon/Ellipse-dark-y.svg"
+        : "/project-todoList/icon/Ellipse-light-y.svg",
+      img_content: theme
+        ? "/project-todoList/icon/plus-dark-y.svg"
+        : "/project-todoList/icon/plus-light-y.svg",
       bg_color: theme ? "bg-[--dark-component-y]" : "bg-[--light-component-y]",
       span_className: theme ? "text-[--dark-text-y] " : "text-[--light-text-y]",
     },
@@ -37,10 +43,10 @@ const Header = () => {
       link: "setting",
       href: "#setting",
       text: "SETTING",
-      img_bg: "/icon/Ellipse-light-g.svg",
+      img_bg: "/project-todoList/icon/Ellipse-light-g.svg",
       img_content: theme
-        ? "/icon/Settings-dark.svg"
-        : "/icon/Settings-light.svg",
+        ? "/project-todoList/icon/Settings-dark.svg"
+        : "/project-todoList/icon/Settings-light.svg",
       bg_color: theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]",
       span_className: theme ? "text-[--dark-text-g] " : "text-[--light-text-g]",
     },

@@ -28,7 +28,9 @@ const ToTopBtn = () => {
         }}
         transition={{ duration: 2, repeat: Infinity }}
         src={
-          theme ? "/icon/arrow-up-circle-1.svg" : "/icon/arrow-up-circle.svg"
+          theme
+            ? "/project-todoList/icon/arrow-up-circle-1.svg"
+            : "/project-todoList/icon/arrow-up-circle.svg"
         }
         alt=""
       />

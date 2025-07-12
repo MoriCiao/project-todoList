@@ -65,8 +65,8 @@ export const TextSizeProvider = ({ children }) => {
     });
   };
 
-  const bgLightImg = "/main-bg-note-light.png";
-  const bgDarkImg = "/main-bg-note-dark.png";
+  const bgLightImg = "/project-todoList/main-bg-note-light.png";
+  const bgDarkImg = "/project-todoList/main-bg-note-dark.png";
 
   // reducer 修正
 

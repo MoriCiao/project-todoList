@@ -1,12 +1,72 @@
-# React + Vite
+# React TodoList
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一個使用 React 打造的任務清單管理工具，支援任務新增、刪除、完成標記、搜尋與排序，以及主題與字體大小切換，並有畫面動畫與 localStorage 儲存功能。
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Demo 展示
 
-## Expanding the ESLint configuration
+[Live Demo on Vercel](https://YOUR-VERCEL-APP.vercel.app)  
+Demo 影片：見專案首頁截圖
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 功能列表
+
+- ✅ 新增任務（標題 + 時間）
+- ✅ 任務完成 / 刪除
+- ✅ 搜尋、排序（依時間 / 狀態）
+- ✅ 切換黑暗 / 亮色主題
+- ✅ 可調字體大小（小、中、大）
+- ✅ 動畫反饋：打勾、任務出現／消失
+- ✅ localStorage 儲存/載入任務
+
+---
+
+## 技術架構
+
+- **React**：`useReducer` 管理任務狀態，`useContext` 管理設定（主題/字體）
+- **TailwindCSS** + **RWD**：彈性佈局與響應式設計
+- **Framer Motion**：補強互動動畫
+- **localStorage**：更新任務時儲存，初始載入時載入儲存資料
+
+---
+
+## 截圖說明
+
+| 功能                | 截圖                                          |
+| ------------------- | --------------------------------------------- |
+| 主題切換 + 字體設定 | ![Setting 截圖](./pictures/setting-light.png) |
+| 新增任務介面        | ![新增任務](./pictures/newtodo-light.png)     |
+| 任務完成動畫效果    | ![完成動畫](./pictures/allTasks-light.png)    |
+
+---
+
+## 開發筆記
+
+- 為什麼用 `useReducer`？  
+  因為任務有多種操作（新增、刪除、打勾），比較適合集中管理。
+- localStorage 實作方式？  
+  初始用 `useEffect` 載入，上線或更新狀態時儲存。
+- 動畫如何優化？  
+  Framer Motion 設定任務進出場動畫，提升使用者反饋感。
+
+---
+
+## 收穫與挑戰
+
+- 學會 React 狀態管理流程與 Context 使用
+- 練習動畫設計，提升 UI 互動性
+- 練習儲存機制與資料持久化設計
+- 執行 Git 操作與部署流程，增強專案完整性
+
+---
+
+## 作者
+
+**MoriCiao**
+
+- GitHub: [MoriCiao](https://github.com/MoriCiao)
+- LinkedIn / Portfolio: YourLinkHere
+
+📫 聯絡我：bboynoice@gamil.com
