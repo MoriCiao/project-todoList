@@ -117,11 +117,11 @@ const AllTasks = () => {
                       src={
                         task.isCheck
                           ? theme
-                            ? "/icon/check-dark-circked.svg"
-                            : "/icon/check-light-checked.svg"
+                            ? "/project-todoList/icon/check-dark-circked.svg"
+                            : "/project-todoList/icon/check-light-checked.svg"
                           : theme
-                          ? "/icon/circle-dark-check.svg"
-                          : "/icon/circle-light-check.svg"
+                          ? "/project-todoList/icon/circle-dark-check.svg"
+                          : "/project-todoList/icon/circle-light-check.svg"
                       }
                       alt="checkIcon"
                     />
