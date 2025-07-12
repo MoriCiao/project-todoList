@@ -12,6 +12,7 @@ const AllTasks_RWD_setting = [
   "md:gap-4 ",
   "sm:grid-cols-1",
   "sm:gap-4",
+  "sm:pt-4",
 ].join(" ");
 // 任務時間的顯示參數
 const timeOptions = {
