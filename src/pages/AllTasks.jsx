@@ -66,8 +66,8 @@ const AllTasks = () => {
         id="alltasks"
         src={
           theme
-            ? "project-todoList/title/All Tasks-dark.svg"
-            : "project-todoList/title/All Tasks.svg"
+            ? "/project-todoList/title/All Tasks-dark.svg"
+            : "/project-todoList/title/All Tasks.svg"
         }
         className="mx-auto"
         alt=""
