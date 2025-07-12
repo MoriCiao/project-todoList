@@ -70,7 +70,7 @@ const AllTasks = () => {
             : "/project-todoList/title/AllTasks.svg"
         }
         className="mx-auto"
-        alt=""
+        alt="AllTasks"
       />
 
       <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
