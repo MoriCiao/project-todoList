@@ -22,7 +22,11 @@ const HomePage = () => {
           theme ? "scale-[1.5] " : ""
         }`}
       >
-        <img className={``} src={theme ? bgDarkImg : bgLightImg} alt="" />
+        <img
+          className={``}
+          src={theme ? bgDarkImg : bgLightImg}
+          alt="HomePageIMG"
+        />
       </div>
     </motion.section>
   );
