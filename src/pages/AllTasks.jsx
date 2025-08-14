@@ -6,13 +6,13 @@ import { motion } from "framer-motion";
 
 const AllTasks_RWD_setting = [
   "2xl:grid-cols-2",
-  "2xl:gap-4",
-  "xl:grid-cols-2",
+  "2xl:gap-8",
   "md:grid-cols-1",
   "md:gap-4 ",
   "sm:grid-cols-1",
   "sm:gap-4",
   "sm:pt-4",
+  "gap-4",
 ].join(" ");
 // 任務時間的顯示參數
 const timeOptions = {
@@ -26,7 +26,16 @@ const timeOptions = {
 
 const AllTasks = () => {
   // 獲取tasks 列表
-  const { theme, motion_fade, state, dispatch } = useContext(todoContext);
+  const {
+    theme,
+    motion_fade,
+    state,
+    dispatch,
+    h1_size,
+    h3_size,
+    h5_size,
+    p_size,
+  } = useContext(todoContext);
 
   const GoToNewTodo = useNavigate();
 
@@ -40,22 +49,8 @@ const AllTasks = () => {
   return (
     <motion.section
       {...motion_fade}
-      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full`}
+      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full `}
     >
-      <div className="sortBtn absolute top-4 left-10 flex flex-col gap-4">
-        <button
-          onClick={() => dispatch({ type: "RAISE_BTN" })}
-          className={`isClickBtn px-2 py-1 border-0 rounded-xl mx-2 ${themeOptions.themeBg} ${themeOptions.themeFont}`}
-        >
-          A-Z
-        </button>
-        <button
-          onClick={() => dispatch({ type: "DECREASE_BTN" })}
-          className={`isClickBtn px-2 py-1 border-0 rounded-xl mx-2  ${themeOptions.themeBg} ${themeOptions.themeFont}`}
-        >
-          Z-A
-        </button>
-      </div>
       <GoToHomePage
         arrowImg={
           theme
@@ -63,16 +58,34 @@ const AllTasks = () => {
             : "/project-todoList/icon/chevron-left-g.svg"
         }
       />
-      <img
-        id="alltasks"
-        src={
-          theme
-            ? "/project-todoList/title/AllTasks-dark.svg"
-            : "/project-todoList/title/AllTasks.svg"
-        }
-        className="mx-auto"
-        alt="AllTasks"
-      />
+      <div className="relative">
+        <img
+          id="alltasks"
+          src={
+            theme
+              ? "/project-todoList/title/AllTasks-dark.svg"
+              : "/project-todoList/title/AllTasks.svg"
+          }
+          className="mx-auto"
+          alt="AllTasks"
+        />
+
+        {/* SortBtn */}
+        <div className="sortBtn absolute bottom-0 left-0 flex md:flex-row flex-col gap-4">
+          <button
+            onClick={() => dispatch({ type: "RAISE_BTN" })}
+            className={`isClickBtn px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+          >
+            A-Z
+          </button>
+          <button
+            onClick={() => dispatch({ type: "DECREASE_BTN" })}
+            className={`isClickBtn px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+          >
+            Z-A
+          </button>
+        </div>
+      </div>
 
       <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
         {state.allTasks.length === 0 ? (
@@ -92,12 +105,16 @@ const AllTasks = () => {
         ) : (
           state.allTasks &&
           state.allTasks.map((task, index) => {
+            console.log(task.isCheck);
             return (
               <div
                 key={index}
-                className={`task relative rounded-md w-auto max-w-[40rem] h-auto grid grid-cols-12 ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+                className={`task relative rounded-md w-auto 2xl:max-w-[40rem] max-h-150 min-h-40 overflow-y-auto flex transition duration-500 ${
+                  task.isCheck ? "brightness-[0.5]" : null
+                } ${themeOptions.themeBg} ${themeOptions.themeFont}`}
               >
-                <div className="check-Icon rounded-l-md col-span-2 col-start-1 py-4">
+                {/* Check img */}
+                <div className="check-Icon rounded-l-md w-[20%] py-4 border-r border-white/50 mr-4">
                   <button
                     className="w-full h-full flex items-center justify-center"
                     onClick={() =>
@@ -128,32 +145,40 @@ const AllTasks = () => {
                     />
                   </button>
                 </div>
-                <div className="task-container col-span-10 col-start-3 pt-4 pb-2 pr-2">
-                  <div className="grid grid-cols-6 items-center justify-center">
-                    <h2
-                      className={`title col-start-1 col-span-2 text-[1.5rem] transition-all duration-300  ${
+
+                {/* Task Body */}
+                <div className="task-container w-[80%] py-4 pr-2 flex flex-col gap-4 max-h-80">
+                  <div className="flex flex-col items-start justify-start">
+                    {/* task Title */}
+                    <h3
+                      className={`title  transition-all duration-300 break-words max-w-100 ${h5_size} ${
                         themeOptions.themeFont
                       } ${task.isCheck ? "line-through" : ""}`}
                     >
                       {task.taskName}
-                    </h2>
+                    </h3>
 
-                    <span
-                      className={`mx-2 my-auto col-start-3 col-span-3 text-end text-[0.8rem]  ${themeOptions.themeFont}`}
+                    {/* Time */}
+                    <div
+                      className={`w-full text-end pr-4 ${themeOptions.themeFont}  ${p_size}`}
                     >
+                      start：
                       {new Date(task.startTime)?.toLocaleDateString(
                         "zh-TW",
                         timeOptions
                       )}{" "}
-                      <br />{" "}
+                      <span className={`${themeOptions.themeFont} px-2`}>
+                        -
+                      </span>
+                      end：
                       {new Date(task.endTime)?.toLocaleDateString(
                         "zh-TW",
                         timeOptions
                       )}
-                    </span>
-
+                    </div>
+                    {/* Trash box */}
                     <button
-                      className={`col-start-6 col-span-1  flex flex-col items-center `}
+                      className={`absolute right-4 top-4 flex flex-col items-center `}
                       onClick={() => {
                         dispatch({
                           type: "DELETE_TASK",
@@ -172,11 +197,14 @@ const AllTasks = () => {
                       />
                     </button>
                   </div>
+                  {/* Task Des */}
                   <div
-                    className={`descript-area rounded-md h-auto ${themeOptions.themeBg}`}
+                    className={`descript-area rounded-md  ${themeOptions.themeBg}`}
                   >
                     {task.taskDescript && (
-                      <p className={`descript  p-4 ${themeOptions.themeFont}`}>
+                      <p
+                        className={`descript max-h-50 break-words p-4 ${themeOptions.themeFont} ${p_size}`}
+                      >
                         {task.taskDescript}
                       </p>
                     )}

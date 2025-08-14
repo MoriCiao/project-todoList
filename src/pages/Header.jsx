@@ -1,13 +1,19 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, use, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { todoContext } from "../components/todoCotext";
 import { AnimatePresence, motion } from "framer-motion";
-const RWD_Btn = ["md:grid", "md:grid-cols-5", "sm:flex"];
 
 const Header = () => {
-  const { textSize, sizeClass, theme, handleScroll, motion_theme } =
-    useContext(todoContext);
-
+  const {
+    textSize,
+    sizeClass,
+    theme,
+    handleScroll,
+    motion_theme,
+    pathname,
+    h1_size,
+    h3_size,
+  } = useContext(todoContext);
   const headerBtn = [
     {
       id: 1,
@@ -55,52 +61,46 @@ const Header = () => {
   return (
     <AnimatePresence mode="wait">
       <motion.section
+        // key值是為了分割
+        key={theme ? "dark" : "light"}
         {...motion_theme}
         className={`relative ${
           theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
-        } header-section  p-4 h-full`}
+        } header-section  p-4 h-full `}
       >
-        <div
-          className={`${sizeClass[textSize]} flex flex-col items-center justify-start`}
-        >
+        <div className={` flex flex-col items-center justify-start`}>
           <Link to="/" className="py-4">
             <h1
-              className={`${theme ? "text-[--light-bg]" : "text-[--dark-bg]"}`}
+              className={`transition-all duration-500 ${
+                theme ? "text-[--light-bg]" : "text-[--dark-bg]"
+              } ${h1_size} `}
             >
               My List
             </h1>
           </Link>
-          <nav className="flex flex-col ">
+          <nav className="flex flex-col md:w-[80%] w-[90%]">
             {headerBtn.map((btn) => {
               return (
                 <Link
                   to={btn.link}
                   key={btn.id}
-                  className={`mb-4 w-full isClickBtn
+                  className={`mb-4 w-full  isClickBtn ${btn.bg_color} flex items-center justify-center rounded-xl p-4 border border-white/50 lg:h-auto h-30
                 `}
                   onClick={handleScroll}
                 >
-                  <button
-                    type={btn.type}
-                    className={`${btn.bg_color} w-full grid grid-cols-5 rounded-xl p-4`}
+                  <div
+                    className={`${btn.bg_color} rounded-full  w-[5rem]  h-[5rem]  flex items-center justify-center `}
                   >
-                    <div
-                      className={`${btn.bg_color} col-span-1 col-start-1 rounded-full  w-[4rem] h-[4rem] flex items-center justify-center`}
+                    <img className="w-[60%]" src={btn.img_content} alt="" />
+                  </div>
+
+                  <div className="w-[75%] text-center">
+                    <h3
+                      className={`${btn.span_className} ${h3_size} transition-all duration-500 tracking-widest font-['Luckiest_Guy']`}
                     >
-                      <img
-                        className="stroke-none"
-                        src={btn.img_content}
-                        alt=""
-                      />
-                    </div>
-                    <div className="col-span-4 col-start-2">
-                      <span
-                        className={`${btn.span_className} text-[2.5rem] font-['Luckiest_Guy']`}
-                      >
-                        {btn.text}
-                      </span>
-                    </div>
-                  </button>
+                      {btn.text}
+                    </h3>
+                  </div>
                 </Link>
               );
             })}

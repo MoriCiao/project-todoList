@@ -3,44 +3,32 @@ import GoToHomePage from "../components/GoBackBtn";
 import { todoContext } from "../components/todoCotext";
 import { AnimatePresence, motion } from "framer-motion";
 const Setting = () => {
-  const {
-    textSize,
-    setTextSize,
-    sizeClass,
-    theme,
-    setTheme,
-    motion_fade,
-    motion_theme,
-  } = useContext(todoContext);
+  const { theme, setTheme, motion_fade, motion_theme, setTextSize, h3_size } =
+    useContext(todoContext);
 
-  const textSytle_theme = `font-['Luckiest_Guy'] ${
+  const textSytle_theme = `transition-all duration-500 font-['Luckiest_Guy'] ${
     theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"
-  } text-[3rem]`;
+  }`;
 
-  const btnStyle_theme = `w-[20rem] grid grid-cols-3 items-center ${
+  const btnStyle_theme = `transition-all duration-500 w-[20rem] grid grid-cols-3 items-center ${
     theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
   } rounded-full mb-4`;
 
-  const textSytle_FontSize = `font-['Luckiest_Guy'] ${
+  const textSytle_FontSize = `transition-all duration-500 font-['Luckiest_Guy'] ${
     theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-  } text-[3rem]`;
+  }`;
 
   const btnStyle_FontSize =
-    "w-[20rem] items-center bg-[--light-component-y] rounded-full mb-4";
+    "transition-all duration-500 w-[20rem] items-center bg-[--light-component-y] rounded-full mb-4";
 
-  useEffect(() => {
-    console.log("Theme變化了!");
-  }, [theme]);
+  useEffect(() => {}, [theme]);
 
   return (
-    <motion.section {...motion_fade} className={`setting  `}>
-      <AnimatePresence
-        mode="wait"
-        onExitComplete={() => console.log("主題切換動畫已完成...")}
-      >
+    <motion.section {...motion_fade} className={`setting  h-full`}>
+      <AnimatePresence mode="wait">
         <motion.div
           {...motion_theme}
-          className="col-start-1 col-span-3 items-start pt-12 relative"
+          className="col-start-1 col-span-3 items-start pt-12 relative h-full"
         >
           <GoToHomePage
             arrowImg={
@@ -60,10 +48,10 @@ const Setting = () => {
             className="mx-auto"
           />
 
-          <div className="flex flex-col items-center w-[80%] max-w-[30rem] mt-8 mx-auto">
+          <div className="flex flex-col gap-8 items-center justify-center w-[80%]  py-8 mx-auto">
             {/* theme setting */}
-            <section className="theme flex flex-col">
-              <h2 className={textSytle_theme}>THEME</h2>
+            <section className="theme flex flex-col  gap-2 items-center justify-center w-full">
+              <h3 className={`${textSytle_theme} ${h3_size}`}>THEME</h3>
               <button
                 className={btnStyle_theme}
                 onClick={() => setTheme(false)}
@@ -77,7 +65,7 @@ const Setting = () => {
                   className="col-start-1 m-auto"
                   alt=""
                 />
-                <h2 className={`${textSytle_theme}`}>LIGHT</h2>
+                <h3 className={`${textSytle_theme} ${h3_size}`}>LIGHT</h3>
               </button>
               <button className={btnStyle_theme} onClick={() => setTheme(true)}>
                 <img
@@ -89,30 +77,30 @@ const Setting = () => {
                   className="col-start-1 m-auto"
                   alt=""
                 />
-                <h2 className={`${textSytle_theme} `}>Dark</h2>
+                <h3 className={`${textSytle_theme} ${h3_size}`}>Dark</h3>
               </button>
             </section>
 
             {/* font setting */}
-            <section className="font-size flex flex-col">
-              <h2 className={textSytle_FontSize}>FONT SIZE</h2>
+            <section className="font-size flex flex-col  gap-2 items-center justify-center w-full">
+              <h3 className={`${textSytle_FontSize} ${h3_size}`}>FONT SIZE</h3>
               <button
-                className={btnStyle_FontSize}
+                className={`${btnStyle_FontSize} ${h3_size}`}
                 onClick={() => setTextSize("small")}
               >
-                <h2 className={`${textSytle_FontSize}`}>SMALL</h2>
+                <h3 className={`${textSytle_FontSize} ${h3_size}`}>SMALL</h3>
               </button>
               <button
                 className={btnStyle_FontSize}
                 onClick={() => setTextSize("medium")}
               >
-                <h2 className={`${textSytle_FontSize}`}>MEDIUM</h2>
+                <h3 className={`${textSytle_FontSize} ${h3_size}`}>MEDIUM</h3>
               </button>
               <button
                 className={btnStyle_FontSize}
                 onClick={() => setTextSize("large")}
               >
-                <h2 className={`${textSytle_FontSize}`}>BIG</h2>
+                <h3 className={`${textSytle_FontSize} ${h3_size}`}>BIG</h3>
               </button>
             </section>
           </div>

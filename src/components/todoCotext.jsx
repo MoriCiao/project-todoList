@@ -1,19 +1,52 @@
 import { easeInOut } from "framer-motion";
-import { createContext, useState, useReducer, useEffect } from "react";
+import { createContext, useState, useReducer, useEffect, useRef } from "react";
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 export const todoContext = createContext();
 export const TextSizeProvider = ({ children }) => {
   // 字體大小變更
   const [textSize, setTextSize] = useState("medium");
-  const sizeClass = {
-    small: "scale-[80%]",
-    medium: "scale-[90%]",
-    large: "scale-[100%]",
-  };
+  const h1_size = `${
+    textSize === "large"
+      ? "text-[5rem]"
+      : textSize === "medium"
+      ? "text-[4rem]"
+      : textSize === "small"
+      ? "text-[3rem]"
+      : null
+  }`;
+  const h3_size = `${
+    textSize === "large"
+      ? "text-[3.5rem]"
+      : textSize === "medium"
+      ? "text-[3rem]"
+      : textSize === "small"
+      ? "text-[2.5rem]"
+      : null
+  }`;
+  const h5_size = `${
+    textSize === "large"
+      ? "text-[2rem]"
+      : textSize === "medium"
+      ? "text-[1.75rem]"
+      : textSize === "small"
+      ? "text-[1.5rem]"
+      : null
+  }`;
+
+  const p_size = `${
+    textSize === "large"
+      ? "text-[1.25rem]"
+      : textSize === "medium"
+      ? "text-[1.1rem]"
+      : textSize === "small"
+      ? "text-[1rem]"
+      : null
+  }`;
+
   // 深淺色主題變更
   const [theme, setTheme] = useState(true);
-
   const [taskName, setTaskName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -27,7 +60,6 @@ export const TextSizeProvider = ({ children }) => {
     );
 
     setAllTasks(newTasksList);
-    console.log("小到大排序成功!!");
   };
 
   const decreaseBtn = () => {
@@ -37,7 +69,6 @@ export const TextSizeProvider = ({ children }) => {
     );
 
     setAllTasks(newTasksList);
-    console.log("大到小排序成功!!");
   };
 
   // motion 參數設定
@@ -48,8 +79,6 @@ export const TextSizeProvider = ({ children }) => {
   };
 
   const motion_theme = {
-    // key值是為了分割
-    key: theme ? "dark" : "light",
     initial: { opacity: 0.0 },
     animate: { opacity: 1 },
     exit: { opacity: 0 },
@@ -65,8 +94,11 @@ export const TextSizeProvider = ({ children }) => {
     });
   };
 
-  const bgLightImg = "/project-todoList/main-bg-note-light.png";
-  const bgDarkImg = "/project-todoList/main-bg-note-dark.png";
+  const bgLightImg = "/project-todoList/main-bg-note-light.webp";
+  const bgDarkImg = "/project-todoList/main-bg-note-dark.webp";
+
+  // pathname
+  const { pathname } = useLocation();
 
   // reducer 修正
 
@@ -109,7 +141,6 @@ export const TextSizeProvider = ({ children }) => {
   ];
 
   function getInitialStorage() {
-    console.log("第一次初始化 state");
     const saved = localStorage.getItem("mylistTasks");
 
     try {
@@ -165,7 +196,7 @@ export const TextSizeProvider = ({ children }) => {
   useEffect(() => {
     try {
       localStorage.setItem("mylistTasks", JSON.stringify(state.allTasks));
-      console.log(state);
+
       console.log("localStorage 已更新 ...");
     } catch (e) {
       console.error("儲存失敗 ：", e);
@@ -178,7 +209,6 @@ export const TextSizeProvider = ({ children }) => {
         setTheme,
         textSize,
         setTextSize,
-        sizeClass,
         taskName,
         setTaskName,
         startTime,
@@ -196,6 +226,11 @@ export const TextSizeProvider = ({ children }) => {
         bgDarkImg,
         state,
         dispatch,
+        pathname,
+        h1_size,
+        h3_size,
+        h5_size,
+        p_size,
       }}
     >
       {children}

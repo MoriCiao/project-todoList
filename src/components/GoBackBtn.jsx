@@ -8,9 +8,13 @@ const GoToHomePage = ({ arrowImg }) => {
   return (
     <button
       onClick={handleGoback}
-      className="fixed md:bottom-[-2rem] md:left-4 sm:bottom-0 sm:left-0"
+      className="fixed md:absolute md:bottom-4 md:left-4 bottom-4 left-4 p-1 border border-white/50 rounded-full hover:bg-white/50 group"
     >
-      <img src={arrowImg} alt="Go Back Home" />
+      <img
+        src={arrowImg}
+        alt="Go Back Home"
+        className="mx-auto -translate-x-[1px] group-hover:brightness-50"
+      />
     </button>
   );
 };

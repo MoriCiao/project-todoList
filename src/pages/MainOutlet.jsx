@@ -7,18 +7,18 @@ import { todoContext } from "../components/todoCotext";
 import { AnimatePresence, motion } from "framer-motion";
 
 const MainOutlet = () => {
-  const { textSize, sizeClass, theme, motion_theme } = useContext(todoContext);
+  const { theme, motion_theme, pathname } = useContext(todoContext);
   //顯示區域 ， 盪第一次載入時，自動抓取本機資料
-
   return (
     <AnimatePresence mode="wait">
       <motion.main
+        key={theme ? "dark" : "light"}
         {...motion_theme}
-        className={`MainOutlet relative grid xxl:grid-cols-3 md:grid-cols-1 h-[100vh] ${
+        className={`MainOutlet relative grid xxl:grid-cols-3 w-full h-[100vh] ${
           theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
         }`}
       >
-        <div className={`${sizeClass[textSize]} h-[95vh]`}>
+        <div className={`h-full w-full overflow-y-auto`}>
           <Outlet />
         </div>
       </motion.main>

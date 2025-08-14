@@ -5,7 +5,6 @@ const ToTopBtn = () => {
   const { theme } = useContext(todoContext);
 
   const handleScrollTop = () => {
-    console.log("Click!");
     window.scrollTo({
       // 要回到header 最上方的 Y 座標
       top: 0,
