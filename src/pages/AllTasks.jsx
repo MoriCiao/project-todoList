@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useReducer } from "react";
 import GoToHomePage from "../components/GoBackBtn";
-import { todoContext } from "../components/todoCotext";
+import { TasksContext } from "../components/TasksCotext";
+import { UIContext } from "../components/UIContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -26,34 +27,28 @@ const timeOptions = {
 
 const AllTasks = () => {
   // 獲取tasks 列表
-  const {
-    theme,
-    motion_fade,
-    state,
-    dispatch,
-    h1_size,
-    h3_size,
-    h5_size,
-    p_size,
-  } = useContext(todoContext);
+  const UICtx = useContext(UIContext);
+  const tasksCtx = useContext(TasksContext);
 
   const GoToNewTodo = useNavigate();
 
   const themeOptions = {
-    themeFont: `${theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"}`,
+    themeFont: `${
+      UICtx.theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"
+    }`,
     themeBg: `${
-      theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
+      UICtx.theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
     }`,
   };
 
   return (
     <motion.section
-      {...motion_fade}
+      {...UICtx.motion_fade}
       className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full `}
     >
       <GoToHomePage
         arrowImg={
-          theme
+          UICtx.theme
             ? "/project-todoList/icon/chevron-left-dark-g.svg"
             : "/project-todoList/icon/chevron-left-g.svg"
         }
@@ -62,7 +57,7 @@ const AllTasks = () => {
         <img
           id="alltasks"
           src={
-            theme
+            UICtx.theme
               ? "/project-todoList/title/AllTasks-dark.svg"
               : "/project-todoList/title/AllTasks.svg"
           }
@@ -73,22 +68,22 @@ const AllTasks = () => {
         {/* SortBtn */}
         <div className="sortBtn absolute bottom-0 left-0 flex md:flex-row flex-col gap-4">
           <button
-            onClick={() => dispatch({ type: "RAISE_BTN" })}
+            onClick={() => tasksCtx.dispatch({ type: "RAISE_BTN" })}
             className={`isClickBtn px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
           >
-            A-Z
+            Min Date
           </button>
           <button
-            onClick={() => dispatch({ type: "DECREASE_BTN" })}
+            onClick={() => tasksCtx.dispatch({ type: "DECREASE_BTN" })}
             className={`isClickBtn px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
           >
-            Z-A
+            Max Date
           </button>
         </div>
       </div>
 
       <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
-        {state.allTasks.length === 0 ? (
+        {tasksCtx.state.allTasks.length === 0 ? (
           <div
             className={`text-center p-4 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont}`}
           >
@@ -103,9 +98,8 @@ const AllTasks = () => {
             </button>
           </div>
         ) : (
-          state.allTasks &&
-          state.allTasks.map((task, index) => {
-            console.log(task.isCheck);
+          tasksCtx.state.allTasks &&
+          tasksCtx.state.allTasks.map((task, index) => {
             return (
               <div
                 key={index}
@@ -118,7 +112,7 @@ const AllTasks = () => {
                   <button
                     className="w-full h-full flex items-center justify-center"
                     onClick={() =>
-                      dispatch({
+                      tasksCtx.dispatch({
                         type: "IS_CHECK",
                         payload: task.taskName,
                       })
@@ -134,10 +128,10 @@ const AllTasks = () => {
                       transition={{ duration: 0.4 }}
                       src={
                         task.isCheck
-                          ? theme
+                          ? UICtx.theme
                             ? "/project-todoList/icon/check-dark-circked.svg"
                             : "/project-todoList/icon/check-light-checked.svg"
-                          : theme
+                          : UICtx.theme
                           ? "/project-todoList/icon/circle-dark-check.svg"
                           : "/project-todoList/icon/circle-light-check.svg"
                       }
@@ -151,16 +145,18 @@ const AllTasks = () => {
                   <div className="flex flex-col items-start justify-start">
                     {/* task Title */}
                     <h3
-                      className={`title  transition-all duration-300 break-words max-w-100 ${h5_size} ${
-                        themeOptions.themeFont
-                      } ${task.isCheck ? "line-through" : ""}`}
+                      className={`title  transition-all duration-300 break-words max-w-100 ${
+                        UICtx.h5_size
+                      } ${themeOptions.themeFont} ${
+                        task.isCheck ? "line-through" : ""
+                      }`}
                     >
                       {task.taskName}
                     </h3>
 
                     {/* Time */}
                     <div
-                      className={`w-full text-end pr-4 ${themeOptions.themeFont}  ${p_size}`}
+                      className={`w-full text-end pr-4 ${themeOptions.themeFont}  ${UICtx.p_size}`}
                     >
                       start：
                       {new Date(task.startTime)?.toLocaleDateString(
@@ -180,7 +176,7 @@ const AllTasks = () => {
                     <button
                       className={`absolute right-4 top-4 flex flex-col items-center `}
                       onClick={() => {
-                        dispatch({
+                        tasksCtx.dispatch({
                           type: "DELETE_TASK",
                           payload: task.taskName,
                         });
@@ -188,7 +184,7 @@ const AllTasks = () => {
                     >
                       <img
                         src={
-                          theme
+                          UICtx.theme
                             ? "/project-todoList/icon/trash-dark-g.svg"
                             : "/project-todoList/icon/trash-g.svg"
                         }
@@ -203,7 +199,7 @@ const AllTasks = () => {
                   >
                     {task.taskDescript && (
                       <p
-                        className={`descript max-h-50 break-words p-4 ${themeOptions.themeFont} ${p_size}`}
+                        className={`descript max-h-50 break-words p-4 ${themeOptions.themeFont} ${UICtx.p_size}`}
                       >
                         {task.taskDescript}
                       </p>

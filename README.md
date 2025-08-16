@@ -4,13 +4,6 @@
 
 ---
 
-## Demo 展示
-
-[Live Demo on Vercel](https://YOUR-VERCEL-APP.vercel.app)  
-Demo 影片：見專案首頁截圖
-
----
-
 ## 功能列表
 
 - ✅ 新增任務（標題 + 時間）
@@ -34,12 +27,12 @@ Demo 影片：見專案首頁截圖
 
 ## 截圖說明
 
-| 功能                 | 截圖                                                                                             |
-| -------------------- | ------------------------------------------------------------------------------------------------ |
-| 主頁面               | ![首頁畫面](./public/readme/Screenshot-1.png)                                                    |
-| 主題切換 + 字體設定  | ![主題切換](./public/readme/Screenshot-2-1.png)<br>![字體設定](./public/readme/Screenshot-2.png) |
-| 新增任務介面         | ![新增任務](./public/readme/Screenshot-3.png)                                                    |
-| 任務介面（全部任務） | ![全部任務](./public/readme/Screenshot-4.png)                                                    |
+| 功能                 | 截圖                                                                             |
+| -------------------- | -------------------------------------------------------------------------------- |
+| 主頁面               | ![首頁畫面](/readme/Screenshot-1.png)                                            |
+| 主題切換 + 字體設定  | ![主題切換](/readme/Screenshot-2-1.png)<br>![字體設定](/readme/Screenshot-2.png) |
+| 新增任務介面         | ![新增任務](/readme/Screenshot-3.png)                                            |
+| 任務介面（全部任務） | ![全部任務](/readme/Screenshot-4.png)                                            |
 |                      |
 
 ---

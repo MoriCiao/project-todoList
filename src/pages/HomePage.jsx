@@ -1,17 +1,16 @@
 import React, { useContext, useEffect } from "react";
-import { todoContext } from "../components/todoCotext";
+import { UIContext } from "../components/UIContext";
 import { motion } from "framer-motion";
 const HomePage = () => {
-  const { theme, bgLightImg, bgDarkImg, motion_fade } = useContext(todoContext);
-
+  const UICtx = useContext(UIContext);
   return (
     <motion.section
-      {...motion_fade}
+      {...UICtx.motion_fade}
       className={` overflow-hidden w-full h-full flex `}
     >
       <img
         className={`object-fit  w-[80%] sm:m-auto`}
-        src={theme ? bgDarkImg : bgLightImg}
+        src={UICtx.homepageBG}
         alt="HomePageIMG"
         loading="eager"
       />

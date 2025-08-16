@@ -1,19 +1,11 @@
 import React, { Fragment, use, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { todoContext } from "../components/todoCotext";
+
+import { UIContext } from "../components/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {
-  const {
-    textSize,
-    sizeClass,
-    theme,
-    handleScroll,
-    motion_theme,
-    pathname,
-    h1_size,
-    h3_size,
-  } = useContext(todoContext);
+  const UICtx = useContext(UIContext);
   const headerBtn = [
     {
       id: 1,
@@ -22,11 +14,15 @@ const Header = () => {
       href: "#alltasks",
       text: "ALL TASKS",
       img_bg: "/project-todoList/icon/Ellipse-light-g.svg",
-      img_content: theme
+      img_content: UICtx.theme
         ? "/project-todoList/icon/list-dark-g.svg"
         : "/project-todoList/icon/list-light-g.svg",
-      bg_color: theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]",
-      span_className: theme ? "text-[--dark-text-g] " : "text-[--light-text-g]",
+      bg_color: UICtx.theme
+        ? "bg-[--dark-component-g]"
+        : "bg-[--light-component-g]",
+      span_className: UICtx.theme
+        ? "text-[--dark-text-g] "
+        : "text-[--light-text-g]",
     },
     {
       id: 2,
@@ -34,14 +30,18 @@ const Header = () => {
       link: "newtodo",
       href: "#newtodo",
       text: "NEW TODO",
-      img_bg: theme
+      img_bg: UICtx.theme
         ? "/project-todoList/icon/Ellipse-dark-y.svg"
         : "/project-todoList/icon/Ellipse-light-y.svg",
-      img_content: theme
+      img_content: UICtx.theme
         ? "/project-todoList/icon/plus-dark-y.svg"
         : "/project-todoList/icon/plus-light-y.svg",
-      bg_color: theme ? "bg-[--dark-component-y]" : "bg-[--light-component-y]",
-      span_className: theme ? "text-[--dark-text-y] " : "text-[--light-text-y]",
+      bg_color: UICtx.theme
+        ? "bg-[--dark-component-y]"
+        : "bg-[--light-component-y]",
+      span_className: UICtx.theme
+        ? "text-[--dark-text-y] "
+        : "text-[--light-text-y]",
     },
     {
       id: 3,
@@ -50,11 +50,15 @@ const Header = () => {
       href: "#setting",
       text: "SETTING",
       img_bg: "/project-todoList/icon/Ellipse-light-g.svg",
-      img_content: theme
+      img_content: UICtx.theme
         ? "/project-todoList/icon/Settings-dark.svg"
         : "/project-todoList/icon/Settings-light.svg",
-      bg_color: theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]",
-      span_className: theme ? "text-[--dark-text-g] " : "text-[--light-text-g]",
+      bg_color: UICtx.theme
+        ? "bg-[--dark-component-g]"
+        : "bg-[--light-component-g]",
+      span_className: UICtx.theme
+        ? "text-[--dark-text-g] "
+        : "text-[--light-text-g]",
     },
   ];
 
@@ -62,18 +66,18 @@ const Header = () => {
     <AnimatePresence mode="wait">
       <motion.section
         // key值是為了分割
-        key={theme ? "dark" : "light"}
-        {...motion_theme}
+        key={UICtx.theme ? "dark" : "light"}
+        {...UICtx.motion_theme}
         className={`relative ${
-          theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
+          UICtx.theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
         } header-section  p-4 h-full `}
       >
         <div className={` flex flex-col items-center justify-start`}>
           <Link to="/" className="py-4">
             <h1
               className={`transition-all duration-500 ${
-                theme ? "text-[--light-bg]" : "text-[--dark-bg]"
-              } ${h1_size} `}
+                UICtx.theme ? "text-[--light-bg]" : "text-[--dark-bg]"
+              } ${UICtx.h1_size} `}
             >
               My List
             </h1>
@@ -86,7 +90,7 @@ const Header = () => {
                   key={btn.id}
                   className={`mb-4 w-full  isClickBtn ${btn.bg_color} flex items-center justify-center rounded-xl p-4 border border-white/50 lg:h-auto h-30
                 `}
-                  onClick={handleScroll}
+                  onClick={() => UICtx.handleScroll(UICtx.mainRef)}
                 >
                   <div
                     className={`${btn.bg_color} rounded-full  w-[5rem]  h-[5rem]  flex items-center justify-center `}
@@ -96,7 +100,7 @@ const Header = () => {
 
                   <div className="w-[75%] text-center">
                     <h3
-                      className={`${btn.span_className} ${h3_size} transition-all duration-500 tracking-widest font-['Luckiest_Guy']`}
+                      className={`${btn.span_className} ${UICtx.h3_size} transition-all duration-500 tracking-widest font-['Luckiest_Guy']`}
                     >
                       {btn.text}
                     </h3>

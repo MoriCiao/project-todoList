@@ -1,21 +1,18 @@
-import React, { useContext, useEffect } from "react";
-
+import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
-
-import { todoContext } from "../components/todoCotext";
-
+import { UIContext } from "../components/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 const MainOutlet = () => {
-  const { theme, motion_theme, pathname } = useContext(todoContext);
+  const UICtx = useContext(UIContext);
   //顯示區域 ， 盪第一次載入時，自動抓取本機資料
   return (
     <AnimatePresence mode="wait">
       <motion.main
-        key={theme ? "dark" : "light"}
-        {...motion_theme}
+        key={UICtx.theme ? "dark" : "light"}
+        {...UICtx.motion_theme}
         className={`MainOutlet relative grid xxl:grid-cols-3 w-full h-[100vh] ${
-          theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
+          UICtx.theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
         }`}
       >
         <div className={`h-full w-full overflow-y-auto`}>

@@ -1,16 +1,18 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { todoContext } from "./todoCotext";
-import { animate, motion } from "framer-motion";
+import { TasksContext } from "./TasksCotext";
+import { UIContext } from "./UIContext";
+import { motion } from "framer-motion";
 const GoToNewTodo = () => {
-  const { theme, handleScroll } = useContext(todoContext);
+  const UICtx = useContext(UIContext);
+  const tasksCtx = useContext(TasksContext);
   const toNewTodo = useNavigate();
   return (
     <button
-      className="md:hidden w-[40px] h-[40px]"
+      className="lg:hidden w-[40px] h-[40px]"
       onClick={() => {
         toNewTodo("/newtodo"); // 先導入 newTodo 頁面
-        handleScroll(); // 在觸發畫面 Y 軸移動到頁面
+        tasksCtx.handleScroll(); // 在觸發畫面 Y 軸移動到頁面
       }}
     >
       <motion.img
@@ -21,7 +23,7 @@ const GoToNewTodo = () => {
         }}
         transition={{ duration: 2, repeat: Infinity }}
         src={
-          theme
+          UICtx.theme
             ? "/project-todoList/icon/plus-circle-dark.svg"
             : "/project-todoList/icon/plus-circle-light.svg"
         }
