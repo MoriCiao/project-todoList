@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { UIContext } from "./UIContext";
+import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
 const ToTopBtn = () => {
   const UICtx = useContext(UIContext);

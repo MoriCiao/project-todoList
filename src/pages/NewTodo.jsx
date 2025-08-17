@@ -1,10 +1,9 @@
 import { useContext, useRef, useEffect, useCallback } from "react";
-import { TasksContext } from "../components/TasksCotext";
-import { UIContext } from "../components/UIContext";
+import { TasksContext } from "../contexts/TasksContext";
+import { UIContext } from "../contexts/UIContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import GoToHomePage from "../components/GoBackBtn";
-
 import "flatpickr/dist/themes/confetti.css";
 import {
   NewtodoDate,
@@ -12,6 +11,7 @@ import {
   NewtodoLabel,
   NewtodoTextArea,
 } from "../components/NewTodoItems";
+import TitleImage from "../components/TitleImage";
 
 const NewTodo = () => {
   const UICtx = useContext(UIContext);
@@ -79,15 +79,15 @@ const NewTodo = () => {
         }
       />
       {/* Newtodo Image */}
-      <img
+      <TitleImage
         id="newtodo"
         src={
           UICtx.theme
             ? "/project-todoList/title/New Todo-dark.svg"
             : "/project-todoList/title/New Todo.svg"
         }
-        alt="New Todo.svg"
-        className="mx-auto"
+        className={`mx-auto`}
+        alt="NewTodo.svg"
       />
 
       <form

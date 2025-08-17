@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { TasksContext } from "./TasksCotext";
-import { UIContext } from "./UIContext";
+import { TasksContext } from "../contexts/TasksContext";
+import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
-const GoToNewTodo = () => {
+const GoToNewTodoIcon = () => {
   const UICtx = useContext(UIContext);
   const tasksCtx = useContext(TasksContext);
   const toNewTodo = useNavigate();
@@ -33,4 +33,4 @@ const GoToNewTodo = () => {
   );
 };
 
-export default GoToNewTodo;
+export default GoToNewTodoIcon;

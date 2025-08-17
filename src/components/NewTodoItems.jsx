@@ -1,8 +1,6 @@
 import { useContext } from "react";
-import { UIContext } from "./UIContext";
 import Flatpickr from "react-flatpickr";
-
-// const UICtx = useContext(UIContext);
+import { UIContext } from "../contexts/UIContext";
 
 export const NewtodoLabel = ({ htmlFor, name, className }) => {
   return (

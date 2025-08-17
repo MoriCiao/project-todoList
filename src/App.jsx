@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import { TasksProvider } from "./components/TasksCotext";
-import { UIContext } from "./components/UIContext";
+import { TasksProvider } from "./contexts/TasksContext";
+import { UIContext } from "./contexts/UIContext";
 import "./style/App.css";
 import Header from "./pages/Header";
 import MainOutlet from "./pages/MainOutlet";
@@ -10,15 +10,10 @@ import NewTodo from "./pages/NewTodo";
 import Setting from "./pages/Setting";
 import HomePage from "./pages/HomePage";
 import ToTopBtn from "./components/ToTopBtn";
-import GoToNewTodo from "./components/GoToNewTodo";
+import GoToNewTodoIcon from "./components/GoToNewTodoIcon";
 
 function App() {
   const UICtx = useContext(UIContext);
-  // const mainRef = useRef(null);
-  // const headerRef = useRef(null);
-  // const handleScroll = (ref) => {
-  //   ref.current.scrollIntoView({ behavior: "smooth" });
-  // };
 
   return (
     <div
@@ -47,7 +42,7 @@ function App() {
 
         <div className="fixed bottom-8 right-8 flex flex-col gap-8">
           <ToTopBtn />
-          <GoToNewTodo />
+          <GoToNewTodoIcon />
         </div>
       </TasksProvider>
     </div>

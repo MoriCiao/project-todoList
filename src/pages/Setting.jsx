@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import GoToHomePage from "../components/GoBackBtn";
-import { UIContext } from "../components/UIContext";
+import { UIContext } from "../contexts/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
+import TitleImage from "../components/TitleImage";
 const Setting = () => {
   const UICtx = useContext(UIContext);
 
@@ -34,15 +35,16 @@ const Setting = () => {
                 : "/project-todoList/icon/chevron-left-g.svg"
             }
           />
-          <img
+
+          <TitleImage
             id="setting"
             src={
               UICtx.theme
                 ? "/project-todoList/title/Setting-dark.svg"
                 : "/project-todoList/title/Setting.svg"
             }
+            className={`mx-auto`}
             alt="Setting.svg"
-            className="mx-auto"
           />
 
           <div className="flex flex-col gap-8 items-center justify-center w-[80%]  py-8 mx-auto">

@@ -1,7 +1,7 @@
 import React, { Fragment, use, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import { UIContext } from "../components/UIContext";
+import { UIContext } from "../contexts/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
 
 const Header = () => {

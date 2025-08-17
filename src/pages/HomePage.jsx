@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { UIContext } from "../components/UIContext";
+import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
 const HomePage = () => {
   const UICtx = useContext(UIContext);
