@@ -1,66 +1,16 @@
 import React, { Fragment, use, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { UIContext } from "../contexts/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
+import {
+  HeaderLink,
+  HeaderIcon,
+  HeaderTitle,
+  themeOption,
+} from "../components/HeaderBtnItems";
 
 const Header = () => {
   const UICtx = useContext(UIContext);
-  const headerBtn = [
-    {
-      id: 1,
-      type: "button",
-      link: "alltasks",
-      href: "#alltasks",
-      text: "ALL TASKS",
-      img_bg: "/project-todoList/icon/Ellipse-light-g.svg",
-      img_content: UICtx.theme
-        ? "/project-todoList/icon/list-dark-g.svg"
-        : "/project-todoList/icon/list-light-g.svg",
-      bg_color: UICtx.theme
-        ? "bg-[--dark-component-g]"
-        : "bg-[--light-component-g]",
-      span_className: UICtx.theme
-        ? "text-[--dark-text-g] "
-        : "text-[--light-text-g]",
-    },
-    {
-      id: 2,
-      type: "button",
-      link: "newtodo",
-      href: "#newtodo",
-      text: "NEW TODO",
-      img_bg: UICtx.theme
-        ? "/project-todoList/icon/Ellipse-dark-y.svg"
-        : "/project-todoList/icon/Ellipse-light-y.svg",
-      img_content: UICtx.theme
-        ? "/project-todoList/icon/plus-dark-y.svg"
-        : "/project-todoList/icon/plus-light-y.svg",
-      bg_color: UICtx.theme
-        ? "bg-[--dark-component-y]"
-        : "bg-[--light-component-y]",
-      span_className: UICtx.theme
-        ? "text-[--dark-text-y] "
-        : "text-[--light-text-y]",
-    },
-    {
-      id: 3,
-      type: "button",
-      link: "setting",
-      href: "#setting",
-      text: "SETTING",
-      img_bg: "/project-todoList/icon/Ellipse-light-g.svg",
-      img_content: UICtx.theme
-        ? "/project-todoList/icon/Settings-dark.svg"
-        : "/project-todoList/icon/Settings-light.svg",
-      bg_color: UICtx.theme
-        ? "bg-[--dark-component-g]"
-        : "bg-[--light-component-g]",
-      span_className: UICtx.theme
-        ? "text-[--dark-text-g] "
-        : "text-[--light-text-g]",
-    },
-  ];
 
   return (
     <AnimatePresence mode="wait">
@@ -82,32 +32,67 @@ const Header = () => {
               My List
             </h1>
           </Link>
-          <nav className="flex flex-col md:w-[80%] w-[90%]">
-            {headerBtn.map((btn) => {
-              return (
-                <Link
-                  to={btn.link}
-                  key={btn.id}
-                  className={`mb-4 w-full  isClickBtn ${btn.bg_color} flex items-center justify-center rounded-xl p-4 border border-white/50 lg:h-auto h-30
-                `}
-                  onClick={() => UICtx.handleScroll(UICtx.mainRef)}
-                >
-                  <div
-                    className={`${btn.bg_color} rounded-full  w-[5rem]  h-[5rem]  flex items-center justify-center `}
-                  >
-                    <img className="w-[60%]" src={btn.img_content} alt="" />
-                  </div>
-
-                  <div className="w-[75%] text-center">
-                    <h3
-                      className={`${btn.span_className} ${UICtx.h3_size} transition-all duration-500 tracking-widest font-['Luckiest_Guy']`}
-                    >
-                      {btn.text}
-                    </h3>
-                  </div>
-                </Link>
-              );
-            })}
+          <nav className="flex flex-col gap-4 md:w-[80%] w-[90%]">
+            {/* "ALL TASKS" */}
+            <HeaderLink
+              link="alltasks"
+              onClick={() => UICtx.handleScroll(UICtx.mainRef)}
+              themeBgColor={themeOption("green", UICtx).bg}
+            >
+              <HeaderIcon
+                bgColor={themeOption("green", UICtx).bg}
+                src={
+                  UICtx.theme
+                    ? "/project-todoList/icon/list-dark-g.svg"
+                    : "/project-todoList/icon/list-light-g.svg"
+                }
+              />
+              <HeaderTitle
+                label="ALL TASKS"
+                themeTextColor={themeOption("green", UICtx).text}
+                h3_size={UICtx.h3_size}
+              />
+            </HeaderLink>
+            {/* "NEW TODO" */}
+            <HeaderLink
+              link="newtodo"
+              onClick={() => UICtx.handleScroll(UICtx.mainRef)}
+              themeBgColor={themeOption("yellow", UICtx).bg}
+            >
+              <HeaderIcon
+                bgColor={themeOption("yellow", UICtx).bg}
+                src={
+                  UICtx.theme
+                    ? "/project-todoList/icon/plus-dark-y.svg"
+                    : "/project-todoList/icon/plus-light-y.svg"
+                }
+              />
+              <HeaderTitle
+                label="NEW TODO"
+                themeTextColor={themeOption("yellow", UICtx).text}
+                h3_size={UICtx.h3_size}
+              />
+            </HeaderLink>
+            {/* "SETTING" */}
+            <HeaderLink
+              link="setting"
+              onClick={() => UICtx.handleScroll(UICtx.mainRef)}
+              themeBgColor={themeOption("green", UICtx).bg}
+            >
+              <HeaderIcon
+                bgColor={themeOption("green", UICtx).bg}
+                src={
+                  UICtx.theme
+                    ? "/project-todoList/icon/Settings-dark.svg"
+                    : "/project-todoList/icon/Settings-light.svg"
+                }
+              />
+              <HeaderTitle
+                label="SETTING"
+                themeTextColor={themeOption("green", UICtx).text}
+                h3_size={UICtx.h3_size}
+              />
+            </HeaderLink>
           </nav>
         </div>
       </motion.section>

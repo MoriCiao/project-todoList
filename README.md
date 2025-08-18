@@ -64,4 +64,4 @@
 - GitHub: [MoriCiao](https://github.com/MoriCiao)
 - LinkedIn / Portfolio: YourLinkHere
 
-📫 聯絡我：bboynoice@gamil.com
+📫 聯絡我：rosen.moriciao@gmail.com
