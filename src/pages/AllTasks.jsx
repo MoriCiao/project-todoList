@@ -1,5 +1,4 @@
 import React, { Fragment, useContext } from "react";
-import GoToHomePage from "../components/GoBackBtn";
 import { TasksContext } from "../contexts/TasksContext";
 import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
@@ -8,24 +7,15 @@ import TitleImage from "../components/TitleImage";
 import NoTask from "../components/NoTask";
 import TaskCard from "../components/TaskCard";
 const AllTasks_RWD_setting = [
-  "2xl:grid-cols-2",
-  "2xl:gap-8",
+  "lg:grid-cols-2",
+  "lg:gap-4",
   "md:grid-cols-1",
-  "md:gap-4 ",
+  "md:gap-2 ",
   "sm:grid-cols-1",
   "sm:gap-4",
   "sm:pt-4",
   "gap-4",
 ].join(" ");
-// 任務時間的顯示參數
-// const timeOptions = {
-//   // year: "numeric",
-//   month: "2-digit",
-//   day: "2-digit",
-//   hour: "2-digit",
-//   minute: "2-digit",
-//   hour12: false,
-// };
 
 const AllTasks = () => {
   // 獲取tasks 列表
@@ -46,13 +36,6 @@ const AllTasks = () => {
       {...UICtx.motion_fade}
       className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full `}
     >
-      <GoToHomePage
-        arrowImg={
-          UICtx.theme
-            ? "/project-todoList/icon/chevron-left-dark-g.svg"
-            : "/project-todoList/icon/chevron-left-g.svg"
-        }
-      />
       <div className="relative">
         <TitleImage
           id="alltasks"
@@ -90,7 +73,7 @@ const AllTasks = () => {
           tasksCtx.state.allTasks.map((task, index) => {
             return (
               <Fragment key={index}>
-                <TaskCard task={task} />;
+                <TaskCard task={task} />
               </Fragment>
             );
           })

@@ -3,7 +3,6 @@ import { TasksContext } from "../contexts/TasksContext";
 import { UIContext } from "../contexts/UIContext";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import GoToHomePage from "../components/GoBackBtn";
 import "flatpickr/dist/themes/confetti.css";
 import {
   NewtodoDate,
@@ -71,13 +70,6 @@ const NewTodo = () => {
       {...UICtx.motion_fade}
       className={`newtodo col-start-1 col-span-3 items-center p-12 relative h-full`}
     >
-      <GoToHomePage
-        arrowImg={
-          UICtx.theme
-            ? "/project-todoList/icon/chevron-left-dark-y.svg"
-            : "/project-todoList/icon/chevron-left-y.svg"
-        }
-      />
       {/* Newtodo Image */}
       <TitleImage
         id="newtodo"

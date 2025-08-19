@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
 const HomePage = () => {
