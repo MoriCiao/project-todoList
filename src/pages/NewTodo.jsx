@@ -9,6 +9,7 @@ import {
   NewtodoInput,
   NewtodoLabel,
   NewtodoTextArea,
+  SubmitBtn,
 } from "../components/NewTodoItems";
 import TitleImage from "../components/TitleImage";
 
@@ -22,27 +23,26 @@ const NewTodo = () => {
     e.preventDefault();
   };
 
-  const lableStyle = `p-4 font-[Istok Web] text-center mt-4 ${UICtx.p_size}`;
-
   const handleInputTask = () => {
     if (
-      tasksCtx.taskName === "" ||
-      tasksCtx.startTime === "" ||
-      tasksCtx.endTime === ""
+      tasksCtx.newTodo.taskName === "" ||
+      // tasksCtx.newTodo.startTime === "" ||
+      tasksCtx.newTodo.endTime === ""
     ) {
       alert("請輸入任務名稱及選擇開始與結束的日期!");
       return;
     }
-    if (tasksCtx.startTime > tasksCtx.endTime) {
+    if (tasksCtx.newTodo.startTime > tasksCtx.newTodo.endTime) {
       alert("開始日期不可大於結束日期");
       return;
     }
+
     const newTask = {
       id: Date.now().toString(),
-      taskName: tasksCtx.taskName,
-      startTime: tasksCtx.startTime,
-      endTime: tasksCtx.endTime,
-      taskDescript: tasksCtx.taskDescript,
+      taskName: tasksCtx.newTodo.taskName,
+      startTime: tasksCtx.newTodo.startTime,
+      endTime: tasksCtx.newTodo.endTime,
+      taskDescript: tasksCtx.newTodo.descript,
       // 開闔文字
       isCheck: false,
     };
@@ -51,10 +51,14 @@ const NewTodo = () => {
     tasksCtx.dispatch({ type: "ADD_TASK", payload: newTask });
 
     // 資料送出後，須把每個參數重新設定
-    tasksCtx.setTaskName("");
-    tasksCtx.setStartTime("");
-    tasksCtx.setEndTime("");
-    tasksCtx.setTaskDescript("");
+    tasksCtx.setNewTodo({
+      taskName: "",
+      date: {
+        startTime: "",
+        endTime: "",
+      },
+      descript: "",
+    });
     // 資料輸入成功後，將頁面導向 Alltasks
     navigate("/alltasks");
   };
@@ -88,13 +92,9 @@ const NewTodo = () => {
       >
         {/* Task Name */}
         <div className="newtodo-Taskname flex flex-col w-full justify-center items-center">
-          <NewtodoLabel
-            htmlFor="task-name"
-            className={`${lableStyle} ${
-              UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-            } `}
-            name="Task Name"
-          />
+          {/* TaskName label */}
+          <NewtodoLabel htmlFor="task-name" name="Task Name" />
+          {/* TaskName Input */}
           <NewtodoInput
             type="text"
             name="mission"
@@ -108,12 +108,16 @@ const NewTodo = () => {
                 ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
                 : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
             }`}
-            value={tasksCtx.taskName}
+            value={tasksCtx.newTodo.taskName}
             onChange={(e) => {
               if (e.target.value.length > 15) {
                 alert("最多輸入15個字");
               }
-              tasksCtx.setTaskName(String(e.target.value));
+
+              tasksCtx.setNewTodo((prev) => ({
+                ...prev,
+                taskName: String(e.target.value),
+              }));
             }}
             ref={taskRef}
           />
@@ -121,63 +125,38 @@ const NewTodo = () => {
 
         {/* Deadline */}
         <div className="newtodo-Date flex flex-col w-full justify-center items-center">
-          <NewtodoLabel
-            htmlFor="deadline"
-            className={`${lableStyle} ${
-              UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-            } `}
-            name="Deadline"
-          />
+          <NewtodoLabel htmlFor="deadline" name="Deadline" />
           <div className="flex flex-col gap-4 items-center w-[20rem]">
             <section className="grid grid-cols-4 items-center">
-              <NewtodoLabel
-                htmlFor="start"
-                className={`text-start text-[1.2rem] col-span-1 col-start-1 ${
-                  UICtx.p_size
-                } ${
-                  UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-                }`}
-                name="Start"
-              />
+              <NewtodoLabel htmlFor="start" type="date" name="Start" />
               <NewtodoDate
                 name={"start"}
                 id={"start"}
                 placeholder={"請選擇日期..."}
-                value={tasksCtx.startTime}
-                className={`InputItem w-[15rem] h-[3rem] border-0 rounded p-2 col-span-4 col-start-2 ${
-                  UICtx.p_size
-                } ${
-                  UICtx.theme
-                    ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
-                    : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
-                }`}
-                onChange={(e) => tasksCtx.setStartTime(e.target.value)}
+                value={tasksCtx.newTodo.startTime}
+                onChange={(e) =>
+                  tasksCtx.setNewTodo((prev) => ({
+                    ...prev,
+                    startTime: e.target.value,
+                  }))
+                }
               />
             </section>
+            {/* End Time */}
             <section className="grid grid-cols-4 items-center">
-              <NewtodoLabel
-                htmlFor="end"
-                className={`text-start text-[1.2rem] col-span-1 col-start-1 ${
-                  UICtx.p_size
-                } ${
-                  UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-                }`}
-                name="End"
-              />
+              <NewtodoLabel htmlFor="end" type="date" name="End" />
 
               <NewtodoDate
                 name={"end"}
                 id={"end"}
                 placeholder={"請選擇日期..."}
-                value={tasksCtx.endTime}
-                className={`InputItem w-[15rem] h-[3rem] border-0 rounded p-2 col-span-4 col-start-2 ${
-                  UICtx.p_size
-                } ${
-                  UICtx.theme
-                    ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
-                    : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
-                }`}
-                onChange={(e) => tasksCtx.setEndTime(e.target.value)}
+                value={tasksCtx.newTodo.endTime}
+                onChange={(e) =>
+                  tasksCtx.setNewTodo((prev) => ({
+                    ...prev,
+                    endTime: e.target.value,
+                  }))
+                }
               />
             </section>
           </div>
@@ -185,51 +164,28 @@ const NewTodo = () => {
 
         {/* Description */}
         <div className="newtodo-Description flex flex-col w-full justify-center items-center">
-          {/* Descript */}
-          <NewtodoLabel
-            htmlFor="descript"
-            className={`${lableStyle} ${
-              UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-            } `}
-            name="Descript"
-          />
+          <NewtodoLabel htmlFor="descript" name="Descript" />
           <NewtodoTextArea
             maxlength="200"
             rows="4"
             placeholder="Describe the task"
-            className={`InputItem border-0 rounded resize-none h-40 w-[20rem] p-2 ${
-              UICtx.p_size
-            } ${
-              UICtx.theme
-                ? "bg-[--dark-component-y] text-[--dark-text-y] placeholder-[--dark-text-y]"
-                : "bg-[--light-component-y] text-[--light-text-y] placeholder-[--light-text-y]"
-            } border border-red-500`}
             value={tasksCtx.taskDescript}
-            onChange={(e) => tasksCtx.setTaskDescript(e.target.value)}
+            onChange={(e) =>
+              tasksCtx.setNewTodo((prev) => ({
+                ...prev,
+                descript: e.target.value,
+              }))
+            }
           />
         </div>
 
         <div className="newtodo-Submit flex flex-col w-full justify-center items-center">
           {/* submit btn */}
-          <button
-            type="submit"
+          <SubmitBtn
+            type={"submit"}
             onClick={() => handleInputTask()}
-            className={`w-[10rem] h-auto rounded-full ${
-              UICtx.theme
-                ? "bg-[--dark-component-y]"
-                : "bg-[--light-component-y]"
-            }`}
-          >
-            <p
-              className={`font-['Luckiest_Guy'] w-full text-center leading-tight ${
-                UICtx.h3_size
-              } ${
-                UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
-              }`}
-            >
-              ADD
-            </p>
-          </button>
+            text="ADD"
+          />
         </div>
       </form>
     </motion.section>

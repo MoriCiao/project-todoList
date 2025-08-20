@@ -10,6 +10,12 @@ import React, {
 export const TasksContext = createContext();
 
 export const TasksProvider = ({ children }) => {
+  const [newTodo, setNewTodo] = useState({
+    taskName: "",
+    startTime: "",
+    endTime: "",
+    descript: "",
+  });
   const [taskName, setTaskName] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
@@ -129,18 +135,12 @@ export const TasksProvider = ({ children }) => {
     () => ({
       state,
       dispatch,
-      taskName,
-      setTaskName,
-      startTime,
-      setStartTime,
-      endTime,
-      setEndTime,
-      taskDescript,
-      setTaskDescript,
+      newTodo,
+      setNewTodo,
       raiseBtn,
       decreaseBtn,
     }),
-    [state, taskName, startTime, endTime, taskDescript]
+    [state, newTodo]
   );
 
   useEffect(() => {
