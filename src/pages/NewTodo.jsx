@@ -16,7 +16,6 @@ import TitleImage from "../components/TitleImage";
 const NewTodo = () => {
   const UICtx = useContext(UIContext);
   const tasksCtx = useContext(TasksContext);
-
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -113,7 +112,6 @@ const NewTodo = () => {
               if (e.target.value.length > 15) {
                 alert("最多輸入15個字");
               }
-
               tasksCtx.setNewTodo((prev) => ({
                 ...prev,
                 taskName: String(e.target.value),

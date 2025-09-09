@@ -142,8 +142,6 @@ export const TasksProvider = ({ children }) => {
   useEffect(() => {
     try {
       localStorage.setItem("mylistTasks", JSON.stringify(state.allTasks));
-
-      // console.log("localStorage 已更新 ...");
     } catch (e) {
       console.error("儲存失敗 ：", e);
     }
