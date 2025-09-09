@@ -16,10 +16,6 @@ export const TasksProvider = ({ children }) => {
     endTime: "",
     descript: "",
   });
-  const [taskName, setTaskName] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [taskDescript, setTaskDescript] = useState("");
 
   // sortBtn
   const raiseBtn = () => {

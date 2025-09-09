@@ -49,19 +49,21 @@ const AllTasks = () => {
         />
 
         {/* SortBtn */}
-        <div className="sortBtn absolute bottom-0 left-0 flex md:flex-row flex-col gap-4">
-          <SortDateBtn
-            type="button"
-            text="Min Date"
-            onClick={() => tasksCtx.dispatch({ type: "RAISE_BTN" })}
-            className={`isClickBtn px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
-          />
-          <SortDateBtn
-            type="button"
-            text="Max Date"
-            onClick={() => tasksCtx.dispatch({ type: "DECREASE_BTN" })}
-            className={`isClickBtn px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
-          />
+        <div className="sortBtn md:absolute bottom-0 left-0 w-full flex items-center md:justify-start justify-between gap-4">
+          <Slide direction="down" duration={1500} triggerOnce={true}>
+            <SortDateBtn
+              type="button"
+              text="Min Date"
+              onClick={() => tasksCtx.dispatch({ type: "RAISE_BTN" })}
+              className={`isClickBtn px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+            />
+            <SortDateBtn
+              type="button"
+              text="Max Date"
+              onClick={() => tasksCtx.dispatch({ type: "DECREASE_BTN" })}
+              className={`isClickBtn px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+            />
+          </Slide>
         </div>
       </div>
 
@@ -69,14 +71,12 @@ const AllTasks = () => {
         {tasksCtx.state.allTasks.length === 0 ? (
           <NoTask themeOptions={themeOptions} />
         ) : (
-          tasksCtx.state.allTasks &&
-          tasksCtx.state.allTasks.map((task, index) => {
-            return (
-              <Fragment key={index}>
-                <TaskCard task={task} />
-              </Fragment>
-            );
-          })
+          <Fade cascade damping={0.2} triggerOnce={true}>
+            {tasksCtx.state.allTasks &&
+              tasksCtx.state.allTasks.map((task, index) => {
+                return <TaskCard key={index} task={task} />;
+              })}
+          </Fade>
         )}
       </div>
     </motion.section>

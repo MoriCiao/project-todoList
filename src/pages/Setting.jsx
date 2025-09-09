@@ -7,6 +7,7 @@ import {
   SettingIMG,
   SettingTitle,
 } from "../components/SettingItems";
+import { Fade, Slide } from "react-awesome-reveal";
 
 const setting_svg = {
   light: "/project-todoList/title/Setting.svg",
@@ -63,41 +64,43 @@ const Setting = () => {
 
           <div className="flex flex-col gap-8 items-center justify-center w-[80%]  py-8 mx-auto">
             {/* theme setting */}
+
             <section className="theme flex flex-col  gap-2 items-center justify-center w-full">
               <SettingTitle
                 title="THEME"
                 style_i={selectColor("theme", UICtx).text}
               />
+              <Fade direction="left" duration={500} cascade damping={0.3}>
+                {/* Light */}
+                <SettingBtn
+                  className={selectColor("theme", UICtx).btn}
+                  onClick={() => UICtx.setTheme(false)}
+                >
+                  <SettingIMG
+                    src={UICtx.theme ? sum_svg.dark : sum_svg.light}
+                    alt={"Sun.svg"}
+                  />
+                  <SettingTitle
+                    title="LIGHT"
+                    style_i={selectColor("theme", UICtx).text}
+                  />
+                </SettingBtn>
 
-              {/* Light */}
-              <SettingBtn
-                className={selectColor("theme", UICtx).btn}
-                onClick={() => UICtx.setTheme(false)}
-              >
-                <SettingIMG
-                  src={UICtx.theme ? sum_svg.dark : sum_svg.light}
-                  alt={"Sun.svg"}
-                />
-                <SettingTitle
-                  title="LIGHT"
-                  style_i={selectColor("theme", UICtx).text}
-                />
-              </SettingBtn>
-
-              {/* Dark */}
-              <SettingBtn
-                className={selectColor("theme", UICtx).btn}
-                onClick={() => UICtx.setTheme(true)}
-              >
-                <SettingIMG
-                  src={UICtx.theme ? moon_svg.dark : moon_svg.light}
-                  alt={"Moon.svg"}
-                />
-                <SettingTitle
-                  title="Dark"
-                  style_i={selectColor("theme", UICtx).text}
-                />
-              </SettingBtn>
+                {/* Dark */}
+                <SettingBtn
+                  className={selectColor("theme", UICtx).btn}
+                  onClick={() => UICtx.setTheme(true)}
+                >
+                  <SettingIMG
+                    src={UICtx.theme ? moon_svg.dark : moon_svg.light}
+                    alt={"Moon.svg"}
+                  />
+                  <SettingTitle
+                    title="Dark"
+                    style_i={selectColor("theme", UICtx).text}
+                  />
+                </SettingBtn>
+              </Fade>
             </section>
 
             {/* font setting */}
@@ -106,38 +109,40 @@ const Setting = () => {
                 title="FONT SIZE"
                 style_i={selectColor("fontSize", UICtx).text}
               />
-              {/* Small */}
-              <SettingBtn
-                className={selectColor("fontSize", UICtx).btn}
-                onClick={() => UICtx.setTextSize("small")}
-              >
-                <SettingTitle
-                  title="SMALL"
-                  style_i={selectColor("fontSize", UICtx).text}
-                />
-              </SettingBtn>
+              <Fade direction="left" duration={500} cascade damping={0.3}>
+                {/* Small */}
+                <SettingBtn
+                  className={selectColor("fontSize", UICtx).btn}
+                  onClick={() => UICtx.setTextSize("small")}
+                >
+                  <SettingTitle
+                    title="SMALL"
+                    style_i={selectColor("fontSize", UICtx).text}
+                  />
+                </SettingBtn>
 
-              {/* Medium */}
-              <SettingBtn
-                className={selectColor("fontSize", UICtx).btn}
-                onClick={() => UICtx.setTextSize("medium")}
-              >
-                <SettingTitle
-                  title="MEDIUM"
-                  style_i={selectColor("fontSize", UICtx).text}
-                />
-              </SettingBtn>
+                {/* Medium */}
+                <SettingBtn
+                  className={selectColor("fontSize", UICtx).btn}
+                  onClick={() => UICtx.setTextSize("medium")}
+                >
+                  <SettingTitle
+                    title="MEDIUM"
+                    style_i={selectColor("fontSize", UICtx).text}
+                  />
+                </SettingBtn>
 
-              {/* Large */}
-              <SettingBtn
-                className={selectColor("fontSize", UICtx).btn}
-                onClick={() => UICtx.setTextSize("large")}
-              >
-                <SettingTitle
-                  title="LARGE"
-                  style_i={selectColor("fontSize", UICtx).text}
-                />
-              </SettingBtn>
+                {/* Large */}
+                <SettingBtn
+                  className={selectColor("fontSize", UICtx).btn}
+                  onClick={() => UICtx.setTextSize("large")}
+                >
+                  <SettingTitle
+                    title="LARGE"
+                    style_i={selectColor("fontSize", UICtx).text}
+                  />
+                </SettingBtn>
+              </Fade>
             </section>
           </div>
         </motion.div>
