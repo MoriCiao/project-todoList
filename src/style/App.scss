@@ -58,7 +58,6 @@ body{
     cursor: pointer;
     &:hover{
         scale: 1.05;
-        filter: brightness(1.25);
         transform: translate(-2px,-2px);
     }
 

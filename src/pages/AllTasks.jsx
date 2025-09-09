@@ -6,13 +6,10 @@ import SortDateBtn from "../components/SortDateBtn";
 import TitleImage from "../components/TitleImage";
 import NoTask from "../components/NoTask";
 import TaskCard from "../components/TaskCard";
+import { Fade, Slide } from "react-awesome-reveal";
 const AllTasks_RWD_setting = [
   "lg:grid-cols-2",
-  "lg:gap-4",
-  "md:grid-cols-1",
-  "md:gap-2 ",
   "sm:grid-cols-1",
-  "sm:gap-4",
   "sm:pt-4",
   "gap-4",
 ].join(" ");
@@ -36,7 +33,7 @@ const AllTasks = () => {
       {...UICtx.motion_fade}
       className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full `}
     >
-      <div className="relative">
+      <div className="relative flex flex-col">
         <TitleImage
           id="alltasks"
           src={

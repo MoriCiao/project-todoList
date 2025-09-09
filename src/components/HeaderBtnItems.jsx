@@ -1,4 +1,6 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UIContext } from "../contexts/UIContext";
 
 export function themeOption(color_tpye, UICtx) {
   const g_theme = {
@@ -41,10 +43,15 @@ export const HeaderTitle = ({ label, themeTextColor, h3_size }) => {
 };
 
 export const HeaderLink = ({ link, onClick, themeBgColor, children }) => {
+  const UICtx = useContext(UIContext);
   return (
     <Link
       to={link}
-      className={`isClickBtn w-full  flex items-center justify-center rounded-xl p-4 border border-white/50 lg:h-auto h-30 ${themeBgColor}  `}
+      className={`isClickBtn w-full max-w-xl m-auto flex items-center justify-center rounded-xl p-4 border lg:h-auto h-30 ${themeBgColor}  ${
+        UICtx.theme
+          ? "hover:brightness-125 border-white/50 "
+          : "hover:border-black/10 shadow-md "
+      } `}
       onClick={onClick}
     >
       {children[0]}

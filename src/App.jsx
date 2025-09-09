@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div
-      className={`APP-div relative w-auto lg:grid lg:grid-cols-3 flex flex-col  items-start h-[100vh] lg:overflow-hidden overflow-y-auto`}
+      className={`APP-div relative w-auto 2xl:grid 2xl:grid-cols-3 flex flex-col  items-start h-[100vh]  overflow-y-auto`}
     >
       <TasksProvider>
         <header

@@ -12,7 +12,6 @@ export const TaskTitle = ({ task, themeOptions, UICtx }) => {
 
 export const TaskDate = ({ task, themeOptions, UICtx }) => {
   const timeOptions = {
-    // year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
