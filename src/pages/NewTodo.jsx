@@ -10,7 +10,7 @@ import {
   NewtodoLabel,
   NewtodoTextArea,
   SubmitBtn,
-} from "../components/NewTodoItems";
+} from "../components/NewTodo/NewTodoItems";
 import TitleImage from "../components/TitleImage";
 
 const NewTodo = () => {

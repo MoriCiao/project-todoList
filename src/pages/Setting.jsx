@@ -6,7 +6,7 @@ import {
   SettingBtn,
   SettingIMG,
   SettingTitle,
-} from "../components/SettingItems";
+} from "../components/Setting/SettingItems";
 import { Fade, Slide } from "react-awesome-reveal";
 
 const setting_svg = {
