@@ -1,12 +1,13 @@
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { TasksContext } from "../contexts/TasksContext";
 import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
 import SortDateBtn from "../components/SortDateBtn";
 import TitleImage from "../components/TitleImage";
 import NoTask from "../components/NoTask";
-import TaskCard from "../components/TaskCard";
+import TaskCard from "../components/AllTasks/TaskCard";
 import { Fade, Slide } from "react-awesome-reveal";
+import ExpandPage from "../components/expandPage/ExpandPage";
 const AllTasks_RWD_setting = [
   "lg:grid-cols-2",
   "sm:grid-cols-1",
@@ -19,6 +20,11 @@ const AllTasks = () => {
   const UICtx = useContext(UIContext);
   const tasksCtx = useContext(TasksContext);
 
+  const [expand, setExpand] = useState({
+    task: {},
+    isOpen: false,
+  });
+
   const themeOptions = {
     themeFont: `${
       UICtx.theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"
@@ -27,6 +33,10 @@ const AllTasks = () => {
       UICtx.theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
     }`,
   };
+
+  useEffect(() => {
+    if (!expand.isOpen) return;
+  }, [expand.isOpen]);
 
   return (
     <motion.section
@@ -71,11 +81,25 @@ const AllTasks = () => {
           <Fade cascade damping={0.2} triggerOnce={true}>
             {tasksCtx.state.allTasks &&
               tasksCtx.state.allTasks.map((task, index) => {
-                return <TaskCard key={index} task={task} />;
+                return (
+                  <TaskCard
+                    key={index}
+                    task={task}
+                    expand={expand}
+                    setExpand={setExpand}
+                  />
+                );
               })}
           </Fade>
         )}
       </div>
+      {expand.isOpen && (
+        <ExpandPage
+          expand={expand}
+          setExpand={setExpand}
+          themeOptions={themeOptions}
+        />
+      )}
     </motion.section>
   );
 };

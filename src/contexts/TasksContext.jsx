@@ -119,7 +119,14 @@ export const TasksProvider = ({ children }) => {
         });
         return { ...state, allTasks: newTasksList };
       }
-
+      case "REVISE_DESCRIPT": {
+        const task = action.payload;
+        const originalIndex = state.allTasks.findIndex(
+          (i) => i.startTime === task.startTime
+        );
+        console.log(originalIndex);
+        state.allTasks[originalIndex] = task;
+      }
       default:
         return state;
     }
