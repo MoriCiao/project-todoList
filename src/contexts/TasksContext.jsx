@@ -160,7 +160,7 @@ export const TasksProvider = ({ children }) => {
     } catch (e) {
       console.error("儲存失敗 ：", e);
     }
-  }, [state.allTasks]);
+  }, [JSON.stringify(state.allTasks)]);
   return (
     <TasksContext.Provider value={value}>{children}</TasksContext.Provider>
   );

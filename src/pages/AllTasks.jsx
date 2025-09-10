@@ -35,10 +35,6 @@ const AllTasks = () => {
     }`,
   };
 
-  useEffect(() => {
-    if (!expand.isOpen) return;
-  }, [expand.isOpen]);
-
   return (
     <motion.section
       {...UICtx.motion_fade}
