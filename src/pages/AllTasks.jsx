@@ -8,6 +8,7 @@ import NoTask from "../components/NoTask";
 import TaskCard from "../components/AllTasks/TaskCard";
 import { Fade, Slide } from "react-awesome-reveal";
 import ExpandPage from "../components/expandPage/ExpandPage";
+import Loading from "../components/Loading/Loading";
 const AllTasks_RWD_setting = [
   "lg:grid-cols-2",
   "sm:grid-cols-1",
@@ -19,7 +20,7 @@ const AllTasks = () => {
   // 獲取tasks 列表
   const UICtx = useContext(UIContext);
   const tasksCtx = useContext(TasksContext);
-
+  const allTasks = tasksCtx.state.allTasks;
   const [expand, setExpand] = useState({
     task: {},
     isOpen: false,
@@ -75,7 +76,7 @@ const AllTasks = () => {
       </div>
 
       <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
-        {tasksCtx.state.allTasks.length === 0 ? (
+        {allTasks.length === 0 ? (
           <NoTask themeOptions={themeOptions} />
         ) : (
           <Fade cascade damping={0.2} triggerOnce={true}>
@@ -100,6 +101,7 @@ const AllTasks = () => {
           themeOptions={themeOptions}
         />
       )}
+      {tasksCtx.state.isLoading && <Loading />}
     </motion.section>
   );
 };

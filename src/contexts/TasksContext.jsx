@@ -76,17 +76,16 @@ export const TasksProvider = ({ children }) => {
 
   function getInitialStorage() {
     const saved = localStorage.getItem("mylistTasks");
-
     try {
       if (!saved) {
         // 裡面無任何資料
         localStorage.setItem("mylistTasks", JSON.stringify(defaultTasks));
-        return { allTasks: defaultTasks };
+        return { allTasks: defaultTasks, isLoading: false };
       }
       return { allTasks: JSON.parse(saved) };
     } catch (e) {
       console.error("本機加載失敗...", e);
-      return { allTasks: defaultTasks };
+      return { allTasks: defaultTasks, isLoading: false };
     }
   }
 
@@ -124,8 +123,17 @@ export const TasksProvider = ({ children }) => {
         const originalIndex = state.allTasks.findIndex(
           (i) => i.startTime === task.startTime
         );
-        console.log(originalIndex);
-        state.allTasks[originalIndex] = task;
+
+        const updateTasks = state.allTasks.map((item, index) =>
+          index === originalIndex ? task : item
+        );
+
+        localStorage.setItem("mylistTasks", JSON.stringify(updateTasks));
+
+        return { ...state, allTasks: updateTasks, isLoading: false };
+      }
+      case "LOADING": {
+        return { ...state, isLoading: true };
       }
       default:
         return state;
