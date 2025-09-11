@@ -1,6 +1,6 @@
 # React TodoList
 
-一個使用 React 打造的任務清單管理工具，支援任務新增、刪除、完成標記、搜尋與排序，以及主題與字體大小切換，並有畫面動畫與 localStorage 儲存功能。
+一個使用 React 打造的任務清單管理工具，支援任務新增、刪除、完成標記、排序，以及主題與字體大小切換，並有畫面動畫與 localStorage 儲存功能。
 
 ---
 
@@ -62,6 +62,5 @@
 **MoriCiao**
 
 - GitHub: [MoriCiao](https://github.com/MoriCiao)
-- LinkedIn / Portfolio: YourLinkHere
 
 📫 聯絡我：rosen.moriciao@gmail.com
