@@ -59,13 +59,13 @@ const AllTasks = () => {
               type="button"
               text="Min Date"
               onClick={() => tasksCtx.dispatch({ type: "RAISE_BTN" })}
-              className={`isClickBtn px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+              className={`px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
             />
             <SortDateBtn
               type="button"
               text="Max Date"
               onClick={() => tasksCtx.dispatch({ type: "DECREASE_BTN" })}
-              className={`isClickBtn px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+              className={`px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
             />
           </Slide>
         </div>
