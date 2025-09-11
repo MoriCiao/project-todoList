@@ -80,14 +80,19 @@ export const TasksProvider = ({ children }) => {
       if (!saved) {
         // 裡面無任何資料
         localStorage.setItem("mylistTasks", JSON.stringify(defaultTasks));
-        return { allTasks: defaultTasks, isLoading: false };
+        return defaultTasks;
       }
-      return { allTasks: JSON.parse(saved) };
+      return JSON.parse(saved);
     } catch (e) {
       console.error("本機加載失敗...", e);
-      return { allTasks: defaultTasks, isLoading: false };
+      return defaultTasks;
     }
   }
+
+  const initailState = {
+    allTasks: getInitialStorage(),
+    isLoading: false,
+  };
 
   const TaskBtnReducer = (state, action) => {
     switch (action.type) {
@@ -123,24 +128,23 @@ export const TasksProvider = ({ children }) => {
         const originalIndex = state.allTasks.findIndex(
           (i) => i.startTime === task.startTime
         );
-
         const updateTasks = state.allTasks.map((item, index) =>
           index === originalIndex ? task : item
         );
 
         localStorage.setItem("mylistTasks", JSON.stringify(updateTasks));
 
-        return { ...state, allTasks: updateTasks, isLoading: false };
+        return { ...state, allTasks: updateTasks, isLoading: true };
       }
-      case "LOADING": {
-        return { ...state, isLoading: true };
+      case "LOADING_STATUS": {
+        return { ...state, isLoading: action.payload };
       }
       default:
         return state;
     }
   };
 
-  const [state, dispatch] = useReducer(TaskBtnReducer, {}, getInitialStorage);
+  const [state, dispatch] = useReducer(TaskBtnReducer, initailState);
 
   const value = useMemo(
     () => ({

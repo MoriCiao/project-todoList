@@ -76,11 +76,11 @@ const AllTasks = () => {
           <NoTask themeOptions={themeOptions} />
         ) : (
           <Fade cascade damping={0.2} triggerOnce={true}>
-            {tasksCtx.state.allTasks &&
-              tasksCtx.state.allTasks.map((task, index) => {
+            {allTasks &&
+              allTasks.map((task, index) => {
                 return (
                   <TaskCard
-                    key={index}
+                    key={`${index}-${task.taskName}-${task.description}`}
                     task={task}
                     expand={expand}
                     setExpand={setExpand}
