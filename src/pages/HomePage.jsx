@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { UIContext } from "../contexts/UIContext";
 import { motion } from "framer-motion";
+import TodoAnimite from "../components/todoAnimite/TodoAnimite";
 const HomePage = () => {
   const UICtx = useContext(UIContext);
   return (
@@ -8,12 +9,13 @@ const HomePage = () => {
       {...UICtx.motion_fade}
       className={` overflow-hidden w-full h-full flex `}
     >
-      <img
+      <TodoAnimite />
+      {/* <img
         className={`object-fit  w-[80%] sm:m-auto`}
         src={UICtx.homepageBG}
         alt="HomePageIMG"
         loading="eager"
-      />
+      /> */}
     </motion.section>
   );
 };
