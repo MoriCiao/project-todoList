@@ -5,7 +5,7 @@ import { Bounce, Fade } from 'react-awesome-reveal'
 import { UIContext } from '../../contexts/UIContext'
 
 
-const ImgStick  = ({color}) =>{
+const ImgSticky  = ({color = "green"} ) =>{
    const imgGreen = "/project-todoList/animiteItems/animate-g-1.webp"
    const imgYellow = "/project-todoList/animiteItems/animate-y-1.webp"
     return (

@@ -1,11 +1,33 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { SetStateAction, useContext, useEffect, useRef, useState } from 'react'
 import { TasksContext } from '../../contexts/TasksContext';
 import { Zoom } from 'react-awesome-reveal';
-import { TaskDate, TaskTitle } from '../AllTasks/TaskCatdItems';
+import { TaskDate, TaskTitle } from '../AllTasks/TaskCardItems';
 import { UIContext } from '../../contexts/UIContext';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion'; 
-const ExpandPage = ({expand,setExpand ,themeOptions}) =>{
+
+export type Task = {
+    taskName: string
+    taskDescript: string
+    startTime: string
+    endTime: string 
+    isCheck: boolean
+}
+
+export type ExpandState = {
+  task : Task 
+  isOpen : boolean
+}
+
+export type taskProps = {
+  expand : ExpandState
+  setExpand:React.Dispatch<SetStateAction<ExpandState>> ;
+  themeOptions :string
+}
+
+
+const ExpandPage = ({expand , setExpand ,themeOptions} : taskProps) =>{
+    console.log(expand)
     const UICtx = useContext(UIContext);
     const tasksCtx = useContext(TasksContext);
     const expandRef = useRef<HTMLTextAreaElement | null>(null)
@@ -14,7 +36,14 @@ const ExpandPage = ({expand,setExpand ,themeOptions}) =>{
     const handleDescript = () =>{
       
       tasksCtx.dispatch({type : "REVISE_DESCRIPT" ,payload : task})
-      setExpand({task: {},isOpen: false})
+      setExpand({task: {
+        taskName: "",
+        taskDescript: "",
+        startTime: "",
+        endTime: "",
+        isCheck: false,
+      },
+      isOpen: false})
      
       setTimeout(()=>{
          navigte(0)

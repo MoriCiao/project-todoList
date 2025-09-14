@@ -61,6 +61,7 @@ export const UIProvider = ({ children }) => {
     exit: { opacity: 0 },
     transition: { duration: 0.5 },
   };
+
   const homepageBG = theme ? bgDarkImg : bgLightImg;
 
   // scroll

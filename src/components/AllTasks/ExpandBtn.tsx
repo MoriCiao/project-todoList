@@ -1,10 +1,15 @@
 import React, { useContext } from 'react'
 import { UIContext } from '../../contexts/UIContext'
 import { motion } from 'framer-motion'
-import { TasksContext } from '../../contexts/TasksContext'
-const ExpandBtn = ({task , setExpand }) => {
+import { ExpandState, Task } from '../expandPage/ExpandPage'
+
+type expandBtnProps = {
+  task : Task
+  setExpand : React.Dispatch<SetStateAction<ExpandState>>
+}
+
+const ExpandBtn = ({task , setExpand } :expandBtnProps) => {
     const { theme } = useContext(UIContext)
-    const tasksCtx = useContext(TasksContext);
     
   return (
     <motion.button 

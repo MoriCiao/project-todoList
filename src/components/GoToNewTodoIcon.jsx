@@ -12,7 +12,7 @@ const GoToNewTodoIcon = () => {
       className="lg:hidden w-[40px] h-[40px]"
       onClick={() => {
         toNewTodo("/newtodo"); // 先導入 newTodo 頁面
-        tasksCtx.handleScroll(); // 在觸發畫面 Y 軸移動到頁面
+        tasksCtx.handleScroll; // 在觸發畫面 Y 軸移動到頁面
       }}
     >
       <motion.img
