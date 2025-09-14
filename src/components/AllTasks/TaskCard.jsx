@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { UIContext } from "../../contexts/UIContext";
 import { TasksContext } from "../../contexts/TasksContext";
 import { TaskDelBtn, TasksCheckBtn } from "./TasksBtn";
-import { TaskDate, TaskDescription, TaskTitle } from "./TaskCatdItems";
+import { TaskDate, TaskDescription, TaskTitle } from "./TaskCardItems";
 import ExpandBtn from "./ExpandBtn";
 
 const TaskCard = ({ task, setExpand }) => {

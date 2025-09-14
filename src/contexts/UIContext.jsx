@@ -9,8 +9,15 @@ const bgDarkImg = "/project-todoList/main-bg-note-dark.webp";
 export const UIProvider = ({ children }) => {
   const [textSize, setTextSize] = useState("medium");
 
+  function userTheme() {
+    const savedTheme = localStorage.getItem("todoTheme");
+    if (!savedTheme) return true;
+    const userTheme = savedTheme === "dark" ? true : false;
+    return userTheme;
+  }
+
   // 深淺色主題變更
-  const [theme, setTheme] = useState(true);
+  const [theme, setTheme] = useState(userTheme());
 
   const h1_size = `${
     textSize === "large"

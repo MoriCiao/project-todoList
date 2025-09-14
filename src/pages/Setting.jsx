@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { UIContext } from "../contexts/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
 import TitleImage from "../components/TitleImage";
@@ -48,6 +48,12 @@ function selectColor(type, UICtx) {
 
 const Setting = () => {
   const UICtx = useContext(UIContext);
+
+  useEffect(() => {
+    const currentTheme = UICtx.theme ? "dark" : "light";
+    localStorage.setItem("todoTheme", currentTheme);
+  }, [UICtx.theme]);
+
   return (
     <motion.section {...UICtx.motion_fade} className={`setting  h-full`}>
       <AnimatePresence mode="wait">

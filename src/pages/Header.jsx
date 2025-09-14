@@ -1,4 +1,4 @@
-import React, { Fragment, use, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UIContext } from "../contexts/UIContext";
 import { AnimatePresence, motion } from "framer-motion";
@@ -8,6 +8,7 @@ import {
   HeaderTitle,
   themeOption,
 } from "../components/HeaderBtnItems";
+import { Fade } from "react-awesome-reveal";
 
 const Header = () => {
   const UICtx = useContext(UIContext);
