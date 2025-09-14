@@ -12,10 +12,17 @@ export const SettingIMG = ({ src, alt }) => (
 );
 
 export const SettingBtn = ({ children, className, onClick }) => {
+  const UICtx = useContext(UIContext);
   return (
     <motion.button
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.2 }}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: `0 5px 10px ${
+          UICtx.theme ? "rgba(255,255,255,0.3)" : "rgba(0,0,0,0.5)"
+        }`,
+        filter: "brightness(1.25)",
+      }}
+      transition={{ duration: 0.5 }}
       className={className}
       onClick={onClick}
     >

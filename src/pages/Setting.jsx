@@ -27,20 +27,20 @@ const moon_svg = {
 function selectColor(type, UICtx) {
   if (type === "theme") {
     const theme_color = {
-      text: `transition-all duration-500 font-['Luckiest_Guy'] ${
+      text: `font-['Luckiest_Guy'] ${
         UICtx.theme ? "text-[--dark-text-g]" : "text-[--light-text-g]"
       }`,
-      btn: `transition-all duration-500 w-[20rem] grid grid-cols-3 items-center  rounded-full mb-4 ${
+      btn: `w-[20rem] grid grid-cols-3 items-center  rounded-full mb-4 ${
         UICtx.theme ? "bg-[--dark-component-g]" : "bg-[--light-component-g]"
       }`,
     };
     return theme_color;
   } else if (type === "fontSize") {
     const fontSize_color = {
-      text: `transition-all duration-500 font-['Luckiest_Guy'] ${
+      text: `font-['Luckiest_Guy'] ${
         UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"
       }`,
-      btn: "transition-all duration-500 w-[20rem] items-center bg-[--light-component-y] rounded-full mb-4",
+      btn: "w-[20rem] items-center bg-[--light-component-y] rounded-full mb-4",
     };
     return fontSize_color;
   }

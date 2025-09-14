@@ -13,17 +13,27 @@ const ImgStick  = ({color}) =>{
     )
 }
 
-const ImgDiv = ({color,top ,left, bottom , right , delay , rotate}) =>{
+type ImgDivProps = {
+    color :string;
+    top? :string;
+    left? :string;
+    bottom? :string;
+    right? :string;
+    delay? :number;
+    rotate?: number
+}
+
+const ImgDiv = ({color,top ,left, bottom , right , delay = 0 , rotate = 0 }:ImgDivProps) =>{
 
     return(
         <motion.div 
             initial={{rotate: 0 ,scale: 0.8}}
             animate={{rotate: rotate ,scale: [0.8,1.25,1]} }
             transition={{
-                scale:{delay: delay*0.5 ,duration:1.25},
+                scale:{delay: delay * 0.5 ,duration:1.25},
                 rotate:{delay: delay ,duration: 0.5} }}
             className={`absolute top-${top} left-${left} bottom-${bottom} right-${right} w-[20%]`}>
-            <ImgStick color={color}/>
+            <ImgSticky color={color}/>
         </motion.div>
     )
 }
@@ -47,18 +57,27 @@ export default function TodoAnimite() {
             }}
             className='w-full h-full flex lg:flex-row flex-col gap-8 items-center justify-center font-["Luckiest_Guy"] tracking-widest select-none'>
                 <Bounce triggerOnce={true} cascade delay={2500} damping={0.3}>
-                    <span 
-                        className={`text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-green-400 text-shadow-black/50" }`} >
+                    <motion.span 
+                        initial={{ y : 0}}
+                        animate={{ y : [10, -10 ,10] }}
+                        transition={{duration: 4 , repeat: Infinity ,delay: 4}}
+                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-green-400 text-shadow-black/50" }`} >
                             Record
-                    </span>
-                    <span 
-                        className={`text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-yellow-400 text-shadow-black/50" }`} >
+                    </motion.span>
+                    <motion.span 
+                        initial={{ y : 0}}
+                        animate={{ y : [10, -10 ,10] }}
+                        transition={{duration: 4 , repeat: Infinity ,delay: 4.5}}
+                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-yellow-400 text-shadow-black/50" }`} >
                             Your
-                    </span>
-                    <span 
-                        className={`text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-red-400 text-shadow-black/50" }`} >
+                    </motion.span>
+                    <motion.span 
+                        initial={{ y : 0}}
+                        animate={{ y : [10, -10 ,10] }}
+                        transition={{duration: 4 , repeat: Infinity ,delay: 5}}
+                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-red-400 text-shadow-black/50" }`} >
                             Life!
-                    </span>
+                    </motion.span>
                 </Bounce>
 
         </motion.div>

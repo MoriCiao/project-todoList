@@ -12,7 +12,9 @@ const GoToHomePage = () => {
   return (
     <button
       onClick={() => navigate("/")}
-      className="fixed md:absolute md:bottom-4 md:left-4 bottom-4 left-4 p-1 border border-white/50 rounded-full hover:bg-white/50 group"
+      className={`fixed md:absolute md:bottom-4 md:left-4 bottom-4 left-4 p-1 border border-white/50 rounded-full  group ${
+        UICtx.theme ? "hover:bg-white/20" : "hover:bg-black/20"
+      }`}
     >
       <img
         src={UICtx.theme ? back_svg.dark : back_svg.light}

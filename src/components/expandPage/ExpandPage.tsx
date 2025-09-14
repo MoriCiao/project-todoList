@@ -26,16 +26,18 @@ const ExpandPage = ({expand,setExpand ,themeOptions}) =>{
     if(expandRef.current) expandRef.current.focus()
   },[])
   return (
-    <section className={`expand-page fixed inset-0 z-99 flex items-start justify-center backdrop-blur-sm ${UICtx.theme ? "bg-black/50" : "bg-white/20"}`}>
+    <section className={`expand-page fixed inset-0 z-99 flex items-start justify-center backdrop-blur-sm 
+          bg-black/50`}>
         <Zoom>
-            <div className={`m-auto mt-12 w-[92vw] px-12 py-8 max-w-xl  border border-white/50 flex flex-col gap-4 text-white ${UICtx.theme ? "bg-[--dark-bg]" : "bg-[--light-component-g]"} `}>
+            <div className={`m-auto mt-12 w-[92vw] px-12 py-8 max-w-xl  border flex flex-col gap-4 text-white 
+                bg-[--dark-bg] border-white/50`}>
        
                 <TaskTitle task={task} UICtx={UICtx} themeOptions={themeOptions}/>
                 <TaskDate task={task} UICtx={UICtx} themeOptions={themeOptions}/>
 
                 <textarea 
                   ref={expandRef}
-                  value={task.taskDescript}
+                  value={task?.taskDescript ?? ""}
                   onChange={(e)=>setExpand((prev)=>({...prev, task: {...task, taskDescript : e.target.value}}))}
                   className={`text-xl h-50 border bg-white/50 flex items-start justify-start p-4 text-black `}/>
                 

@@ -22,7 +22,13 @@ const AllTasks = () => {
   const tasksCtx = useContext(TasksContext);
   const allTasks = tasksCtx.state.allTasks;
   const [expand, setExpand] = useState({
-    task: {},
+    task: {
+      taskName: "",
+      taskDescript: "",
+      startTime: "",
+      endTime: "",
+      isCheck: false,
+    },
     isOpen: false,
   });
 
