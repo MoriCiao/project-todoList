@@ -41,6 +41,9 @@ const ImgDiv = ({color,top ,left, bottom , right , delay = 0 , rotate = 0 }:ImgD
 
 export default function TodoAnimite() {
     const UICtx = useContext(UIContext)
+    const textShadow = UICtx.theme 
+    ? [`0 5px 5px #9afc863f`, `0 15px 20px #ff80002f`, `0 5px 5px #ff525254`] 
+    : [`0 5px 5px #0000007f`, `0 15px 20px #0000007f`, `0 5px 5px #0000007f`]
   return (
     <div className='relative w-full sm:h-full h-full flex items-center justify-center'>
         <Fade triggerOnce={true} cascade damping={0.5} >
@@ -59,23 +62,23 @@ export default function TodoAnimite() {
                 <Bounce triggerOnce={true} cascade delay={2500} damping={0.3}>
                     <motion.span 
                         initial={{ y : 0}}
-                        animate={{ y : [10, -10 ,10] }}
-                        transition={{duration: 4 , repeat: Infinity ,delay: 4}}
-                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-green-400 text-shadow-black/50" }`} >
+                        animate={{ y : [10, -10 ,10] ,textShadow: textShadow}}
+                        transition={{duration: 3 , repeat: Infinity ,delay: 4}}
+                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white" : "text-green-400" }`} >
                             Record
                     </motion.span>
                     <motion.span 
                         initial={{ y : 0}}
-                        animate={{ y : [10, -10 ,10] }}
-                        transition={{duration: 4 , repeat: Infinity ,delay: 4.5}}
-                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-yellow-400 text-shadow-black/50" }`} >
+                        animate={{ y : [10, -10 ,10] ,textShadow: textShadow}}
+                        transition={{duration: 3 , repeat: Infinity ,delay: 4.2}}
+                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white" : "text-yellow-400" }`} >
                             Your
                     </motion.span>
                     <motion.span 
-                        initial={{ y : 0}}
-                        animate={{ y : [10, -10 ,10] }}
-                        transition={{duration: 4 , repeat: Infinity ,delay: 5}}
-                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white text-shadow-yellow-800/50" : "text-red-400 text-shadow-black/50" }`} >
+                        initial={{ y : 0 }}
+                        animate={{ y : [10, -10 ,10] ,textShadow: textShadow}}
+                        transition={{duration: 3 , repeat: Infinity ,delay: 4.4}}
+                        className={`block text-[6rem] text-shadow-lg/50 ${UICtx.theme ? "text-white" : "text-red-400" }`} >
                             Life!
                     </motion.span>
                 </Bounce>
