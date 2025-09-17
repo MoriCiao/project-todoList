@@ -6,11 +6,11 @@ const ToTopBtn = () => {
 
   return (
     <button
-      className="rounded-full lg:hidden sm:block w-[40px] h-[40px]"
+      className="h-[40px] w-[40px] rounded-full sm:block lg:hidden"
       onClick={() => UICtx.handleScroll(UICtx.headerRef)}
     >
       <motion.img
-        className="rounded-full w-[40px] h-[40px]"
+        className="h-[40px] w-[40px] rounded-full"
         initial={{ scale: 1, boxShadow: "0px 0px 8px white" }}
         animate={{
           scale: [1, 1.1, 1],

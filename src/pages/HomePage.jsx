@@ -8,7 +8,7 @@ const HomePage = () => {
   return (
     <motion.section
       {...UICtx.motion_fade}
-      className={` overflow-hidden w-full h-full flex `}
+      className={`flex h-full w-full overflow-hidden`}
     >
       <TodoAnimite />
     </motion.section>

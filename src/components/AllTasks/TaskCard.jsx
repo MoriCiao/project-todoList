@@ -19,11 +19,11 @@ const TaskCard = ({ task, setExpand }) => {
 
   return (
     <div
-      className={`task relative rounded-md w-auto 2xl:max-w-[40rem] max-h-150 min-h-40 overflow-y-auto flex transition duration-500 ${
+      className={`task relative flex max-h-150 min-h-40 w-auto overflow-y-auto rounded-md transition duration-500 2xl:max-w-[40rem] ${
         task.isCheck ? "brightness-[0.5]" : null
       } ${themeOptions.themeBg} ${themeOptions.themeFont}`}
     >
-      <div className="check-Icon rounded-l-md w-[20%] py-4 border-r border-white/50 mr-4">
+      <div className="check-Icon mr-4 w-[20%] rounded-l-md border-r border-white/50 py-4">
         <TasksCheckBtn
           task={task}
           onClick={() =>
@@ -35,7 +35,7 @@ const TaskCard = ({ task, setExpand }) => {
         />
       </div>
 
-      <div className="task-container w-[80%] py-4 pr-2 flex flex-col gap-4 max-h-80">
+      <div className="task-container flex max-h-80 w-[80%] flex-col gap-4 py-4 pr-2">
         <div className="flex flex-col items-start justify-start">
           {/* task Title */}
           <TaskTitle task={task} themeOptions={themeOptions} UICtx={UICtx} />
@@ -53,7 +53,7 @@ const TaskCard = ({ task, setExpand }) => {
         </div>
         {/* Task Des */}
         <div
-          className={`descript-area flex items-center w-full  rounded-md px-4 ${themeOptions.themeBg}`}
+          className={`descript-area flex w-full items-center rounded-md px-4 ${themeOptions.themeBg}`}
         >
           {task.taskDescript && (
             <TaskDescription

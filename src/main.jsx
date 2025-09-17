@@ -7,5 +7,5 @@ createRoot(document.getElementById("root")).render(
     <UIProvider>
       <App />
     </UIProvider>
-  </HashRouter>
+  </HashRouter>,
 );

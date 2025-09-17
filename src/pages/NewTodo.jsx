@@ -71,7 +71,7 @@ const NewTodo = () => {
   return (
     <motion.section
       {...UICtx.motion_fade}
-      className={`newtodo col-start-1 col-span-3 items-center p-12 relative h-full`}
+      className={`newtodo relative col-span-3 col-start-1 h-full items-center p-12`}
     >
       {/* Newtodo Image */}
       <TitleImage
@@ -87,10 +87,10 @@ const NewTodo = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-8 items-center w-[80%] mx-auto  p-2"
+        className="mx-auto flex w-[80%] flex-col items-center gap-8 p-2"
       >
         {/* Task Name */}
-        <div className="newtodo-Taskname flex flex-col w-full justify-center items-center">
+        <div className="newtodo-Taskname flex w-full flex-col items-center justify-center">
           {/* TaskName label */}
           <NewtodoLabel htmlFor="task-name" name="Task Name" />
           {/* TaskName Input */}
@@ -100,7 +100,7 @@ const NewTodo = () => {
             id="mission"
             placeholder="Input Task..."
             maxLength={15}
-            className={`InputItem border-0 rounded indent-4 w-[20rem] h-[3rem] ${
+            className={`InputItem h-[3rem] w-[20rem] rounded border-0 indent-4 ${
               UICtx.p_size
             } ${
               UICtx.theme
@@ -122,9 +122,9 @@ const NewTodo = () => {
         </div>
 
         {/* Deadline */}
-        <div className="newtodo-Date flex flex-col w-full justify-center items-center">
+        <div className="newtodo-Date flex w-full flex-col items-center justify-center">
           <NewtodoLabel htmlFor="deadline" name="Deadline" />
-          <div className="flex flex-col gap-4 items-center w-[20rem]">
+          <div className="flex w-[20rem] flex-col items-center gap-4">
             <section className="grid grid-cols-4 items-center">
               <NewtodoLabel htmlFor="start" type="date" name="Start" />
               <NewtodoDate
@@ -161,7 +161,7 @@ const NewTodo = () => {
         </div>
 
         {/* Description */}
-        <div className="newtodo-Description flex flex-col w-full justify-center items-center">
+        <div className="newtodo-Description flex w-full flex-col items-center justify-center">
           <NewtodoLabel htmlFor="descript" name="Descript" />
           <NewtodoTextArea
             maxlength="200"
@@ -177,7 +177,7 @@ const NewTodo = () => {
           />
         </div>
 
-        <div className="newtodo-Submit flex flex-col w-full justify-center items-center">
+        <div className="newtodo-Submit flex w-full flex-col items-center justify-center">
           {/* submit btn */}
           <SubmitBtn
             type={"submit"}

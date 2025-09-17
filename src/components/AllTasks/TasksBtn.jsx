@@ -6,7 +6,7 @@ export const TasksCheckBtn = ({ task, onClick }) => {
   const UICtx = useContext(UIContext);
   return (
     <button
-      className="w-full h-full flex items-center justify-center"
+      className="flex h-full w-full items-center justify-center"
       onClick={onClick}
     >
       <motion.img
@@ -16,8 +16,8 @@ export const TasksCheckBtn = ({ task, onClick }) => {
               ? "/project-todoList/icon/check-dark-circked.svg"
               : "/project-todoList/icon/check-light-checked.svg"
             : UICtx.theme
-            ? "/project-todoList/icon/circle-dark-check.svg"
-            : "/project-todoList/icon/circle-light-check.svg"
+              ? "/project-todoList/icon/circle-dark-check.svg"
+              : "/project-todoList/icon/circle-light-check.svg"
         }
         alt="checkIcon"
         initial={{ scale: 1 }}
@@ -34,7 +34,7 @@ export const TaskDelBtn = ({ onClick }) => {
   const UICtx = useContext(UIContext);
   return (
     <button
-      className={`absolute right-4 top-4 flex flex-col items-center `}
+      className={`absolute top-4 right-4 flex flex-col items-center`}
       onClick={onClick}
     >
       <img

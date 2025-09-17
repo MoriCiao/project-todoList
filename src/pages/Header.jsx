@@ -21,19 +21,19 @@ const Header = () => {
         {...UICtx.motion_theme}
         className={`relative ${
           UICtx.theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
-        } header-section  p-4 h-full `}
+        } header-section h-full p-4`}
       >
-        <div className={` flex flex-col items-center justify-start`}>
+        <div className={`flex flex-col items-center justify-start`}>
           <Link to="/" className="py-4">
             <h1
-              className={`transition-all duration-500 font-['Luckiest_Guy'] ${
+              className={`font-['Luckiest_Guy'] transition-all duration-500 ${
                 UICtx.theme ? "text-[--light-bg]" : "text-[--dark-bg]"
               } ${UICtx.h1_size} `}
             >
               My List
             </h1>
           </Link>
-          <nav className="flex flex-col gap-4 md:w-[80%] w-[90%]">
+          <nav className="flex w-[90%] flex-col gap-4 md:w-[80%]">
             <Fade direction="up" triggerOnce={true} cascade damping={0.5}>
               {/* "ALL TASKS" */}
               <HeaderLink

@@ -17,18 +17,18 @@ function App() {
 
   return (
     <div
-      className={`APP-div relative w-auto 2xl:grid 2xl:grid-cols-3 flex flex-col  items-start h-[100vh]  overflow-y-auto`}
+      className={`APP-div relative flex h-[100vh] w-auto flex-col items-start overflow-y-auto 2xl:grid 2xl:grid-cols-3`}
     >
       <TasksProvider>
         <header
           ref={UICtx.headerRef}
-          className="w-full h-full col-start-1 lg:col-span-1 md:col-span-1"
+          className="col-start-1 h-full w-full md:col-span-1 lg:col-span-1"
         >
           <Header />
         </header>
         <main
           ref={UICtx.mainRef}
-          className="lg:col-start-2 lg:col-span-2 md:col-start-2 md:col-span-1 w-full"
+          className="w-full md:col-span-1 md:col-start-2 lg:col-span-2 lg:col-start-2"
         >
           <Routes>
             <Route path="/" element={<MainOutlet />}>
@@ -40,7 +40,7 @@ function App() {
           </Routes>
         </main>
 
-        <div className="fixed bottom-8 right-8 flex flex-col gap-8">
+        <div className="fixed right-8 bottom-8 flex flex-col gap-8">
           <ToTopBtn />
           <GoToNewTodoIcon />
         </div>

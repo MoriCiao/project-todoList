@@ -6,11 +6,11 @@ const NoTask = ({ themeOptions }) => {
 
   return (
     <div
-      className={`text-center p-4 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont}`}
+      className={`rounded-md p-4 text-center ${themeOptions.themeBg} ${themeOptions.themeFont}`}
     >
-      <p className={`p-4  ${themeOptions.themeFont}`}>目前暫無任務</p>
+      <p className={`p-4 ${themeOptions.themeFont}`}>目前暫無任務</p>
       <button
-        className={`px-4 py-2 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} font-bold `}
+        className={`rounded-md px-4 py-2 ${themeOptions.themeBg} ${themeOptions.themeFont} font-bold`}
         onClick={() => {
           navigate("/newtodo");
         }}

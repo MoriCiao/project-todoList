@@ -66,7 +66,7 @@ export const NewtodoDate = ({ name, placeholder, onChange, value }) => {
         time_24hr: true,
         allowInput: true,
       }}
-      className={`InputItem w-[15rem] h-[3rem] border-0 rounded p-2 col-span-4 col-start-2 ${
+      className={`InputItem col-span-4 col-start-2 h-[3rem] w-[15rem] rounded border-0 p-2 ${
         UICtx.p_size
       } ${
         UICtx.theme
@@ -94,7 +94,7 @@ export const NewtodoTextArea = ({
       maxLength={maxlength}
       rows={rows}
       placeholder={placeholder}
-      className={`InputItem border-0 rounded resize-none h-40 w-[20rem] p-2 ${
+      className={`InputItem h-40 w-[20rem] resize-none rounded border-0 p-2 ${
         UICtx.p_size
       } ${
         UICtx.theme
@@ -115,12 +115,12 @@ export const SubmitBtn = ({ type, onClick, text }) => {
       transition={{ duration: 0.2 }}
       type={type}
       onClick={onClick}
-      className={`w-[10rem] h-auto rounded-full ${
+      className={`h-auto w-[10rem] rounded-full ${
         UICtx.theme ? "bg-[--dark-component-y]" : "bg-[--light-component-y]"
       }`}
     >
       <p
-        className={`font-['Luckiest_Guy'] w-full text-center leading-tight ${
+        className={`w-full text-center font-['Luckiest_Guy'] leading-tight ${
           UICtx.h3_size
         } ${UICtx.theme ? "text-[--dark-text-y]" : "text-[--light-text-y]"}`}
       >

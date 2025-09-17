@@ -1,7 +1,7 @@
 export const TaskTitle = ({ task, themeOptions, UICtx }) => {
   return (
     <h3
-      className={`title  transition-all duration-300 break-words max-w-100 ${
+      className={`title max-w-100 break-words transition-all duration-300 ${
         UICtx.h5_size
       } ${themeOptions.themeFont} ${task.isCheck ? "line-through" : ""}`}
     >
@@ -21,7 +21,7 @@ export const TaskDate = ({ task, themeOptions, UICtx }) => {
 
   return (
     <div
-      className={`w-full text-end pr-4 ${themeOptions.themeFont}  ${UICtx.p_size}`}
+      className={`w-full pr-4 text-end ${themeOptions.themeFont} ${UICtx.p_size}`}
     >
       {new Date(task.startTime)?.toLocaleDateString("zh-TW", timeOptions)}
       <span className={`${themeOptions.themeFont} px-2`}>-</span>
@@ -39,8 +39,7 @@ export const TaskDescription = ({ task, themeOptions, UICtx }) => {
       defaultValue={
         task.taskDescript.length === 0 ? "無內容" : task.taskDescript
       }
-      className={`descript resize-none w-full h-10 my-auto break-words overflow-hidden my-2 py-2 ${themeOptions.themeFont} ${UICtx.p_size}
-      `}
+      className={`descript my-2 my-auto h-10 w-full resize-none overflow-hidden py-2 break-words ${themeOptions.themeFont} ${UICtx.p_size} `}
     ></textarea>
   );
 };

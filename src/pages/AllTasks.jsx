@@ -44,7 +44,7 @@ const AllTasks = () => {
   return (
     <motion.section
       {...UICtx.motion_fade}
-      className={`AllTasks col-start-1 col-span-3 items-center p-12 relative h-full `}
+      className={`AllTasks relative col-span-3 col-start-1 h-full items-center p-12`}
     >
       <div className="relative flex flex-col">
         <TitleImage
@@ -59,25 +59,25 @@ const AllTasks = () => {
         />
 
         {/* SortBtn */}
-        <div className="sortBtn md:absolute bottom-0 left-0 w-full flex items-center md:justify-start justify-between gap-4">
+        <div className="sortBtn bottom-0 left-0 flex w-full items-center justify-between gap-4 md:absolute md:justify-start">
           <Slide direction="down" duration={1500} triggerOnce={true}>
             <SortDateBtn
               type="button"
               text="Min Date"
               onClick={() => tasksCtx.dispatch({ type: "RAISE_BTN" })}
-              className={`px-2 py-1 border-0 rounded-md ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+              className={`rounded-md border-0 px-2 py-1 ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
             />
             <SortDateBtn
               type="button"
               text="Max Date"
               onClick={() => tasksCtx.dispatch({ type: "DECREASE_BTN" })}
-              className={`px-2 py-1 border-0 rounded-md  ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
+              className={`rounded-md border-0 px-2 py-1 ${themeOptions.themeBg} ${themeOptions.themeFont} hover:sacle-105`}
             />
           </Slide>
         </div>
       </div>
 
-      <div className={`grid ${AllTasks_RWD_setting} pt-4 `}>
+      <div className={`grid ${AllTasks_RWD_setting} pt-4`}>
         {allTasks.length === 0 ? (
           <NoTask themeOptions={themeOptions} />
         ) : (

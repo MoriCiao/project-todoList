@@ -23,38 +23,38 @@ export const UIProvider = ({ children }) => {
     textSize === "large"
       ? "text-[5rem]"
       : textSize === "medium"
-      ? "text-[4rem]"
-      : textSize === "small"
-      ? "text-[3rem]"
-      : null
+        ? "text-[4rem]"
+        : textSize === "small"
+          ? "text-[3rem]"
+          : null
   }`;
   const h3_size = `${
     textSize === "large"
       ? "text-[3.5rem]"
       : textSize === "medium"
-      ? "text-[3rem]"
-      : textSize === "small"
-      ? "text-[2.5rem]"
-      : null
+        ? "text-[3rem]"
+        : textSize === "small"
+          ? "text-[2.5rem]"
+          : null
   }`;
   const h5_size = `${
     textSize === "large"
       ? "text-[2rem]"
       : textSize === "medium"
-      ? "text-[1.75rem]"
-      : textSize === "small"
-      ? "text-[1.5rem]"
-      : null
+        ? "text-[1.75rem]"
+        : textSize === "small"
+          ? "text-[1.5rem]"
+          : null
   }`;
 
   const p_size = `${
     textSize === "large"
       ? "text-[1.25rem]"
       : textSize === "medium"
-      ? "text-[1.1rem]"
-      : textSize === "small"
-      ? "text-[1rem]"
-      : null
+        ? "text-[1.1rem]"
+        : textSize === "small"
+          ? "text-[1rem]"
+          : null
   }`;
   const motion_fade = {
     initial: { opacity: 0, y: -20 },
@@ -95,7 +95,7 @@ export const UIProvider = ({ children }) => {
       headerRef,
       handleScroll,
     }),
-    [theme, textSize]
+    [theme, textSize],
   );
 
   return <UIContext.Provider value={value}>{children}</UIContext.Provider>;

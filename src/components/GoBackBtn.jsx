@@ -12,7 +12,7 @@ const GoToHomePage = () => {
   return (
     <button
       onClick={() => navigate("/")}
-      className={`fixed md:absolute md:bottom-4 md:left-4 bottom-4 left-4 p-1 border border-white/50 rounded-full  group ${
+      className={`group fixed bottom-4 left-4 rounded-full border border-white/50 p-1 md:absolute md:bottom-4 md:left-4 ${
         UICtx.theme ? "hover:bg-white/20" : "hover:bg-black/20"
       }`}
     >

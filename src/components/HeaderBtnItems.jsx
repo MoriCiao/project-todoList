@@ -23,7 +23,7 @@ export function themeOption(color_tpye, UICtx) {
 export const HeaderIcon = ({ bgColor, src, alt = "headerIcon" }) => {
   return (
     <div
-      className={`rounded-full  w-[5rem]  h-[5rem]  flex items-center justify-center ${bgColor}`}
+      className={`flex h-[5rem] w-[5rem] items-center justify-center rounded-full ${bgColor}`}
     >
       <img className="w-[60%]" src={src} alt={alt} />
     </div>
@@ -34,7 +34,7 @@ export const HeaderTitle = ({ label, themeTextColor, h3_size }) => {
   return (
     <div className="w-[75%] text-center">
       <h3
-        className={`transition-all duration-500 tracking-widest font-['Luckiest_Guy'] ${themeTextColor} ${h3_size} `}
+        className={`font-['Luckiest_Guy'] tracking-widest transition-all duration-500 ${themeTextColor} ${h3_size} `}
       >
         {label}
       </h3>
@@ -47,10 +47,10 @@ export const HeaderLink = ({ link, onClick, themeBgColor, children }) => {
   return (
     <Link
       to={link}
-      className={`isClickBtn w-full max-w-xl m-auto flex items-center justify-center rounded-xl p-4 border lg:h-auto h-30 ${themeBgColor}  ${
+      className={`isClickBtn m-auto flex h-30 w-full max-w-xl items-center justify-center rounded-xl border p-4 lg:h-auto ${themeBgColor} ${
         UICtx.theme
-          ? "hover:brightness-125 border-white/50 "
-          : "hover:border-black/10 shadow-md "
+          ? "border-white/50 hover:brightness-125"
+          : "shadow-md hover:border-black/10"
       } `}
       onClick={onClick}
     >

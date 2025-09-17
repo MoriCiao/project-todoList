@@ -13,7 +13,7 @@ const MainOutlet = () => {
       <motion.main
         key={UICtx.theme ? "dark" : "light"}
         {...UICtx.motion_theme}
-        className={`MainOutlet relative grid xxl:grid-cols-3 w-full h-[100vh] ${
+        className={`MainOutlet xxl:grid-cols-3 relative grid h-[100vh] w-full ${
           UICtx.theme ? "bg-[--dark-bg]" : "bg-[--light-bg]"
         }`}
       >

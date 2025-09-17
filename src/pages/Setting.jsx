@@ -55,11 +55,11 @@ const Setting = () => {
   }, [UICtx.theme]);
 
   return (
-    <motion.section {...UICtx.motion_fade} className={`setting  h-full`}>
+    <motion.section {...UICtx.motion_fade} className={`setting h-full`}>
       <AnimatePresence mode="wait">
         <motion.div
           {...UICtx.motion_theme}
-          className="col-start-1 col-span-3 items-start pt-12 relative h-full"
+          className="relative col-span-3 col-start-1 h-full items-start pt-12"
         >
           <TitleImage
             id="setting"
@@ -68,10 +68,10 @@ const Setting = () => {
             alt="Setting.svg"
           />
 
-          <div className="flex flex-col gap-8 items-center justify-center w-[80%]  py-8 mx-auto">
+          <div className="mx-auto flex w-[80%] flex-col items-center justify-center gap-8 py-8">
             {/* theme setting */}
 
-            <section className="theme flex flex-col  gap-2 items-center justify-center w-full">
+            <section className="theme flex w-full flex-col items-center justify-center gap-2">
               <SettingTitle
                 title="THEME"
                 style_i={selectColor("theme", UICtx).text}
@@ -110,7 +110,7 @@ const Setting = () => {
             </section>
 
             {/* font setting */}
-            <section className="font-size flex flex-col  gap-2 items-center justify-center w-full">
+            <section className="font-size flex w-full flex-col items-center justify-center gap-2">
               <SettingTitle
                 title="FONT SIZE"
                 style_i={selectColor("fontSize", UICtx).text}

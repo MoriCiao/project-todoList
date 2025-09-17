@@ -9,7 +9,7 @@ const GoToNewTodoIcon = () => {
   const toNewTodo = useNavigate();
   return (
     <button
-      className="lg:hidden w-[40px] h-[40px]"
+      className="h-[40px] w-[40px] lg:hidden"
       onClick={() => {
         toNewTodo("/newtodo"); // 先導入 newTodo 頁面
         tasksCtx.handleScroll; // 在觸發畫面 Y 軸移動到頁面

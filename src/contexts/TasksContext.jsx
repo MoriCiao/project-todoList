@@ -21,7 +21,7 @@ export const TasksProvider = ({ children }) => {
   const raiseBtn = () => {
     // 按照時間大小排序
     const newTasksList = [...allTasks].sort(
-      (a, b) => new Date(a.startTime) - new Date(b.startTime)
+      (a, b) => new Date(a.startTime) - new Date(b.startTime),
     );
 
     setAllTasks(newTasksList);
@@ -30,7 +30,7 @@ export const TasksProvider = ({ children }) => {
   const decreaseBtn = () => {
     // 按照時間大到小排序
     const newTasksList = [...allTasks].sort(
-      (a, b) => new Date(b.startTime) - new Date(a.startTime)
+      (a, b) => new Date(b.startTime) - new Date(a.startTime),
     );
 
     setAllTasks(newTasksList);
@@ -98,14 +98,14 @@ export const TasksProvider = ({ children }) => {
     switch (action.type) {
       case "DELETE_TASK":
         const filteredTasks = state.allTasks.filter(
-          (task) => task.taskName !== action.payload
+          (task) => task.taskName !== action.payload,
         );
         return { ...state, allTasks: filteredTasks };
       case "IS_CHECK":
         const toggledTasks = state.allTasks.map((task) =>
           task.taskName === action.payload
             ? { ...task, isCheck: !task.isCheck }
-            : task
+            : task,
         );
         return { ...state, allTasks: toggledTasks };
       case "ADD_TASK": {
@@ -126,10 +126,10 @@ export const TasksProvider = ({ children }) => {
       case "REVISE_DESCRIPT": {
         const task = action.payload;
         const originalIndex = state.allTasks.findIndex(
-          (i) => i.startTime === task.startTime
+          (i) => i.startTime === task.startTime,
         );
         const updateTasks = state.allTasks.map((item, index) =>
-          index === originalIndex ? task : item
+          index === originalIndex ? task : item,
         );
 
         localStorage.setItem("mylistTasks", JSON.stringify(updateTasks));
@@ -155,7 +155,7 @@ export const TasksProvider = ({ children }) => {
       raiseBtn,
       decreaseBtn,
     }),
-    [state, newTodo]
+    [state, newTodo],
   );
 
   useEffect(() => {

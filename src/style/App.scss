@@ -1,76 +1,70 @@
-:root{
-    /* Light */
-        --light-bg: rgb(253, 235, 200);
-        --light-text-g: rgb(9, 97, 72);
-        --light-text-y: rgb(193, 138, 38);
-        --light-component-g: rgba(93, 172, 129,.5);
-        --light-component-y: rgba(235, 180, 113, 0.5);
-        /* Dark */
-        --dark-bg: rgb(28, 28, 28);
-        --dark-text-g: rgb(208, 240, 224);
-        --dark-text-y: rgb(255, 204, 102);
-        --dark-component-g: rgba(114, 214, 180,.5);
-        --dark-component-y: rgba(242, 177, 121,.5);
-        /* Font Family */
-        --font-title: 'Luckiest_Guy';
-        --font-text: 'Istok_Web';
-        
-}   
-
-
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    color: #1C1C1C;
-
+:root {
+  /* Light */
+  --light-bg: rgb(253, 235, 200);
+  --light-text-g: rgb(9, 97, 72);
+  --light-text-y: rgb(193, 138, 38);
+  --light-component-g: rgba(93, 172, 129, 0.5);
+  --light-component-y: rgba(235, 180, 113, 0.5);
+  /* Dark */
+  --dark-bg: rgb(28, 28, 28);
+  --dark-text-g: rgb(208, 240, 224);
+  --dark-text-y: rgb(255, 204, 102);
+  --dark-component-g: rgba(114, 214, 180, 0.5);
+  --dark-component-y: rgba(242, 177, 121, 0.5);
+  /* Font Family */
+  --font-title: "Luckiest_Guy";
+  --font-text: "Istok_Web";
 }
-body{
-    background-color: var(--light-bg);
-    h1{
-        font-family: var(--font-text);
-        font-style: italic;
-        font-size: 4rem;
-    }
-    h3{
-        font-size: 2rem;
-    }
-    p{
-        font-family: var(--font-text);
-        
-    }
-   
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: #1c1c1c;
 }
-.MainOutlet{
+body {
+  background-color: var(--light-bg);
+  h1 {
+    font-family: var(--font-text);
+    font-style: italic;
+    font-size: 4rem;
+  }
+  h3 {
+    font-size: 2rem;
+  }
+  p {
+    font-family: var(--font-text);
+  }
+}
+.MainOutlet {
+  overflow-y: overlay;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  .AllTasks {
     overflow-y: overlay;
     scrollbar-width: none;
     scroll-behavior: smooth;
-    .AllTasks{
-        
-        overflow-y: overlay;
-        scrollbar-width: none;
-        scroll-behavior: smooth;
-    }
+  }
 }
 
-.isClickBtn{
-    transition: all 0.4s ease-in-out;
-    cursor: pointer;
-    &:hover{
-        scale: 1.05;
-        transform: translate(-2px,-2px);
-    }
+.isClickBtn {
+  transition: all 0.4s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    scale: 1.05;
+    transform: translate(-2px, -2px);
+  }
 }
 @media (max-width: 768px) {
-    .MainOutlet {
-    overflow-y:visible;
+  .MainOutlet {
+    overflow-y: visible;
     scrollbar-width: none;
-    scroll-behavior: smooth;   }
-    
+    scroll-behavior: smooth;
+  }
 }
 
 @media (max-width: 1024px) {
-    .descript {
-        display: block;
-    }
+  .descript {
+    display: block;
+  }
 }
